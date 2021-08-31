@@ -6,10 +6,38 @@
   min-height: 1rem;
 }
 
+.border-1 {
+  border-width: 1px;
+}
+
 .border-b-1 {
   border-bottom-width: 1px;
 }
 
 .bg-y-mapo {
   background-color: #fbab54;
+}
+
+.input-size {
+  width: 508px;
+}
+
+.input {
+  @apply border-1 border-gray-300 rounded px-4 py-3 input-size;
+}
+
+.input-btn {
+  @apply border-1 border-gray-300 rounded px-4 py-3 input-size;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.red-star {
+  --text-opacity: 1;
+  color: rgba(255, 43, 69, var(--text-opacity));
+  font-size: 0.875rem;
+  margin-left: 0.25rem;
 }

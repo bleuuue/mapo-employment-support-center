@@ -20,7 +20,7 @@ const Header: FC = () => {
             <a href="#" className="whitespace-nowrap">
               솔루션
             </a>
-            <a href="#" className="whitespace-nowrap">
+            <a href="/login" className="whitespace-nowrap">
               회원가입/로그인?
             </a>
           </nav>
