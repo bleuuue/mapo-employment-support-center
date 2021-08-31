@@ -6,10 +6,36 @@
   min-height: 1rem;
 }
 
+.border-1 {
+  border-width: 1px;
+}
+
 .border-b-1 {
   border-bottom-width: 1px;
 }
 
 .bg-y-mapo {
   background-color: #fbab54;
+}
+
+.red-star {
+  font-size: 0.875rem;
+  margin-left: 0.25rem;
+  color: rgb(255, 43, 69);
+}
+
+.input-size {
+  width: 508px;
+}
+
+.input {
+  @apply border-gray-300 rounded py-3 px-4 border-1 input-size;
+}
+
+.form-group {
+  @apply relative mb-4;
+}
+
+.input-btn {
+  @apply rounded py-3 px-4 border-1 input-size;
 }
