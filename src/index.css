@@ -53,6 +53,57 @@
   background-color: #f2f2f2;
 }
 
+.form-group {
+  @apply relative mb-4;
+}
+
+.label-recruit {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+}
+
+.input-recruit {
+  @apply py-3 px-4 appearance-none border rounded border-gray-300 text-gray-500 w-full;
+}
+
+.textarea-recruit {
+  @apply py-3 px-4 appearance-none border rounded border-gray-300 text-gray-500 w-full h-32;
+}
+
+.form-radio {
+  @apply appearance-none inline-block align-middle bg-origin-border select-none flex-shrink-0 rounded-full h-5 w-5 border bg-white;
+
+  color: #6f2b90;
+}
+
+.form-radio:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(66 153 225 / 50%);
+  border-color: #63b3ed;
+}
+
+.btn {
+  display: block;
+  text-align: center;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.btn-lg-three {
+  border-radius: 0.25rem;
+  font-weight: 700;
+  min-height: 3.125rem;
+}
+
+.btn-lg-two {
+  border-radius: 0.25rem;
+  font-weight: 700;
+  min-height: 3.125rem;
+  background-color: #6f2b90;
+}
+
 @media (min-width: 640px) {
   .sidebar {
     width: 25%;
