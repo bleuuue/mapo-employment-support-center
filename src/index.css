@@ -11,5 +11,70 @@
 }
 
 .bg-y-mapo {
-  background-color: #fbab54;
+  background-color: #fff;
+}
+
+.layout-side {
+  @apply flex flex-col flex-wrap relative -mx-4;
+}
+
+.sidebar {
+  background: #fff;
+  @apply flex-auto px-4 order-1 mt-2 mb-2;
+}
+
+.container-recruit {
+  @apply container w-full mx-auto;
+}
+
+.content {
+  @apply flex-auto px-4 order-2 my-2;
+}
+
+.li-recruit {
+  @apply border border-gray-200 rounded flex-1 justify-start my-1 mx-2;
+}
+
+.a-li-recruit {
+  @apply inline-block w-full h-full py-3 px-4;
+}
+
+.list-menu {
+  @apply flex flex-wrap flex-col -mx-2;
+
+  color: rgba(62, 57, 64);
+}
+
+@media (min-width: 640px) {
+  .sidebar {
+    width: 25%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .layout-side {
+    flex-direction: row;
+  }
+
+  .content {
+    @apply w-7/12 my-20;
+  }
+}
+
+@media (min-width: 960px) {
+  .content {
+    @apply w-7/12 my-28;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-recruit {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-recruit {
+    max-width: 1024px;
+  }
 }
