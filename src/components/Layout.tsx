@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Footer from './common/footer';
-import Header from './header';
+import Header from './common/header';
 
 const Layout: FC = ({ children }) => {
   return (

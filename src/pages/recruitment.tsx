@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Route, NavLink } from 'react-router-dom';
 
 const Recruitment: FC = () => {
   return (
@@ -13,9 +14,13 @@ const Recruitment: FC = () => {
           <div>
             <ul className="list-menu">
               <li className="li-recruit">
-                <a href="#" className="a-li-recruit">
+                <NavLink
+                  to="/recruit/create"
+                  className="a-li-recruit"
+                  activeClassName="is-active-recruit"
+                >
                   채용 공고 만들기
-                </a>
+                </NavLink>
               </li>
               <li className="li-recruit">
                 <a href="#" className="a-li-recruit">

@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { FC, useState } from 'react';
+import { Route, NavLink } from 'react-router-dom';
 
 const Header: FC = () => {
   return (
@@ -18,9 +18,13 @@ const Header: FC = () => {
             <a href="#" className="whitespace-nowrap">
               일반채용
             </a>
-            <Link to="/recruit" className="whitespace-nowrap">
+            <NavLink
+              activeClassName="is-active"
+              to="/recruit"
+              className="whitespace-nowrap"
+            >
               채용관리
-            </Link>
+            </NavLink>
             <a href="#" className="whitespace-nowrap">
               마이페이지
             </a>
