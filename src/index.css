@@ -23,11 +23,23 @@
 }
 
 .input {
-  @apply border-1 border-gray-300 rounded px-4 py-3 input-size;
+  @apply border-1 border-gray-300 rounded px-4 py-3;
 }
 
 .input-btn {
-  @apply border-1 border-gray-300 rounded px-4 py-3 input-size;
+  @apply border-1 border-gray-300 rounded px-4 py-3;
+}
+
+.double-check-btn {
+  @apply relative inline-flex items-center justify-center space-x-2 w-full border-1 border-gray-300 rounded-md md:rounded-r-md px-3 py-2 -ml-px font-bold whitespace-nowrap;
+}
+
+.double-check-input-size {
+  width: 420px;
+}
+
+.double-check-btn-size {
+  width: 88px;
 }
 
 .form-group {
@@ -40,4 +52,28 @@
   color: rgba(255, 43, 69, var(--text-opacity));
   font-size: 0.875rem;
   margin-left: 0.25rem;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  user-select: none;
+  flex-shrink: 0;
+  height: 1rem;
+  width: 1rem;
+  background-color: #fff;
+  border-color: #cfcfcf;
+  border-width: 1px;
+  border-radius: 0.25rem;
+}
+
+.checkbox:checked {
+  background-color: burlywood;
+  border-width: 0;
+  content: '✔';
+  font-size: 1.5em;
+  line-height: 0.8;
+  color: red;
 }

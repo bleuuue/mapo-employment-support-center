@@ -13,7 +13,7 @@ const Login: FC = () => {
             <span className="red-star">*</span>
           </div>
           <input
-            className="input"
+            className="input input-size"
             placeholder="아이디를 입력해주세요"
             type="text"
           ></input>
@@ -24,12 +24,15 @@ const Login: FC = () => {
             <span className="red-star">*</span>
           </div>
           <input
-            className="input"
+            className="input input-size"
             placeholder="비밀번호를 입력해주세요"
             type="text"
           ></input>
         </div>
-        <button type="submit" className="input-btn sticky my-4 font-bold">
+        <button
+          type="submit"
+          className="input-btn sticky my-4 font-bold input-size"
+        >
           로그인
         </button>
         <div className="my-4 text-sm">
@@ -43,8 +46,10 @@ const Login: FC = () => {
           </div>
           <div className="flex justify-end text-gray-400">비밀번호 찾기</div>
         </div>
-        <button type="button" className="input-btn my-3 font-bold">
-          이메일로 개인회원 가입하기
+        <button type="button" className="input-btn my-3 font-bold input-size">
+          <a href="/personalSignUp" className="whitespace-nowrap">
+            이메일로 개인회원 가입하기
+          </a>
         </button>
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
@@ -56,8 +61,10 @@ const Login: FC = () => {
             </span>
           </div>
         </div>
-        <button type="button" className="input-btn my-3 font-bold">
-          이메일로 기업회원 가입하기
+        <button type="button" className="input-btn my-3 font-bold input-size">
+          <a href="/businessSignUp" className="whitespace-nowrap">
+            이메일로 기업회원 가입하기
+          </a>
         </button>
       </div>
     </div>

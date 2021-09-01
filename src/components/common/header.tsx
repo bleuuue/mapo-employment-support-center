@@ -21,7 +21,7 @@ const Header: FC = () => {
               솔루션
             </a>
             <a href="/login" className="whitespace-nowrap">
-              회원가입/로그인?
+              회원가입/로그인
             </a>
           </nav>
         </div>
