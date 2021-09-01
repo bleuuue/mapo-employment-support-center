@@ -2,6 +2,8 @@ import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header: FC = () => {
+  const [loginButton, setLoginButton] = useState('');
+
   return (
     <div className="border-b-2 border-gray-200">
       <header className="max-w-screen-xl mx-auto px-4 flex flex-row flex-wrap text-xs lg:text-sm justify-between items-center py-4">
@@ -31,7 +33,7 @@ const Header: FC = () => {
           </nav>
         </div>
         <div className="flex flex-row flex-wrap justify-between items-center space-x-3">
-          회원가입/로그인
+          <button>회원가입/로그인</button>
         </div>
       </header>
     </div>

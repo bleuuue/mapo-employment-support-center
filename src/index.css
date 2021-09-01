@@ -71,7 +71,7 @@
 }
 
 .form-radio {
-  @apply appearance-none inline-block align-middle bg-origin-border select-none flex-shrink-0 rounded-full h-5 w-5 border bg-white;
+  @apply inline-block align-middle bg-origin-border flex-shrink-0 rounded-full h-5 w-5 border bg-white;
 
   color: #6f2b90;
 }
@@ -102,6 +102,15 @@
   font-weight: 700;
   min-height: 3.125rem;
   background-color: #6f2b90;
+}
+
+.btn-lg-five {
+  border-radius: 0.25rem;
+  font-weight: 700;
+  width: 100%;
+  min-height: 3.125rem;
+  background-color: rgba(241, 234, 245);
+  color: #6f2b90;
 }
 
 @media (min-width: 640px) {

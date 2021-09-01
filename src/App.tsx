@@ -11,8 +11,7 @@ const App: FC = () => {
       <Layout>
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route exact path="/recruit" component={Recruitment} />
-          <Route path="/recruit/create" component={CreatePost} />
+          <Route path="/recruit" component={Recruitment} />
         </Switch>
       </Layout>
     </Router>
