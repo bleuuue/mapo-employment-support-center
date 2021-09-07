@@ -5,13 +5,13 @@ const PersonalSignUp: FC = () => {
     <div className="flex">
       <div className="mx-auto">
         <div className="pt-8 pb-8">
-          <h2 className="font-bold md:text-3xl text-center">회원가입</h2>
+          <h2 className="font-black text-3xl text-center">개인 회원가입</h2>
         </div>
         <div className="form-group">
           <div className="mb-1">
             이름
             <span className="red-star">*</span>
-            <span className="ml-1 text-gray-400 text-sm">
+            <span className="ml-1 gray-text-color text-sm">
               이력서에 사용될 본명을 입력해주세요
             </span>
           </div>
@@ -35,8 +35,13 @@ const PersonalSignUp: FC = () => {
               ></input>
             </div>
             <div className="flex flex-wrap flex-row mt-2 md:mt-0">
-              <button className="double-check-btn" type="button">
-                <span className="text-sm">중복확인</span>
+              <button
+                className="double-check-btn border-primary-color "
+                type="button"
+              >
+                <span className="text-sm text-primary-color font-black">
+                  중복확인
+                </span>
               </button>
             </div>
           </div>
@@ -55,8 +60,13 @@ const PersonalSignUp: FC = () => {
               ></input>
             </div>
             <div className="flex flex-wrap flex-row mt-2 md:mt-0">
-              <button className="double-check-btn" type="button">
-                <span className="text-sm">중복확인</span>
+              <button
+                className="double-check-btn border-primary-color"
+                type="button"
+              >
+                <span className="text-sm text-primary-color font-black">
+                  중복확인
+                </span>
               </button>
             </div>
           </div>
@@ -75,8 +85,13 @@ const PersonalSignUp: FC = () => {
               ></input>
             </div>
             <div className="flex flex-wrap flex-row mt-2 md:mt-0">
-              <button className="double-check-btn" type="button">
-                <span className="text-sm">확인</span>
+              <button
+                className="double-check-btn border-primary-color"
+                type="button"
+              >
+                <span className="text-sm text-primary-color font-black">
+                  확인
+                </span>
               </button>
             </div>
           </div>
@@ -85,7 +100,7 @@ const PersonalSignUp: FC = () => {
           <div className="mb-1">
             비밀번호
             <span className="red-star">*</span>
-            <span className="ml-1 text-gray-400 text-sm">
+            <span className="ml-1 gray-text-color text-sm">
               8글자 이상 입력해주세요
             </span>
           </div>
@@ -121,7 +136,7 @@ const PersonalSignUp: FC = () => {
             <div className="inline-flex items-center">
               <input className="checkbox mr-2" type="checkbox" />
               <div>서비스 이용약관</div>
-              <div className="ml-2 cursor-pointer text-xs mt-1">
+              <div className="ml-2 cursor-pointer text-xs mt-1 text-primary-color">
                 약관 보기 &gt;{' '}
               </div>
             </div>
@@ -131,11 +146,19 @@ const PersonalSignUp: FC = () => {
               <input className="checkbox mr-2" type="checkbox" />
               <div>개인정보 수집 및 이용</div>
               <div>서비스 이용약관</div>
-              <div className="ml-2 cursor-pointer text-xs mt-1">
+              <div className="ml-2 cursor-pointer text-xs mt-1 text-primary-color">
                 약관 보기 &gt;{' '}
               </div>
             </div>
           </div>
+        </div>
+        <div className="pt-4 lg:pt-4 pb-4 my-4 bottom-0 left-0 right-0">
+          <button
+            type="submit"
+            className="input-btn my-3 font-black input-size bg-primary-color text-white"
+          >
+            회원가입
+          </button>
         </div>
       </div>
     </div>

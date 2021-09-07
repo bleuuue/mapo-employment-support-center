@@ -5,6 +5,9 @@ import Login from './components/login/Login';
 import PersonalSignUp from './components/login/register/personerSignUp';
 import BusinessSignUp from './components/login/register/businessSignUp';
 import Main from './pages/main';
+import FindPersonerId from './components/login/FindPersonerId';
+import FindBusinessId from './components/login/FindBusinessId';
+import FindPassword from './components/login/FindPassword';
 
 const App: FC = () => {
   return (
@@ -15,6 +18,9 @@ const App: FC = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/personalSignUp" component={PersonalSignUp} />
           <Route exact path="/businessSignUp" component={BusinessSignUp} />
+          <Route exact path="/personerId" component={FindPersonerId} />
+          <Route exact path="/businessId" component={FindBusinessId} />
+          <Route exact path="/password" component={FindPassword} />
         </Switch>
       </Layout>
     </Router>

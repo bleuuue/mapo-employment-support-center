@@ -31,41 +31,58 @@ const Login: FC = () => {
         </div>
         <button
           type="submit"
-          className="input-btn sticky my-4 font-bold input-size"
+          className="input-btn my-4 font-bold input-size bg-primary-color text-white"
         >
-          로그인
+          개인 / 기업 통합 로그인
         </button>
         <div className="my-4 text-sm">
           <div className="flex justify-between">
-            <div className="flex"> 자동 로그인</div>
-            <div className="flex text-gray-400">
-              <div>개인 아이디 찾기</div>
-              <div className="mx-2"> / </div>
-              <div> 기업 아이디 찾기</div>
+            <div className="flex items-center">
+              <input className="checkbox mr-2 text-sm" type="checkbox" />
+              <div className="flex"> 자동 로그인</div>
+            </div>
+            <div className="flex">
+              <a href="/personerId" className="whitespace-nowrap">
+                <div className="gray-text-color">개인 아이디 찾기</div>
+              </a>
+              <div className="mx-2 gray-text-color"> / </div>
+              <a href="/businessId" className="whitespace-nowrap">
+                <div className="gray-text-color"> 기업 아이디 찾기</div>
+              </a>
             </div>
           </div>
-          <div className="flex justify-end text-gray-400">비밀번호 찾기</div>
-        </div>
-        <button type="button" className="input-btn my-3 font-bold input-size">
-          <a href="/personalSignUp" className="whitespace-nowrap">
-            이메일로 개인회원 가입하기
+          <a href="/password" className="whitespace-nowrap">
+            <div className="flex justify-end gray-text-color">
+              비밀번호 찾기
+            </div>
           </a>
-        </button>
+        </div>
+        <a href="/personalSignUp" className="whitespace-nowrap">
+          <button
+            type="button"
+            className="input-btn my-3 font-bold input-size bg-opacity"
+          >
+            이메일로 개인회원 가입하기
+          </button>
+        </a>
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-100"></div>
           </div>
           <div className="relative flex justify-center">
-            <span className="px-2 bg-white text-sm text-gray-300 font-bold">
+            <span className="px-2 bg-white text-sm gray-text-color font-bold">
               또는
             </span>
           </div>
         </div>
-        <button type="button" className="input-btn my-3 font-bold input-size">
-          <a href="/businessSignUp" className="whitespace-nowrap">
+        <a href="/businessSignUp" className="whitespace-nowrap">
+          <button
+            type="button"
+            className="input-btn my-3 font-bold input-size border-1"
+          >
             이메일로 기업회원 가입하기
-          </a>
-        </button>
+          </button>
+        </a>
       </div>
     </div>
   );

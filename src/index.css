@@ -2,12 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+  color: #5f5f5f;
+}
+
+.bg-primary-color {
+  background-color: #7c9ff2;
+}
+
+.bg-opacity {
+  background-color: rgba(124, 159, 242, 0.3);
+}
+
+.border-primary-color {
+  border-width: 1px;
+  border-color: #7c9ff2;
+}
+
+.text-primary-color {
+  color: #7c9ff2;
+}
+
+.gray-text-color {
+  color: #cccccc;
+}
+
 .min-h-1 {
   min-height: 1rem;
 }
 
 .border-1 {
   border-width: 1px;
+  border-color: #cccccc;
 }
 
 .border-b-1 {
@@ -23,15 +51,15 @@
 }
 
 .input {
-  @apply border-1 border-gray-300 rounded px-4 py-3;
+  @apply border-1 rounded px-4 py-3;
 }
 
 .input-btn {
-  @apply border-1 border-gray-300 rounded px-4 py-3;
+  @apply rounded px-4 py-3;
 }
 
 .double-check-btn {
-  @apply relative inline-flex items-center justify-center space-x-2 w-full border-1 border-gray-300 rounded-md md:rounded-r-md px-3 py-2 -ml-px font-bold whitespace-nowrap;
+  @apply relative inline-flex items-center justify-center space-x-2 w-full rounded-md md:rounded-r-md px-3 py-2 -ml-px font-bold whitespace-nowrap;
 }
 
 .double-check-input-size {
@@ -70,7 +98,7 @@
 }
 
 .checkbox:checked {
-  background-color: burlywood;
+  background-color: #7c9ff2;
   border-width: 0;
   content: '✔';
   font-size: 1.5em;
