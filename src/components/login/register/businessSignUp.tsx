@@ -86,7 +86,7 @@ const BusinessSignUp: FC = () => {
                 className="double-check-btn border-primary-color"
                 type="button"
               >
-                <span className="text-sm text-primary-color font-black">
+                <span className="text-sm text-primary-color font-black padding-13">
                   확인
                 </span>
               </button>
