@@ -27,13 +27,15 @@ const Header: FC = () => {
             >
               채용관리
             </NavLink>
-            <a href="#" className="whitespace-nowrap">
+            <NavLink to="/myPage" className="whitespace-nowrap">
               마이페이지
-            </a>
+            </NavLink>
           </nav>
         </div>
         <div className="flex flex-row flex-wrap justify-between items-center space-x-3">
-          <button>회원가입/로그인</button>
+          <NavLink to="/login" className="whitespace-nowrap">
+            회원가입/로그인
+          </NavLink>
         </div>
       </header>
     </div>

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CreatePost from './components/common/recruit/CreatePost';
 import Wanted from './components/common/wanted/wanted';
 import Layout from './components/Layout';
-import Login from './components/login/Login';
+import Login from './components/login/login';
 import PersonalSignUp from './components/login/register/personerSignUp';
 import BusinessSignUp from './components/login/register/businessSignUp';
 import Main from './pages/main';
