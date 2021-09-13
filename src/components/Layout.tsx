@@ -6,7 +6,7 @@ const Layout: FC = ({ children }) => {
   return (
     <div className="flex-col min-h-screen">
       <Header />
-      <div className="bg-y-mapo min-h-screen flex-auto">{children}</div>
+      <div className="min-h-screen flex-auto">{children}</div>
       <Footer />
     </div>
   );
