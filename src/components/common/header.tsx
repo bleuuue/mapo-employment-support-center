@@ -27,7 +27,7 @@ const Header: FC = () => {
             >
               채용관리
             </NavLink>
-            <NavLink to="/myPage" className="whitespace-nowrap">
+            <NavLink to="/personerMyPage" className="whitespace-nowrap">
               마이페이지
             </NavLink>
           </nav>
