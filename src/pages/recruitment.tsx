@@ -15,8 +15,8 @@ const Recruitment: FC = () => {
     <Router>
       <RecruitMain>
         <Switch>
-          <Route exact path="/recruit/create" component={CreatePost} />
-          <Route exact path="/recruit/management" component={RecruitList} />
+          <Route path="/recruit/create" component={CreatePost} />
+          <Route path="/recruit/management" component={RecruitList} />
         </Switch>
       </RecruitMain>
     </Router>

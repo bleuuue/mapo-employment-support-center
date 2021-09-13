@@ -1,5 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { useInput } from '../../../hooks';
 
 const CreatePost: FC = () => {
@@ -189,12 +188,12 @@ const CreatePost: FC = () => {
         </div>
         <div className="pt-4 pb-20 lg:pt-4 lg:pb-4 my-4 bottom-0 left-0 right-0 z-0">
           <div className="flex flex-wrap flex-row">
-            <button className="flex-auto w-auto mr-1 btn btn-lg-three text-white bg-gray-300 shadow-xl">
+            <button className="flex-auto w-auto mr-1 btn btn-lg-three text-white bg-gray-300 shadow-xl hover:filter hover:brightness-90">
               임시저장
             </button>
             <button
               type="submit"
-              className="flex-auto btn btn-lg-two w-auto text-white shadow-xl"
+              className="flex-auto btn btn-lg-two w-auto bg-primary-color text-white shadow-xl hover:filter hover:brightness-90"
             >
               승인요청하기
             </button>

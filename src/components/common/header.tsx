@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header: FC = () => {
-  const [loginButton, setLoginButton] = useState('');
+  const [loginButton, setLoginButton] = useState('회원가입/로그인');
 
   return (
     <div className="border-b-2 border-gray-200">
@@ -14,7 +14,7 @@ const Header: FC = () => {
             </a>
           </div>
           <nav className="hidden lg:block space-x-8 font-bold">
-            <NavLink to="/public" className="whitespace-nowrap">
+            <NavLink to="/wanted" className="whitespace-nowrap">
               공공채용
             </NavLink>
             <NavLink to="/general" className="whitespace-nowrap">
