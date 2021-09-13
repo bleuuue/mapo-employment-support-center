@@ -356,3 +356,43 @@ h5 {
   padding-left: 13.5px;
   padding-right: 13.5px;
 }
+
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.margin-minus-1 {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.margin-minus-5 {
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.layout-side {
+  @apply flex flex-wrap relative flex-col margin-minus-1 md:flex-row;
+}
+
+.sidebar {
+  @apply flex-auto px-4 order-1 my-2;
+}
+
+.list-menu {
+  @apply flex flex-wrap flex-col mx-2 margin-minus-5;
+}
+
+.list-menu li {
+  @apply border-1 rounded flex-1 justify-start my-1 mx-2;
+}
+
+.width-58 {
+  width: 58.333333%;
+}
+
+.content {
+  @apply flex-auto px-4 order-2 my-2 md:my-28 md:w-7/12;
+}

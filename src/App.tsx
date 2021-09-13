@@ -10,6 +10,7 @@ import Main from './pages/main';
 import FindPersonerId from './components/login/FindPersonerId';
 import FindBusinessId from './components/login/FindBusinessId';
 import FindPassword from './components/login/FindPassword';
+import PersonerMyPageMain from './components/myPage/personerMyPage/personerMyPageMain';
 import Recruitment from './pages/recruitment';
 
 const App: FC = () => {
@@ -24,6 +25,7 @@ const App: FC = () => {
           <Route exact path="/personerId" component={FindPersonerId} />
           <Route exact path="/businessId" component={FindBusinessId} />
           <Route exact path="/password" component={FindPassword} />
+          <Route exact path="/personerMyPage" component={PersonerMyPageMain} />
           <Route path="/recruit" component={Recruitment} />
           <Route path="/wanted" component={Wanted} />
         </Switch>
