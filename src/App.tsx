@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import CreatePost from './components/common/recruit/CreatePost';
+import Wanted from './components/common/wanted/wanted';
 import Layout from './components/Layout';
 import Login from './components/login/Login';
 import PersonalSignUp from './components/login/register/personerSignUp';
@@ -9,6 +11,7 @@ import FindPersonerId from './components/login/FindPersonerId';
 import FindBusinessId from './components/login/FindBusinessId';
 import FindPassword from './components/login/FindPassword';
 import PersonerMyPageMain from './components/myPage/personerMyPage/personerMyPageMain';
+import Recruitment from './pages/recruitment';
 
 const App: FC = () => {
   return (
@@ -23,6 +26,8 @@ const App: FC = () => {
           <Route exact path="/businessId" component={FindBusinessId} />
           <Route exact path="/password" component={FindPassword} />
           <Route exact path="/personerMyPage" component={PersonerMyPageMain} />
+          <Route path="/recruit" component={Recruitment} />
+          <Route path="/wanted" component={Wanted} />
         </Switch>
       </Layout>
     </Router>
