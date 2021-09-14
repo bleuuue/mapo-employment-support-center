@@ -33,6 +33,10 @@ h5 {
   color: #cccccc;
 }
 
+.gray-bg-color {
+  background-color: #e5e5e5;
+}
+
 .min-h-1 {
   min-height: 1rem;
 }
@@ -162,7 +166,8 @@ h5 {
 }
 
 .is-active-recruit {
-  background-color: #f2f2f2;
+  background-color: #7c9ff2;
+  color: white;
 }
 
 /* .form-group {

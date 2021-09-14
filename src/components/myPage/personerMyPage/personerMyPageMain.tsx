@@ -1,34 +1,34 @@
 import React, { FC } from 'react';
+import MyPageLeftMenu from '../MyPageLeftMenu';
 
 const PersonerMyPageMain: FC = () => {
   return (
-    <div className="container pb-12 px-44">
+    <div className="container-recruit px-4 pb-12">
       <div className="layout-side">
-        <div className="sidebar">
-          <div className="hidden sm:block">
-            <div className="pt-6 pb-4 md:py-8">
-              <h2 className="text-3xl font-black">마이페이지</h2>
+        <MyPageLeftMenu />
+        <div className="content">
+          <div>
+            <div className="mb-6 relative">
+              <h5 className="-mt-3 mb-2">프로필 정보</h5>
+              <ul className="list-menu">
+                <li className="li-recruit inline-block py-[14px] px-4 text-center text-sm gray-bg-color border-none font-bold">
+                  등록된 프로필이 없습니다.
+                </li>
+              </ul>
             </div>
-            <ul className="list-menu">
-              <li>
-                <a className="inline-block w-full h-full py-3 px-4 md:px-4">
-                  프로필 정보
-                </a>
-              </li>
-              <li>
-                <a className="inline-block w-full h-full py-3 px-4 md:px-4">
-                  비밀번호 변경
-                </a>
-              </li>
-              <li>
-                <a className="inline-block w-full h-full py-3 px-4 md:px-4">
-                  스크랩 리스트
-                </a>
-              </li>
-            </ul>
+            <div className="inset-0 flex items-center mb-8">
+              <div className="w-full border-t border-[#e5e5e5]"></div>
+            </div>
+            <div className="mb-8 relative">
+              <h5 className="-mt-3 mb-2">스크랩 리스트</h5>
+              <ul className="list-menu">
+                <li className="li-recruit inline-block py-[14px] px-4 text-center text-sm gray-bg-color border-none font-bold">
+                  스크랩한 공고가 없습니다.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="content"></div>
       </div>
     </div>
   );
