@@ -13,8 +13,8 @@ import FindPassword from './components/login/FindPassword';
 import Recruitment from './pages/recruitment';
 import PersonerProfileInfo from './components/myPage/personerMyPage/PersonerProfileInfo';
 import RegisterPersonerProfile from './components/myPage/personerMyPage/RegisterPersonerProfile';
-import PersonerMyPageMain from './components/myPage/personerMyPage/PersonerMyPageMain';
 import ChangePersonerPassword from './components/myPage/personerMyPage/ChangePersonerPassword';
+import PersonerMyPageMain from './components/myPage/personerMyPage/PersonerMyPageMain';
 
 const App: FC = () => {
   return (
