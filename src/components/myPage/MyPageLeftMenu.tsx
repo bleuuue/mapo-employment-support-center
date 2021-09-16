@@ -29,7 +29,7 @@ const MyPageLeftMenu: FC = () => {
           </li>
           <li className="li-recruit">
             <NavLink
-              to="/recruit/create"
+              to="/savedList"
               className="a-li-recruit"
               activeClassName="is-active-recruit"
             >
