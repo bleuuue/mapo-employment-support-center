@@ -13,13 +13,13 @@ const FindPersonerId: FC = () => {
 
   const checkNull = () => {
     if (!personerName) {
-      setPersonerNameError('아이디 항목은 필수 정보입니다');
+      setPersonerNameError('이름은 필수 정보입니다');
     } else {
       setPersonerNameError('');
     }
 
     if (!personerEmail) {
-      setPersonerEmailError('비밀번호 항목은 필수 정보입니다');
+      setPersonerEmailError('이메일 항목은 필수 정보입니다');
     } else {
       setPersonerEmailError('');
     }
@@ -33,13 +33,15 @@ const FindPersonerId: FC = () => {
         </div>
         <div className="form-group">
           <div className="mb-1">
-            아이디
+            이름
             <span className="red-star">*</span>
           </div>
           <input
             className="input input-size"
-            placeholder="아이디를 입력해주세요"
+            placeholder="이름을 입력해주세요"
             type="text"
+            value={personerName}
+            onChange={onChangePersonerName}
           ></input>
           {personerNameError && (
             <div className="text-sm red-star pl-3">{personerNameError}</div>
@@ -54,6 +56,8 @@ const FindPersonerId: FC = () => {
             className="input input-size"
             placeholder="가입하신 이메일을 입력해주세요"
             type="text"
+            value={personerEmail}
+            onChange={onChangePersonerEmail}
           ></input>
           {personerEmailError && (
             <div className="text-sm red-star pl-3">{personerEmailError}</div>

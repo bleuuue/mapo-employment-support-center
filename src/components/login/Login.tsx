@@ -1,7 +1,6 @@
-import { icon } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { FC, useEffect, useState, useRef } from 'react';
+import React, { FC, useState } from 'react';
 import { useInput } from '../../hooks';
 
 const Login: FC = () => {

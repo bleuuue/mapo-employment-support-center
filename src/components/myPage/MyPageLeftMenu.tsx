@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const MyPageLeftMenu = () => {
+const MyPageLeftMenu: FC = () => {
   return (
     <div className="sidebar">
       <div className="pt-6 pb-4 md:py-8">
