@@ -186,7 +186,7 @@ const CreatePost: FC = () => {
             <h5 className="font-bold text-xl">전형사항</h5>
           </div>
         </div>
-        <div className="pt-4 pb-20 lg:pt-4 lg:pb-4 my-4 bottom-0 left-0 right-0 z-0">
+        <div className="sticky pt-4 pb-20 lg:pt-4 lg:pb-4 my-4 bottom-0 left-0 right-0 z-0">
           <div className="flex flex-wrap flex-row">
             <button className="flex-auto w-auto mr-1 btn btn-lg-three text-white bg-gray-300 shadow-xl hover:filter hover:brightness-90">
               임시저장
