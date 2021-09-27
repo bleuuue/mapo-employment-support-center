@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import MyPageLeftMenu from '../MyPageLeftMenu';
 
-const ChangePersonerPassword: FC = () => {
+const ChangePersonalPassword: FC = () => {
   return (
     <div className="container-recruit px-4 pb-12">
       <div className="layout-side">
@@ -78,4 +78,4 @@ const ChangePersonerPassword: FC = () => {
   );
 };
 
-export default ChangePersonerPassword;
+export default ChangePersonalPassword;

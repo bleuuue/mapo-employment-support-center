@@ -101,7 +101,7 @@ const Login: FC = () => {
               <div className="flex"> 자동 로그인</div>
             </div>
             <div className="flex">
-              <a href="/personerId" className="whitespace-nowrap">
+              <a href="/personalId" className="whitespace-nowrap">
                 <div className="gray-text-color">개인 아이디 찾기</div>
               </a>
               <div className="mx-2 gray-text-color"> / </div>
@@ -116,7 +116,7 @@ const Login: FC = () => {
             </div>
           </a>
         </div>
-        <a href="/personalSignUp" className="whitespace-nowrap">
+        <a href="/user/personal" className="whitespace-nowrap">
           <button
             type="button"
             className="input-btn my-3 font-bold input-size bg-opacity"
@@ -134,7 +134,7 @@ const Login: FC = () => {
             </span>
           </div>
         </div>
-        <a href="/businessSignUp" className="whitespace-nowrap">
+        <a href="/user/enterprise" className="whitespace-nowrap">
           <button
             type="button"
             className="input-btn my-3 font-bold input-size border-1"

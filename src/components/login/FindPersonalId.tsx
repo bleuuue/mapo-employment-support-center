@@ -1,27 +1,27 @@
 import React, { FC, useState } from 'react';
 import { useInput } from '../../hooks';
 
-const FindPersonerId: FC = () => {
-  const [personerName, onChangePersonerName] = useInput('');
-  const [personerNameError, setPersonerNameError] = useState<string>('');
-  const [personerEmail, onChangePersonerEmail] = useInput('');
-  const [personerEmailError, setPersonerEmailError] = useState<string>('');
+const FindPersonalId: FC = () => {
+  const [personalName, onChangePersonalName] = useInput('');
+  const [personalNameError, setPersonalNameError] = useState<string>('');
+  const [personalEmail, onChangePersonalEmail] = useInput('');
+  const [personalEmailError, setPersonalEmailError] = useState<string>('');
 
   const onSubmitFindId = () => {
-    if (!personerName || !personerEmail) checkNull();
+    if (!personalName || !personalEmail) checkNull();
   };
 
   const checkNull = () => {
-    if (!personerName) {
-      setPersonerNameError('이름은 필수 정보입니다');
+    if (!personalName) {
+      setPersonalNameError('이름은 필수 정보입니다');
     } else {
-      setPersonerNameError('');
+      setPersonalNameError('');
     }
 
-    if (!personerEmail) {
-      setPersonerEmailError('이메일 항목은 필수 정보입니다');
+    if (!personalEmail) {
+      setPersonalEmailError('이메일 항목은 필수 정보입니다');
     } else {
-      setPersonerEmailError('');
+      setPersonalEmailError('');
     }
   };
 
@@ -40,11 +40,11 @@ const FindPersonerId: FC = () => {
             className="input input-size"
             placeholder="이름을 입력해주세요"
             type="text"
-            value={personerName}
-            onChange={onChangePersonerName}
+            value={personalName}
+            onChange={onChangePersonalName}
           ></input>
-          {personerNameError && (
-            <div className="text-sm red-star pl-3">{personerNameError}</div>
+          {personalNameError && (
+            <div className="text-sm red-star pl-3">{personalNameError}</div>
           )}
         </div>
         <div className="form-group">
@@ -56,11 +56,11 @@ const FindPersonerId: FC = () => {
             className="input input-size"
             placeholder="가입하신 이메일을 입력해주세요"
             type="text"
-            value={personerEmail}
-            onChange={onChangePersonerEmail}
+            value={personalEmail}
+            onChange={onChangePersonalEmail}
           ></input>
-          {personerEmailError && (
-            <div className="text-sm red-star pl-3">{personerEmailError}</div>
+          {personalEmailError && (
+            <div className="text-sm red-star pl-3">{personalEmailError}</div>
           )}
         </div>
         <button
@@ -75,4 +75,4 @@ const FindPersonerId: FC = () => {
   );
 };
 
-export default FindPersonerId;
+export default FindPersonalId;

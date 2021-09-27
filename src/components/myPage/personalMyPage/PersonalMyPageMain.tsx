@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import MyPageLeftMenu from '../MyPageLeftMenu';
 
-const PersonerMyPageMain: FC = () => {
+const PersonalMyPageMain: FC = () => {
   return (
     <div className="container-recruit px-4 pb-12">
       <div className="layout-side">
@@ -120,4 +120,4 @@ const PersonerMyPageMain: FC = () => {
   );
 };
 
-export default PersonerMyPageMain;
+export default PersonalMyPageMain;

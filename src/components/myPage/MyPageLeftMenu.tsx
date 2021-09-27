@@ -11,7 +11,7 @@ const MyPageLeftMenu: FC = () => {
         <ul className="list-menu">
           <li className="li-recruit">
             <NavLink
-              to="/personer/info"
+              to="/personal/info"
               className="a-li-recruit"
               activeClassName="is-active-recruit"
             >
@@ -20,7 +20,7 @@ const MyPageLeftMenu: FC = () => {
           </li>
           <li className="li-recruit">
             <NavLink
-              to="/personer/ChangePwd"
+              to="/personal/ChangePwd"
               className="a-li-recruit"
               activeClassName="is-active-recruit"
             >
