@@ -196,6 +196,10 @@ h5 {
   @apply py-3 px-4 appearance-none border rounded border-gray-300 text-gray-500 w-full;
 }
 
+.input-recruit-fixed {
+  @apply py-3 px-4 appearance-none border rounded border-gray-300 text-gray-500 w-full;
+}
+
 .textarea-recruit {
   @apply py-3 px-4 appearance-none border rounded border-gray-300 text-gray-500 w-full h-32;
 }
@@ -204,6 +208,10 @@ h5 {
   @apply inline-block align-middle bg-origin-border flex-shrink-0 rounded-full h-5 w-5 border bg-white;
 
   color: #6f2b90;
+}
+
+.label-form-radio {
+  @apply my-1;
 }
 
 .form-radio:focus {

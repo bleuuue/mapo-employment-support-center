@@ -10,12 +10,13 @@ import Main from './pages/main';
 import FindPersonerId from './components/login/FindPersonerId';
 import FindBusinessId from './components/login/FindBusinessId';
 import FindPassword from './components/login/FindPassword';
-import Recruitment from './pages/recruitment';
 import PersonerProfileInfo from './components/myPage/personerMyPage/PersonerProfileInfo';
 import RegisterPersonerProfile from './components/myPage/personerMyPage/RegisterPersonerProfile';
 import ChangePersonerPassword from './components/myPage/personerMyPage/ChangePersonerPassword';
 import PersonerMyPageMain from './components/myPage/personerMyPage/PersonerMyPageMain';
 import SavedList from './components/myPage/personerMyPage/SavedList';
+import RecruitList from './components/common/recruit/RecruitList';
+import RecruitMain from './components/common/recruit/RecruitMain';
 
 const App: FC = () => {
   return (
@@ -36,7 +37,9 @@ const App: FC = () => {
             path="/personer/registerProfile"
             component={RegisterPersonerProfile}
           />
-          <Route path="/recruit" component={Recruitment} />
+          <Route exact path="/recruit" component={RecruitMain} />
+          <Route path="/recruit/create" component={CreatePost} />
+          <Route path="/recruit/management" component={RecruitList} />
           <Route path="/wanted" component={Wanted} />
           <Route
             path="/personer/ChangePwd"
