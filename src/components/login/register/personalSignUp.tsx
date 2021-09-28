@@ -5,23 +5,43 @@ import { useInput } from '../../../hooks';
 const PersonalSignUp: FC = () => {
   const [name, onChangeName] = useInput('');
   const [email, onChangeEmail] = useInput('');
-  const [id, onChangeId] = useInput('');
+  const [userid, onChangeUserId] = useInput('');
   const [emailCheck, onChangeEmailCheck] = useInput('');
   const [password, onChangePassword] = useInput('');
   const [passwordCheck, onChangePasswordCheck] = useInput('');
+
+  const duplicateId = async (e: any) => {
+    try {
+      if (!userid) return;
+      const response = axios.get(
+        `${process.env.REACT_APP_BACK_URL}/user/duplicate/id/${userid}`,
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const onSubmitSignUp = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
 
-      if (!name || !email || !id || !emailCheck || !password || !passwordCheck)
+      if (
+        !name ||
+        !userid ||
+        !email ||
+        !emailCheck ||
+        !password ||
+        !passwordCheck
+      )
         return;
 
       const response = await axios.post(
         `${process.env.REACT_APP_BACK_URL}/user/personal/signup`,
         {
           MBER_NM: name,
-          MBER_ID: id,
+          MBER_ID: userid,
           MBER_EMAIL_ADRES: email,
           EMAIL_VRFCT: true,
           TERMS: true,
@@ -62,6 +82,34 @@ const PersonalSignUp: FC = () => {
           </div>
           <div className="form-group">
             <div className="mb-1">
+              아이디
+              <span className="red-star">*</span>
+            </div>
+            <div className="mt-1 relative flex flex-wrap flex-col md:flex-row">
+              <div className="relative flex items-stretch flex-grow focus-within:z-10">
+                <input
+                  className="block w-full input"
+                  placeholder="아이디를 입력해주세요"
+                  type="text"
+                  value={userid}
+                  onChange={onChangeUserId}
+                ></input>
+              </div>
+              <div className="flex flex-wrap flex-row mt-2 md:mt-0">
+                <button
+                  className="double-check-btn border-primary-color "
+                  type="button"
+                  onClick={duplicateId}
+                >
+                  <span className="text-sm text-primary-color font-black">
+                    중복확인
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="mb-1">
               이메일
               <span className="red-star">*</span>
             </div>
@@ -73,33 +121,6 @@ const PersonalSignUp: FC = () => {
                   type="text"
                   value={email}
                   onChange={onChangeEmail}
-                ></input>
-              </div>
-              <div className="flex flex-wrap flex-row mt-2 md:mt-0">
-                <button
-                  className="double-check-btn border-primary-color "
-                  type="button"
-                >
-                  <span className="text-sm text-primary-color font-black">
-                    중복확인
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="mb-1">
-              아이디
-              <span className="red-star">*</span>
-            </div>
-            <div className="mt-1 relative flex flex-wrap flex-col md:flex-row">
-              <div className="relative flex items-stretch flex-grow focus-within:z-10">
-                <input
-                  className="block w-full input"
-                  placeholder="아이디를 입력해주세요"
-                  type="text"
-                  value={id}
-                  onChange={onChangeId}
                 ></input>
               </div>
               <div className="flex flex-wrap flex-row mt-2 md:mt-0">
