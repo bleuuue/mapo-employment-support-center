@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { FC, FormEvent, useEffect, useState } from 'react';
 import { useInput } from '../../../hooks';
+import Swal from 'sweetalert2';
 
 const PersonalSignUp: FC = () => {
   const [name, onChangeName] = useInput('');
@@ -9,15 +10,79 @@ const PersonalSignUp: FC = () => {
   const [emailCheck, onChangeEmailCheck] = useInput('');
   const [password, onChangePassword] = useInput('');
   const [passwordCheck, onChangePasswordCheck] = useInput('');
+  const [idDuplicateCheck, setIdDuplicateCheck] = useState<boolean>(true);
+  const [emailDuplicateCheck, setEmailDuplicateCheck] = useState<boolean>(true);
 
-  const duplicateId = async (e: any) => {
+  const duplicateId = async () => {
     try {
-      if (!userid) return;
-      const response = axios.get(
+      if (!idDuplicateCheck) return;
+
+      if (!userid)
+        Swal.fire({
+          html: '<p style={padding-top: 20px}>아이디를 입력해주세요.</p>',
+          focusConfirm: false,
+          confirmButtonColor: '#7c9ff2',
+          confirmButtonText: '확인',
+        });
+
+      const response = await axios.get(
         `${process.env.REACT_APP_BACK_URL}/user/duplicate/id/${userid}`,
       );
+      setIdDuplicateCheck(response.data.isDuplicate);
 
-      console.log(response);
+      Swal.fire({
+        html: response.data.isDuplicate
+          ? '<p style={padding-top: 20px}>중복된 아이디입니다.</p>'
+          : '<p style={margin-top: 8px}>사용할 수 있는 아이디입니다.</p>',
+        focusConfirm: false,
+        confirmButtonColor: '#7c9ff2',
+        confirmButtonText: '확인',
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const duplicateEmail = async () => {
+    try {
+      if (!emailDuplicateCheck) return;
+
+      if (!email) {
+        Swal.fire({
+          html: '<p style={padding-top: 20px}>이메일을 입력해주세요.</p>',
+          focusConfirm: false,
+          confirmButtonColor: '#7c9ff2',
+          confirmButtonText: '확인',
+        });
+        return;
+      }
+
+      const regEmail =
+        /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
+      if (!regEmail.test(email)) {
+        Swal.fire({
+          html: '<p style={padding-top: 20px}>이메일 형식이 잘못되었습니다.</p>',
+          focusConfirm: false,
+          confirmButtonColor: '#7c9ff2',
+          confirmButtonText: '확인',
+        });
+        return;
+      }
+
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACK_URL}/user/duplicate/email/${email}`,
+      );
+      setEmailDuplicateCheck(response.data.isDuplicate);
+
+      Swal.fire({
+        html: response.data.isDuplicate
+          ? '<p style={padding-top: 20px}>중복된 이메일입니다.</p>'
+          : '<p style={margin-top: 8px}>사용할 수 있는 이메일입니다.</p>',
+        focusConfirm: false,
+        confirmButtonColor: '#7c9ff2',
+        confirmButtonText: '확인',
+      });
     } catch (error) {
       console.error(error);
     }
@@ -33,7 +98,8 @@ const PersonalSignUp: FC = () => {
         !email ||
         !emailCheck ||
         !password ||
-        !passwordCheck
+        !passwordCheck ||
+        idDuplicateCheck
       )
         return;
 
@@ -97,13 +163,15 @@ const PersonalSignUp: FC = () => {
               </div>
               <div className="flex flex-wrap flex-row mt-2 md:mt-0">
                 <button
-                  className="double-check-btn border-primary-color "
+                  className={`double-check-btn text-sm font-black ${
+                    idDuplicateCheck
+                      ? 'border-primary-color text-primary-color'
+                      : 'border-none gray-bg-color text-white cursor-default'
+                  }`}
                   type="button"
                   onClick={duplicateId}
                 >
-                  <span className="text-sm text-primary-color font-black">
-                    중복확인
-                  </span>
+                  중복확인
                 </button>
               </div>
             </div>
@@ -125,12 +193,15 @@ const PersonalSignUp: FC = () => {
               </div>
               <div className="flex flex-wrap flex-row mt-2 md:mt-0">
                 <button
-                  className="double-check-btn border-primary-color"
+                  className={`double-check-btn text-sm font-black ${
+                    emailDuplicateCheck
+                      ? 'border-primary-color text-primary-color'
+                      : 'border-none gray-bg-color text-white cursor-default'
+                  }`}
                   type="button"
+                  onClick={duplicateEmail}
                 >
-                  <span className="text-sm text-primary-color font-black">
-                    중복확인
-                  </span>
+                  중복확인
                 </button>
               </div>
             </div>
