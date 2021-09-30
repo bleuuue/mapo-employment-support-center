@@ -47,7 +47,7 @@ const Main: FC = () => {
                   <span className="block">일해요</span>
                 </h2>
                 <p className="mt-4 mb-8 md:mb-4 text-lg leading-relax">
-                  <strong>매일 새로 올라오는</strong>
+                  <strong>매일 새로 올라오는 </strong>
                   <span className="block lg:hidden"></span>
                   <strong>커리어 기회</strong>를 확인하고
                   <span className="block"></span>
@@ -90,10 +90,11 @@ const Main: FC = () => {
                     <strong>10분만 투자</strong>해서 간단한 프로필만
                     입력해보세요.
                     <span className="block"></span>
-                    마포구 채용팀이 상담 후<strong>적합한 기업과 포지션</strong>
-                    을<span className="block"></span>
+                    마포구 채용팀이 상담 후{' '}
+                    <strong>적합한 기업과 포지션</strong>을
+                    <span className="block"></span>
                     추천합니다. 물론 인터뷰와 추천 모두
-                    <strong>무료</strong>
+                    <strong> 무료</strong>
                     입니다.
                   </p>
                   <Link

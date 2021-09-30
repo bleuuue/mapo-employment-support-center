@@ -300,6 +300,11 @@ h5 {
   display: flex;
 }
 
+.content-header {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+}
+
 @media (min-width: 640px) {
   .sidebar {
     width: 25%;
@@ -331,6 +336,11 @@ h5 {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 34%;
+  }
+
+  .content-header {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 
