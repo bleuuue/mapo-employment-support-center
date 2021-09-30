@@ -186,6 +186,8 @@ h5 {
 .label-recruit {
   display: inline-block;
   margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .list-description {
@@ -193,6 +195,10 @@ h5 {
 }
 
 .input-recruit {
+  @apply py-3 px-4 appearance-none border rounded border-gray-300 text-gray-500 w-full;
+}
+
+.input-recruit-fixed {
   @apply py-3 px-4 appearance-none border rounded border-gray-300 text-gray-500 w-full;
 }
 
@@ -204,6 +210,10 @@ h5 {
   @apply inline-block align-middle bg-origin-border flex-shrink-0 rounded-full h-5 w-5 border bg-white;
 
   color: #6f2b90;
+}
+
+.label-form-radio {
+  @apply my-1;
 }
 
 .form-radio:focus {
