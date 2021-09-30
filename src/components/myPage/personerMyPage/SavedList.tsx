@@ -16,9 +16,10 @@ const SavedList: FC = () => {
                     <div className="relative">
                       <div>
                         <div>
+                          <div className="pb-[52.5%]"></div>
                           <div className="rounded overflow-hidden absolute left-0 right-0 top-0 bottom-0">
                             <img
-                              src="https://prod-we-attachments.s3.ap-northeast-2.amaz…12fa6a-f041-4389-baf5-c151c2193c7b-w1200-h630.jpg"
+                              src="../../image/dong-gu.jpg"
                               alt="채용 공공 기본 이미지"
                               className="object-cover w-full h-full"
                             />
