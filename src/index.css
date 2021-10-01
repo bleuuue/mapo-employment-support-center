@@ -305,6 +305,33 @@ h5 {
   padding-bottom: 1rem;
 }
 
+.paginations {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.paginations .page {
+  display: inline-block;
+  margin-right: 0.25rem;
+  border-radius: 0.25rem;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #e6e6e6;
+  border-color: rgba(230, 230, 230, var(--border-opacity));
+  --text-opacity: 1;
+  color: #a2a2a2;
+  color: rgba(162, 162, 162, var(--text-opacity));
+  font-weight: 700;
+  text-align: center;
+  padding: 0.25rem 0.75rem;
+}
+
 @media (min-width: 640px) {
   .sidebar {
     width: 25%;
