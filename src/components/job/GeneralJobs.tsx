@@ -28,8 +28,7 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
               <div className="pb-[52.5%]"></div>
               <div className="rounded overflow-hidden absolute left-0 right-0 top-0 bottom-0">
                 <img
-                  src="../../image/dong-gu.jpg"
-                  alt="채용 공공 기본 이미지"
+                  src={job.CMPNY_IM ? job.CMPNY_IM : '../../image/no-image.png'}
                   className="object-cover w-full h-full"
                 />
               </div>
@@ -69,12 +68,12 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
             </span>
           </div>
           <div className="h4 mb-1 cursor-pointer truncate block">
-            {job.CMPNY_NM}
+            {job.TITLE}
           </div>
           {/* <link className="h4 mb-1 cursor-pointer truncate block">
                         동구밭
                       </link> */}
-          <p className="mb-2 truncate-2">{job.TITLE}</p>
+          <p className="mb-2 truncate-2">{job.CMPNY_NM}</p>
           <div className="my-2">
             <span className="rounded gray-bg-color uppercase px-2 lg:px-3 py-1 text-sm">
               <span className="text-primary-color">

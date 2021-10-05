@@ -1,4 +1,11 @@
-import React, { createRef, FC, useEffect, useRef, useState } from 'react';
+import React, {
+  createRef,
+  FC,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import useSWR from 'swr';
 import axios from 'axios';
 import GeneralJobs from './GeneralJobs';
@@ -51,6 +58,7 @@ const GeneralJobList: FC = () => {
   const [pageCount, setPageCount] = useState<number>(1);
   const [searchKeyword, onChangeSearchKeyword] = useInput('');
   const [searchKey, setSearchKey] = useState('');
+  const [activePage, setActivePage] = useState<number>(1);
 
   const fetcher = async (url: string) => {
     try {
@@ -81,9 +89,10 @@ const GeneralJobList: FC = () => {
     for (let i = 1; i <= Math.ceil(pageCount); i++) {
       pageArray.push(
         <button
-          className="page current"
+          className={`page ${activePage === i ? 'is-active' : ''}`}
           onClick={() => {
             setPageIndex(i);
+            setActivePage(i);
           }}
         >
           {i}
@@ -91,6 +100,15 @@ const GeneralJobList: FC = () => {
       );
     }
     return pageArray;
+  };
+
+  const search = async (e: any) => {
+    try {
+      await setSearchKey(searchKeyword);
+      e.preventDefault();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -111,14 +129,7 @@ const GeneralJobList: FC = () => {
                   onChange={onChangeSearchKeyword}
                 />
                 <div className="bundle ml-2 mt-2">
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    onClick={() => {
-                      setSearchKey(searchKeyword);
-                      console.log(searchKeyword);
-                    }}
-                  >
+                  <button type="button" tabIndex={-1} onClick={search}>
                     <FontAwesomeIcon
                       className=" mb-[0.10rem] gray-text-color"
                       icon={faSearch}
