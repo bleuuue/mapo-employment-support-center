@@ -3,7 +3,6 @@ import { useInput } from '../../../hooks';
 import RecruitLeftSide from './RecruitLeftSide';
 import axios from 'axios';
 import { ListMenu } from '../../../interfaces';
-import { Redirect } from 'react-router';
 
 const CreatePost: FC = () => {
   const token = localStorage.getItem('token');
@@ -66,7 +65,6 @@ const CreatePost: FC = () => {
         },
       );
 
-      console.log(response.data.data);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -110,10 +108,6 @@ const CreatePost: FC = () => {
     try {
       e.preventDefault();
 
-      console.log(
-        `${recruitTitle}, ${recruitOccupation}, ${recruitNumber}, ${jobDetail}, ${eduBackground}, ${careerCheck}, ${careerPeriod}, ${areaCheck}, ${areaAddress}, ${industrialComplex}, ${apytypCheck}, ${clstypCheck}, ${doccdCheck}, ${empcdCheck}, ${empdetCheck}, ${paycdCheck}, ${payAmount}, ${workHourForWeek}, ${mealcdCheck}, ${sevpayCheck}, ${socinsCheck}, ${timecdCheck}, ${closingTime}, ${testmtCheck}`,
-      );
-
       const response = await axios.post(
         `http://121.162.15.140:3000/job/enterprise/register`,
         {
@@ -121,7 +115,7 @@ const CreatePost: FC = () => {
           JOB_TYPE_DESC: recruitOccupation,
           REQUIRE_COUNT: recruitNumber,
           JOB_DESC: jobDetail,
-          EDEUCATION: eduBackground,
+          DEUCATION: eduBackground,
           CAREER: careerCheck,
           CAREER_PERIOD: careerPeriod,
           WORK_AREA: areaCheck,
@@ -156,7 +150,9 @@ const CreatePost: FC = () => {
       );
 
       if (response.statusText === 'Created') {
-        return <Redirect to="/recruit/management" />;
+        console.log('created recruit');
+        window.location.href = 'http://localhost:3000/recruit/management';
+        // return <Redirect to="/" />
       }
     } catch (error) {
       console.error(error);
@@ -528,29 +524,6 @@ const CreatePost: FC = () => {
                       value={workHourForWeek}
                       onChange={onChangeWorkHourForWeek}
                     />
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label className="label-recruit">제출서류</label>
-                  <div className="my-1 flex flex-col">
-                    {doccd.map((doc: ListMenu, i) => {
-                      return (
-                        <label
-                          key={i}
-                          className="inline-flex items-center label-form-radio"
-                        >
-                          <input
-                            type="radio"
-                            className="form-radio"
-                            value={doc.CODE}
-                            checked={doccdCheck === doc.CODE}
-                            onChange={onChangeDoccdCheck}
-                          />
-                          <span className="mx-1">{doc.CODE_NM}</span>
-                        </label>
-                      );
-                    })}
                   </div>
                 </div>
               </div>

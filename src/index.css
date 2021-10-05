@@ -294,6 +294,14 @@ h5 {
   border-radius: 0.25rem;
 }
 
+.btn-xs-red {
+  @apply bg-red-50 text-red-500;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+}
+
 .section-description {
   flex: 1 1 0%;
   position: relative;
