@@ -47,7 +47,7 @@ const App: FC = () => {
             component={ChangePersonerPassword}
           />
           <Route path="/savedList" component={SavedList} />
-          <Route exact path="/job" component={GeneralJobList} />
+          <Route exact path="/job/general" component={GeneralJobList} />
         </Switch>
       </Layout>
     </Router>

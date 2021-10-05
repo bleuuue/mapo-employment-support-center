@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { IJob } from '../../interfaces';
+import { useInput } from '../../hooks';
 
 const mapoguConfig = [
   { id: 1, title: '공덕동' },
@@ -47,15 +48,19 @@ const jobConfig = [
 
 const GeneralJobList: FC = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
+  const [pageCount, setPageCount] = useState<number>(1);
+  const [searchKeyword, onChangeSearchKeyword] = useInput('');
+  const [searchKey, setSearchKey] = useState('');
 
   const fetcher = async (url: string) => {
     try {
       const response = await axios.post(url, {
-        page: pageIndex,
+        SEARCH_NAME: searchKey,
       });
 
       if (response.statusText === 'Created') {
-        return response;
+        setPageCount(Number(response.data.count) / 12);
+        return response.data.data;
       }
     } catch (error) {
       console.error(error);
@@ -63,12 +68,30 @@ const GeneralJobList: FC = () => {
   };
 
   const { data, error, mutate } = useSWR<IJob[]>(
-    `${process.env.REACT_APP_BACK_URL}/job/general`,
+    `${process.env.REACT_APP_BACK_URL}/job/general?page=${pageIndex}`,
     fetcher,
   );
 
   if (!data) return <div>loading...</div>;
   if (error) return <div>error</div>;
+
+  const paging = () => {
+    const pageArray = [];
+
+    for (let i = 1; i <= Math.ceil(pageCount); i++) {
+      pageArray.push(
+        <button
+          className="page current"
+          onClick={() => {
+            setPageIndex(i);
+          }}
+        >
+          {i}
+        </button>,
+      );
+    }
+    return pageArray;
+  };
 
   return (
     <>
@@ -84,9 +107,18 @@ const GeneralJobList: FC = () => {
                   type="text"
                   placeholder="회사, 직무, 지역으로 검색해보세요"
                   className="w-full rounded border-1 py-2 px-4"
+                  value={searchKeyword}
+                  onChange={onChangeSearchKeyword}
                 />
                 <div className="bundle ml-2 mt-2">
-                  <button type="button" tabIndex={-1}>
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    onClick={() => {
+                      setSearchKey(searchKeyword);
+                      console.log(searchKeyword);
+                    }}
+                  >
                     <FontAwesomeIcon
                       className=" mb-[0.10rem] gray-text-color"
                       icon={faSearch}
@@ -108,7 +140,7 @@ const GeneralJobList: FC = () => {
                     />
                   </a>
                 </div>
-                <div className="absolute left-0 z-1 w-full">
+                {/* <div className="absolute left-0 z-1 w-full">
                   <div className="p-4 my-2 bg-white border-1 rounded">
                     <div className="flex flex-wrap flex-row">
                       <div className="flex-1">
@@ -132,7 +164,7 @@ const GeneralJobList: FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="w-1/2 px-2 my-1 sm:my-0">
                 <div>
@@ -144,7 +176,7 @@ const GeneralJobList: FC = () => {
                     />
                   </a>
                 </div>
-                <div className="absolute left-0 z-1 w-full">
+                {/* <div className="absolute left-0 z-1 w-full">
                   <div className="p-4 my-2 bg-white border-1 rounded">
                     <div className="flex flex-wrap flex-row">
                       <div className="flex-1">
@@ -168,7 +200,7 @@ const GeneralJobList: FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -176,13 +208,11 @@ const GeneralJobList: FC = () => {
         <hr className="border border-gray-200" />
         <div className="my-4 -mx-2 flex flex-wrap">
           {data.map((jobs, i) => {
-            return <GeneralJobs key={i} jobs={jobs} mutate={mutate} />;
+            return <GeneralJobs key={i} job={jobs} mutate={mutate} />;
           })}
         </div>
         <div className="paginations">
-          <div>
-            <Link to="/page=1" className="page is-active"></Link>
-          </div>
+          <div>{paging()}</div>
         </div>
       </div>
     </>

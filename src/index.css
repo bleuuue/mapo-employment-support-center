@@ -332,6 +332,12 @@ h5 {
   padding: 0.25rem 0.75rem;
 }
 
+.paginations .page.current {
+  --bg-opacity: 0.1;
+  background-color: rgba(124, 159, 242, var(--bg-opacity));
+  color: #7c9ff2;
+}
+
 @media (min-width: 640px) {
   .sidebar {
     width: 25%;
