@@ -17,6 +17,7 @@ import PersonerMyPageMain from './components/myPage/personerMyPage/PersonerMyPag
 import SavedList from './components/myPage/personerMyPage/SavedList';
 import RecruitList from './components/common/recruit/RecruitList';
 import RecruitMain from './components/common/recruit/RecruitMain';
+import GeneralJobList from './components/job/GeneralJobList';
 
 const App: FC = () => {
   return (
@@ -46,6 +47,7 @@ const App: FC = () => {
             component={ChangePersonerPassword}
           />
           <Route path="/savedList" component={SavedList} />
+          <Route exact path="/job/general" component={GeneralJobList} />
         </Switch>
       </Layout>
     </Router>

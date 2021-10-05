@@ -45,3 +45,16 @@ export interface RecruitPost {
 //   CONTACT_PHONE: '채용담당자 전화번호';
 //   CONTACT_EMAIL: '채용담당자 이메일';
 // }
+export interface IJob {
+  JOBID: number;
+  CMPNY_NM: string;
+  CMPNY_IM: string;
+  TITLE: string;
+  JOB_TYPE_DESC: string;
+  WORK_ADDRESS: string;
+  CAREER: string;
+  JOB_DESC: string;
+  STARTRECEPTION: string;
+  ENDRECEPTION: string;
+  APPROVAL_DATE: Date;
+}
