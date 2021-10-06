@@ -28,8 +28,7 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
               <div className="pb-[52.5%]"></div>
               <div className="rounded overflow-hidden absolute left-0 right-0 top-0 bottom-0">
                 <img
-                  src="../../image/dong-gu.jpg"
-                  alt="채용 공공 기본 이미지"
+                  src={job.CMPNY_IM ? job.CMPNY_IM : '../../image/no-image.png'}
                   className="object-cover w-full h-full"
                 />
               </div>
@@ -55,13 +54,16 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
               {job.WORK_ADDRESS}
             </span>
           </div>
-          {/* <div className="rounded text-center flex items-center bg">
-                  <p className="m-auto inline-block text-white font-sans font-bold tracking-wide text-lg">
-                    CLOSED
-                  </p>
-                </div> */}
+          {dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day') > 0 ? (
+            <div className="rounded text-center flex items-center bg">
+              <p className="m-auto inline-block text-white font-sans font-bold tracking-wide text-lg">
+                CLOSED
+              </p>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
-
         <div className="px-2 py-2">
           <div className="flex">
             <span className="text-sm gray-text-color mr-1">
@@ -69,22 +71,27 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
             </span>
           </div>
           <div className="h4 mb-1 cursor-pointer truncate block">
-            {job.CMPNY_NM}
+            {job.TITLE}
           </div>
           {/* <link className="h4 mb-1 cursor-pointer truncate block">
                         동구밭
                       </link> */}
-          <p className="mb-2 truncate-2">{job.TITLE}</p>
+          <p className="mb-2 truncate-2">{job.CMPNY_NM}</p>
           <div className="my-2">
             <span className="rounded gray-bg-color uppercase px-2 lg:px-3 py-1 text-sm">
-              <span className="text-primary-color">
-                {dayjs(job.ENDRECEPTION).locale('ko').format('MM월 DD일')} 23시
-                59분 채용 마감
-              </span>
-              <span className="text-primary-color ml-2 font-bold">
-                D{dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day')}
-              </span>
-              {/* <strong className="ml-1 lg-ml-2">CLOSED</strong> */}
+              {dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day') > 0 ? (
+                <strong className="ml-1 lg-ml-2 text-gray-400">CLOSED</strong>
+              ) : (
+                <>
+                  <span className="text-primary-color">
+                    {dayjs(job.ENDRECEPTION).locale('ko').format('MM월 DD일')}{' '}
+                    23시 59분 채용 마감
+                  </span>
+                  <span className="text-primary-color ml-2 font-bold">
+                    D{dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day')}
+                  </span>
+                </>
+              )}
             </span>
           </div>
         </div>
