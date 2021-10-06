@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import HeaderList from './HeaderList';
 
 const Header: FC = () => {
   const [loginButton, setLoginButton] = useState('회원가입/로그인');
@@ -13,24 +14,7 @@ const Header: FC = () => {
               <img src="image/mapojob.jpg" />
             </a>
           </div>
-          <nav className="hidden lg:block space-x-8 font-bold">
-            <NavLink to="/wanted" className="whitespace-nowrap">
-              공공채용
-            </NavLink>
-            <NavLink to="/general" className="whitespace-nowrap">
-              일반채용
-            </NavLink>
-            <NavLink
-              activeClassName="is-active"
-              to="/recruit"
-              className="whitespace-nowrap"
-            >
-              채용관리
-            </NavLink>
-            <NavLink to="/personal" className="whitespace-nowrap">
-              마이페이지
-            </NavLink>
-          </nav>
+          <HeaderList />
         </div>
         <div className="flex flex-row flex-wrap justify-between items-center space-x-3">
           <NavLink to="/login" className="whitespace-nowrap">

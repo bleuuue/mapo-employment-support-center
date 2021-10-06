@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
 import MyPageLeftMenu from '../MyPageLeftMenu';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faMapMarker } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const PersonalMyPageMain: FC = () => {
   return (
@@ -66,47 +69,68 @@ const PersonalMyPageMain: FC = () => {
                   <div className="w-full sm:w-1/2 px-2">
                     <div className="rounded relative my-2 sm:my-6">
                       <div className="relative">
-                        <div>
+                        <Link to="/">
                           <div>
+                            <div className="pb-[52.5%]"></div>
                             <div className="rounded overflow-hidden absolute left-0 right-0 top-0 bottom-0">
                               <img
-                                src="https://prod-we-attachments.s3.ap-northeast-2.amaz…12fa6a-f041-4389-baf5-c151c2193c7b-w1200-h630.jpg"
+                                src="../../image/dong-gu.jpg"
                                 alt="채용 공공 기본 이미지"
                                 className="object-cover w-full h-full"
                               />
                             </div>
                           </div>
-                          <div className="rounded text-center flex items-center bg">
-                            <p className="m-auto inline-block text-white font-sans font-bold tracking-wide text-lg">
-                              CLOSED
-                            </p>
-                          </div>
+                        </Link>
+                        <div className="absolute top-0 left-0 right-0 px-2 py-2">
+                          <span className="inline-block"></span>
+                          <span className="inline-block float-right">
+                            <a className="cursor-pointer">
+                              <FontAwesomeIcon
+                                className="w-6 gray-text-color"
+                                icon={faStar}
+                              />
+                            </a>
+                          </span>
                         </div>
+                        <div className="absolute bottom-0 left-0 px-2 py-3">
+                          <span className="rounded bg-gray-50 text-primary-color uppercase lg:px-3 py-1 text-sm">
+                            <FontAwesomeIcon
+                              className="text-primary-color mr-2"
+                              icon={faMapMarker}
+                            />
+                            서울 강남구
+                          </span>
+                        </div>
+                        {/* <div className="rounded text-center flex items-center bg">
+                  <p className="m-auto inline-block text-white font-sans font-bold tracking-wide text-lg">
+                    CLOSED
+                  </p>
+                </div> */}
                       </div>
-                      <div className="px-2 py-2">
-                        <div className="flex">
-                          <span className="text-sm gray-text-color mr-1">
-                            일반채용
-                          </span>
-                          <span className="text-sm gray-text-color mr-1">
-                            정규직
-                          </span>
-                        </div>
-                        <div className="h4 mb-1 cursor-pointer truncate block">
-                          동구밭
-                        </div>
-                        {/* <link className="h4 mb-1 cursor-pointer truncate block">
+                    </div>
+                    <div className="px-2 py-2">
+                      <div className="flex">
+                        <span className="text-sm gray-text-color mr-1">
+                          일반채용
+                        </span>
+                        <span className="text-sm gray-text-color mr-1">
+                          정규직
+                        </span>
+                      </div>
+                      <div className="h4 mb-1 cursor-pointer truncate block">
+                        동구밭
+                      </div>
+                      {/* <link className="h4 mb-1 cursor-pointer truncate block">
                         동구밭
                       </link> */}
-                        <p className="mb-2 truncate-2">
-                          HRD 교육 영상콘텐츠 기획 제작 담당자 채용
-                        </p>
-                        <div className="my-2">
-                          <span className="rounded gray-bg-color gray-text-color uppercase px-2 lg:px-3 py-1 text-sm">
-                            <span>9월 8일 23시 59분 채용 마감</span>
-                            <strong className="ml-1 lg-ml-2">CLOSED</strong>
-                          </span>
-                        </div>
+                      <p className="mb-2 truncate-2">
+                        HRD 교육 영상콘텐츠 기획 제작 담당자 채용
+                      </p>
+                      <div className="my-2">
+                        <span className="rounded gray-bg-color gray-text-color uppercase px-2 lg:px-3 py-1 text-sm">
+                          <span>9월 8일 23시 59분 채용 마감</span>
+                          {/* <strong className="ml-1 lg-ml-2">CLOSED</strong> */}
+                        </span>
                       </div>
                     </div>
                   </div>

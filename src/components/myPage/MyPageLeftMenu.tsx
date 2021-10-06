@@ -33,7 +33,7 @@ const MyPageLeftMenu: FC = () => {
               className="a-li-recruit"
               activeClassName="is-active-recruit"
             >
-              스크린 리스트
+              스크랩 리스트
             </NavLink>
           </li>
         </ul>

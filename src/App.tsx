@@ -8,13 +8,16 @@ import BusinessSignUp from './components/login/register/businessSignUp';
 import Main from './pages/main';
 import FindBusinessId from './components/login/FindBusinessId';
 import FindPassword from './components/login/FindPassword';
-import Recruitment from './pages/recruitment';
 import SavedList from './components/myPage/personalMyPage/SavedList';
 import FindPersonalId from './components/login/FindPersonalId';
 import PersonalMyPageMain from './components/myPage/personalMyPage/PersonalMyPageMain';
 import PersonalProfileInfo from './components/myPage/personalMyPage/PersonalProfileInfo';
 import RegisterPersonalProfile from './components/myPage/personalMyPage/RegisterPersonalProfile';
 import ChangePersonalPassword from './components/myPage/personalMyPage/ChangePersonalPassword';
+import RecruitList from './components/common/recruit/RecruitList';
+import RecruitMain from './components/common/recruit/RecruitMain';
+import GeneralJobList from './components/job/GeneralJobList';
+import CreatePost from './components/common/recruit/CreatePost';
 
 const App: FC = () => {
   return (
@@ -35,13 +38,16 @@ const App: FC = () => {
             path="/personal/registerProfile"
             component={RegisterPersonalProfile}
           />
-          <Route path="/recruit" component={Recruitment} />
+          <Route exact path="/recruit" component={RecruitMain} />
+          <Route path="/recruit/create" component={CreatePost} />
+          <Route path="/recruit/management" component={RecruitList} />
           <Route path="/wanted" component={Wanted} />
           <Route
             path="/personal/ChangePwd"
             component={ChangePersonalPassword}
           />
           <Route path="/savedList" component={SavedList} />
+          <Route exact path="/job/general" component={GeneralJobList} />
         </Switch>
       </Layout>
     </Router>
