@@ -1,11 +1,9 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faMapMarker } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { IJob } from '../../interfaces';
 import { MutatorCallback } from 'swr/dist/types';
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 
 interface GeneralJobProps {

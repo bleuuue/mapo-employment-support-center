@@ -1,11 +1,4 @@
-import React, {
-  createRef,
-  FC,
-  FormEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { FC, useState } from 'react';
 import useSWR from 'swr';
 import axios from 'axios';
 import GeneralJobs from './GeneralJobs';
