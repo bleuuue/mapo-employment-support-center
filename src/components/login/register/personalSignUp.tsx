@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React, { FC, FormEvent, useEffect, useState } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 import { useInput } from '../../../hooks';
 import Swal from 'sweetalert2';
 
 const PersonalSignUp: FC = () => {
   const [name, onChangeName] = useInput('');
   const [email, onChangeEmail] = useInput('');
-  const [userid, onChangeUserId] = useInput('');
+  const [userId, onChangeUserId] = useInput('');
   const [emailCheck, onChangeEmailCheck] = useInput('');
   const [password, onChangePassword] = useInput('');
   const [passwordCheck, onChangePasswordCheck] = useInput('');
@@ -17,7 +17,7 @@ const PersonalSignUp: FC = () => {
     try {
       if (!idDuplicateCheck) return;
 
-      if (!userid)
+      if (!userId)
         Swal.fire({
           html: '<p style={padding-top: 20px}>아이디를 입력해주세요.</p>',
           focusConfirm: false,
@@ -26,7 +26,7 @@ const PersonalSignUp: FC = () => {
         });
 
       const response = await axios.get(
-        `${process.env.REACT_APP_BACK_URL}/user/duplicate/id/${userid}`,
+        `${process.env.REACT_APP_BACK_URL}/user/duplicate/id/${userId}`,
       );
       setIdDuplicateCheck(response.data.isDuplicate);
 
@@ -94,7 +94,7 @@ const PersonalSignUp: FC = () => {
 
       if (
         !name ||
-        !userid ||
+        !userId ||
         !email ||
         !emailCheck ||
         !password ||
@@ -107,7 +107,7 @@ const PersonalSignUp: FC = () => {
         `${process.env.REACT_APP_BACK_URL}/user/personal/signup`,
         {
           MBER_NM: name,
-          MBER_ID: userid,
+          MBER_ID: userId,
           MBER_EMAIL_ADRES: email,
           EMAIL_VRFCT: true,
           TERMS: true,
@@ -157,7 +157,7 @@ const PersonalSignUp: FC = () => {
                   className="block w-full input"
                   placeholder="아이디를 입력해주세요"
                   type="text"
-                  value={userid}
+                  value={userId}
                   onChange={onChangeUserId}
                 ></input>
               </div>
