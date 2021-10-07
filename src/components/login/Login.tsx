@@ -1,8 +1,10 @@
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useEffect, useState } from 'react';
 import { useInput } from '../../hooks';
+import Swal from 'sweetalert2';
+import crypto from 'crypto';
 
 const Login: FC = () => {
   const [id, onChangeId] = useInput('');
@@ -13,6 +15,7 @@ const Login: FC = () => {
     type: 'password',
     visible: false,
   });
+  const [hashKey, setHashKey] = useState<any>('');
 
   const handlePasswordType = () => {
     setPasswordType(() => {
@@ -24,19 +27,37 @@ const Login: FC = () => {
   };
 
   const onSubmitLogin = async (e: FormEvent<HTMLFormElement>) => {
-    if (!id || !password) checkNull();
+    try {
+      e.preventDefault();
 
-    const response = await axios.post(
-      `${process.env.REACT_APP_BACK_URL}/user/signin`,
-      {
-        USER_ID: id,
-        PASSWORD: password,
-      },
-    );
+      if (!id || !password) checkNull();
 
-    if (response.statusText === 'Created') {
-      localStorage.setItem('token', response.data.accessToken);
-      window.location.reload();
+      console.log(hashKey);
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACK_URL}/user/signin`,
+        {
+          USER_ID: id,
+          PASSWORD: hashKey,
+        },
+      );
+
+      console.log(response.data.statusCode);
+
+      if (response.data.statusCode === 201) {
+        localStorage.setItem('token', response.data.accessToken);
+        console.log('sdf');
+        window.location.href = 'http://localhost:3000/';
+      } else {
+        Swal.fire({
+          html: `<p style={padding-top: 20px}>아이디, 비밀번호를 확인해주세요</p>`,
+          focusConfirm: false,
+          confirmButtonColor: '#7c9ff2',
+          confirmButtonText: '확인',
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -54,8 +75,22 @@ const Login: FC = () => {
     } else {
       setPasswordError('');
     }
+
     return;
   };
+
+  useEffect(() => {
+    const salt = 'rHQOMrYQAJp8+XICMU2SP+YTC8YkRnWEj825pffj0GE';
+    // const salt = crypto.randomBytes(32).toString('base64');
+
+    crypto.pbkdf2(password, salt, 100000, 64, 'sha256', (err, hash) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setHashKey(hash.toString('base64'));
+      }
+    });
+  }, [password]);
 
   return (
     <div className="flex">

@@ -25,10 +25,7 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
             <div>
               <div className="pb-[52.5%]"></div>
               <div className="rounded overflow-hidden absolute left-0 right-0 top-0 bottom-0">
-                <img
-                  src={job.CMPNY_IM ? job.CMPNY_IM : '../../image/no-image.png'}
-                  className="object-cover w-full h-full"
-                />
+                <img src={job.JOB_IM} className="object-cover w-full h-full" />
               </div>
             </div>
           </Link>

@@ -50,13 +50,12 @@ const GeneralJobList: FC = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
   const [pageCount, setPageCount] = useState<number>(1);
   const [searchKeyword, onChangeSearchKeyword] = useInput('');
-  const [searchKey, setSearchKey] = useState('');
   const [activePage, setActivePage] = useState<number>(1);
 
   const fetcher = async (url: string) => {
     try {
       const response = await axios.post(url, {
-        SEARCH_NAME: searchKey,
+        SEARCH_NAME: searchKeyword,
       });
 
       if (response.statusText === 'Created') {
@@ -96,12 +95,7 @@ const GeneralJobList: FC = () => {
   };
 
   const search = async (e: any) => {
-    try {
-      await setSearchKey(searchKeyword);
-      e.preventDefault();
-    } catch (error) {
-      console.error(error);
-    }
+    e.preventDefault();
   };
 
   return (

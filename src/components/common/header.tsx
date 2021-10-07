@@ -4,6 +4,12 @@ import HeaderList from './HeaderList';
 
 const Header: FC = () => {
   const [loginButton, setLoginButton] = useState('회원가입/로그인');
+  const token = localStorage.getItem('token');
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  };
 
   return (
     <div className="border-b-2 border-gray-200">
@@ -17,9 +23,15 @@ const Header: FC = () => {
           <HeaderList />
         </div>
         <div className="flex flex-row flex-wrap justify-between items-center space-x-3">
-          <NavLink to="/login" className="whitespace-nowrap">
-            회원가입/로그인
-          </NavLink>
+          {token ? (
+            <NavLink to="/" className="whitespace-nowrap">
+              로그아웃
+            </NavLink>
+          ) : (
+            <NavLink to="/login" className="whitespace-nowrap">
+              회원가입/로그인
+            </NavLink>
+          )}
         </div>
       </header>
     </div>

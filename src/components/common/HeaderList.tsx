@@ -8,7 +8,7 @@ const headerConfig = [
   { id: 4, title: '커뮤니티', link: '/community' },
   { id: 5, title: '상담', link: '/counseling' },
   { id: 6, title: '채용관리', link: '/recruit' },
-  { id: 7, title: '마이페이지', link: '/personer' },
+  { id: 7, title: '마이페이지', link: '/personal' },
 ];
 
 const HeaderList: FC = () => {

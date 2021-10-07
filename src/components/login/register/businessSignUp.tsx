@@ -18,7 +18,7 @@ const BusinessSignUp: FC = () => {
   const [idDuplicateCheck, setIdDuplicateCheck] = useState<boolean>(true);
   const [emailDuplicateCheck, setEmailDuplicateCheck] = useState<boolean>(true);
   const [sendEmailCode, setSendEmailCode] = useState<boolean>();
-  const [verifyEmailCheck, setVerifyEmailCheck] = useState<boolean>();
+  const [verifyEmailCheck, setVerifyEmailCheck] = useState<boolean>(false);
   const [verifyCode, setVerifyCode] = useState<number>(0);
   const [userVerifyCode, onChangeUserVerifyCode] = useInput('');
   const [businessNumberDuplicateCheck, setBusinessNumberDuplicateCheck] =
@@ -28,21 +28,34 @@ const BusinessSignUp: FC = () => {
     type: 'password',
     visible: false,
   });
+  // const [posts, setPosts] = useState([]);
 
-  const cryptoPass = async () => {
-    new Promise(() => {
-      //const salt = crypto.randomBytes(32).toString('base64');
-      const salt = 'rHQOMrYQAJp8+XICMU2SP+YTC8YkRnWEj825pffj0GE';
-      crypto.pbkdf2(password, salt, 100000, 64, 'sha256', (err, hash) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setHashKey(hash.toString('base64'));
-          console.log('cryptoPass : ' + hash.toString('base64'));
-        }
-      });
-    });
-  };
+  // const [checkItems, setCheckItems] = useState([]);
+
+  // const handleSingleCheck = (checked: boolean, id: number) => {
+  //   if (checked) {
+  //     setCheckItems([...checkItems, id]);
+  //   } else {
+  //     // 체크 해제
+  //     setCheckItems(checkItems.filter((el) => el !== id));
+  //   }
+  // };
+
+  // const handleAllCheck = (checked: boolean) => {
+  //   if (checked) {
+  //     console.log('wow');
+  //     const idArray: any = [];
+  //     // 전체 체크 박스가 체크 되면 id를 가진 모든 elements를 배열에 넣어주어서,
+  //     // 전체 체크 박스 체크
+  //     posts.forEach((el) => idArray.push(el.id));
+  //     setCheckItems(idArray);
+  //   }
+
+  //   // 반대의 경우 전체 체크 박스 체크 삭제
+  //   else {
+  //     setCheckItems([]);
+  //   }
+  // };
 
   const duplicateId = async () => {
     try {
@@ -225,19 +238,17 @@ const BusinessSignUp: FC = () => {
     try {
       e.preventDefault();
 
-      // if (
-      //   !name ||
-      //   !password ||
-      //   !passwordCheck ||
-      //   !businessName ||
-      //   idDuplicateCheck ||
-      //   !verifyEmailCheck ||
-      //   businessNumberDuplicateCheck
-      // )
-      //   return;
+      if (!name || !password || !passwordCheck || !businessName) {
+        Swal.fire({
+          html: '<p style={padding-top: 20px}>필수입력란을 기입해주세요.</p>',
+          focusConfirm: false,
+          confirmButtonColor: '#7c9ff2',
+          confirmButtonText: '확인',
+        });
+        return;
+      }
 
-      await cryptoPass();
-      console.log('submitHash : ' + hashKey);
+      console.log('signup' + hashKey);
 
       const response = await axios.post(
         `${process.env.REACT_APP_BACK_URL}/user/enterprise/signup`,
@@ -250,23 +261,37 @@ const BusinessSignUp: FC = () => {
           BIZRNO: businessNumber,
           EMAIL_VRFCT: verifyEmailCheck,
           TERMS: true,
+          BIZRNOAVAILABLE: !businessNumberDuplicateCheck,
         },
       );
 
-      if (response.statusText === 'Created') {
+      if (response.data.statusCode === 201) {
+        window.location.href = 'http://localhost:3000/login';
+      } else {
         Swal.fire({
-          html: '<p style={padding-top: 20px}>가입이 완료되었습니다.</p>',
+          html: `<p style={padding-top: 20px}>${response.data.message}</p>`,
           focusConfirm: false,
           confirmButtonColor: '#7c9ff2',
           confirmButtonText: '확인',
         });
-
-        window.location.reload();
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    const salt = 'rHQOMrYQAJp8+XICMU2SP+YTC8YkRnWEj825pffj0GE';
+    // const salt = crypto.randomBytes(32).toString('base64');
+
+    crypto.pbkdf2(password, salt, 100000, 64, 'sha256', (err, hash) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setHashKey(hash.toString('base64'));
+      }
+    });
+  }, [password]);
 
   useEffect(() => {
     if (password && password.length < 8) {
@@ -382,7 +407,11 @@ const BusinessSignUp: FC = () => {
               </div>
               <div className="flex flex-wrap flex-row mt-2 md:mt-0">
                 <button
-                  className="double-check-btn border-primary-color"
+                  className={`double-check-btn text-sm font-black ${
+                    verifyEmailCheck
+                      ? 'border-none gray-bg-color text-white cursor-default'
+                      : 'border-primary-color text-primary-color'
+                  }`}
                   type="button"
                   onClick={verifyEmail}
                 >
@@ -478,7 +507,11 @@ const BusinessSignUp: FC = () => {
               </div>
               <div className="flex flex-wrap flex-row mt-2 md:mt-0">
                 <button
-                  className="double-check-btn border-primary-color"
+                  className={`double-check-btn text-sm font-black ${
+                    !businessNumberDuplicateCheck
+                      ? 'border-none gray-bg-color text-white cursor-default'
+                      : 'border-primary-color text-primary-color'
+                  }`}
                   type="button"
                   onClick={duplicateBusinessNumber}
                 >
