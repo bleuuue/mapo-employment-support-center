@@ -58,3 +58,9 @@ export interface IJob {
   ENDRECEPTION: string;
   APPROVAL_DATE: Date;
 }
+
+export interface ISub {
+  id: number;
+  title: string;
+  link: string;
+}

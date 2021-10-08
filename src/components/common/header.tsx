@@ -13,7 +13,7 @@ const Header: FC = () => {
 
   return (
     <div className="border-b-2 border-gray-200">
-      <header className="max-w-screen-xl mx-auto px-4 flex flex-row flex-wrap text-xs lg:text-sm justify-between items-center py-4">
+      <header className="max-w-screen-xl mx-auto px-4 flex flex-row flex-wrap text-xs lg:text-sm justify-between items-center">
         <div className="flex flex-row flex-wrap justify-between items-center space-x-12">
           <div className="text-bold text-2xl">
             <a href="/">
@@ -24,9 +24,7 @@ const Header: FC = () => {
         </div>
         <div className="flex flex-row flex-wrap justify-between items-center space-x-3">
           {token ? (
-            <NavLink to="/" className="whitespace-nowrap">
-              로그아웃
-            </NavLink>
+            <button onClick={logout}>로그아웃</button>
           ) : (
             <NavLink to="/login" className="whitespace-nowrap">
               회원가입/로그인

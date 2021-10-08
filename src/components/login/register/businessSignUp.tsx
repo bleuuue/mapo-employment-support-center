@@ -23,39 +23,25 @@ const BusinessSignUp: FC = () => {
   const [userVerifyCode, onChangeUserVerifyCode] = useInput('');
   const [businessNumberDuplicateCheck, setBusinessNumberDuplicateCheck] =
     useState<boolean>(true);
+  const [isAgreeTerms, setIsAgreeTerms] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<string>('');
   const [passwordType, setPasswordType] = useState({
     type: 'password',
     visible: false,
   });
-  // const [posts, setPosts] = useState([]);
+  const [checkList, setCheckList] = useState<any>([]);
+  const [checkbox, setCheckbox] = useState<any>([]);
 
-  // const [checkItems, setCheckItems] = useState([]);
-
-  // const handleSingleCheck = (checked: boolean, id: number) => {
-  //   if (checked) {
-  //     setCheckItems([...checkItems, id]);
-  //   } else {
-  //     // 체크 해제
-  //     setCheckItems(checkItems.filter((el) => el !== id));
-  //   }
-  // };
-
-  // const handleAllCheck = (checked: boolean) => {
-  //   if (checked) {
-  //     console.log('wow');
-  //     const idArray: any = [];
-  //     // 전체 체크 박스가 체크 되면 id를 가진 모든 elements를 배열에 넣어주어서,
-  //     // 전체 체크 박스 체크
-  //     posts.forEach((el) => idArray.push(el.id));
-  //     setCheckItems(idArray);
-  //   }
-
-  //   // 반대의 경우 전체 체크 박스 체크 삭제
-  //   else {
-  //     setCheckItems([]);
-  //   }
-  // };
+  const terms = [
+    {
+      id: 0,
+      content: '서비스 이용약관',
+    },
+    {
+      id: 1,
+      content: '개인정보 이용 동의',
+    },
+  ];
 
   const duplicateId = async () => {
     try {
@@ -248,7 +234,7 @@ const BusinessSignUp: FC = () => {
         return;
       }
 
-      console.log('signup' + hashKey);
+      if (checkList.length == 2) setIsAgreeTerms(true);
 
       const response = await axios.post(
         `${process.env.REACT_APP_BACK_URL}/user/enterprise/signup`,
@@ -280,6 +266,18 @@ const BusinessSignUp: FC = () => {
     }
   };
 
+  const handleSingleCheck = (checked: boolean, id: number) => {
+    if (checked) {
+      setCheckList([...checkList, id]);
+    } else {
+      setCheckList(checkList.filter((checkedId: number) => checkedId !== id));
+    }
+  };
+
+  const handleAllCheck = (checked: boolean) => {
+    setCheckList(checked ? checkbox : []);
+  };
+
   useEffect(() => {
     const salt = 'rHQOMrYQAJp8+XICMU2SP+YTC8YkRnWEj825pffj0GE';
     // const salt = crypto.randomBytes(32).toString('base64');
@@ -305,6 +303,16 @@ const BusinessSignUp: FC = () => {
       }
     }
   }, [password, passwordCheck]);
+
+  useEffect(() => {
+    const ids: any = [];
+
+    terms.map((term, i) => {
+      ids[i] = term.id;
+    });
+
+    setCheckbox(ids);
+  }, []);
 
   return (
     <div className="flex">
@@ -524,30 +532,33 @@ const BusinessSignUp: FC = () => {
           </div>
           <div className="pt-4">
             <div className="inline-flex items-center">
-              <input className="checkbox" type="checkbox" />
+              <input
+                type="checkbox"
+                onChange={(e) => handleAllCheck(e.target.checked)}
+                checked={checkList.length === checkbox.length}
+              />
               <div className="ml-2">약관 전체 동의</div>
             </div>
           </div>
           <div className="border-1 border-gray-200 rounded py-2 px-2 md:px-4 mb-4 mt-2 text-sm">
-            <div className="my-2">
-              <div className="inline-flex items-center">
-                <input className="checkbox mr-2" type="checkbox" />
-                <div>서비스 이용약관</div>
-                <div className="ml-2 cursor-pointer text-xs mt-1 text-primary-color">
-                  약관 보기 &gt;{' '}
+            {terms.map((term, i) => {
+              return (
+                <div className="my-2">
+                  <div className="inline-flex items-center">
+                    <input
+                      className="mr-2"
+                      type="checkbox"
+                      onChange={(e) => handleSingleCheck(e.target.checked, i)}
+                      checked={checkList.includes(i)}
+                    />
+                    <div>{term.content}</div>
+                    <div className="ml-2 cursor-pointer text-xs mt-1 text-primary-color">
+                      약관 보기 &gt;{' '}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="my-2">
-              <div className="inline-flex items-center">
-                <input className="checkbox mr-2 text-sm" type="checkbox" />
-                <div>개인정보 수집 및 이용</div>
-                <div>서비스 이용약관</div>
-                <div className="ml-2 cursor-pointer text-xs mt-1 text-primary-color">
-                  약관 보기 &gt;{' '}
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
           <div className="pt-4 lg:pt-4 pb-4 my-4 bottom-0 left-0 right-0">
             <button
