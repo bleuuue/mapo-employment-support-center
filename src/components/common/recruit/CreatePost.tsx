@@ -316,6 +316,8 @@ const CreatePost: FC = () => {
         },
       );
 
+      console.log(response);
+
       if (response.statusText === 'Created') console.log('post save!');
     } catch (error) {
       console.error(error);
