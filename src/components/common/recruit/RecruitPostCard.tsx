@@ -35,16 +35,29 @@ const RecruitPostCard: FC<RecruitPostCardProps> = ({ post, mutate }) => {
     }
   };
 
+  const renderSwitch = (param: string) => {
+    switch (param) {
+      case '등록':
+        return <span className="font-bold text-purple-400 mr-3">작성중</span>;
+      case '승인요청':
+        return (
+          <span className="font-bold text-yellow-300 mr-3">승인 대기중</span>
+        );
+      case '승인완료':
+        return (
+          <span className="font-bold text-primary-color mr-3">승인 완료</span>
+        );
+      case '승인거절':
+        return <span className="font-bold text-red-300 mr-3">승인 거절</span>;
+      default:
+        return 'foo';
+    }
+  };
+
   return (
     <div className="flex-auto sm:flex-none sm:w-1/2 p-2">
       <div className="border border-gray-100 rounded my-4 p-4 h-full">
-        <div>
-          {post.JOB_STAT === '등록' ? (
-            <span className="font-bold text-purple-400 mr-3">작성중</span>
-          ) : (
-            <span className="font-bold text-primary-color mr-3">승인 완료</span>
-          )}
-        </div>
+        <div>{renderSwitch(post.JOB_STAT)}</div>
         <div className="tag-list">
           <span className="text-sm text-gray-300 mr-1">일반채용</span>
           <span className="text-sm text-gray-300 mr-1">정규직</span>

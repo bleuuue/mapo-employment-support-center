@@ -357,7 +357,7 @@ const CreatePost: FC = () => {
       savePost();
       // if (jobId) await requestApprove();
 
-      // window.location.href = 'http://localhost:3000/recruit/management';
+      window.location.href = 'http://localhost:3000/recruit/management';
     } catch (error) {
       console.error(error);
     }

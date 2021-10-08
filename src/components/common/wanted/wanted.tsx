@@ -101,7 +101,12 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
           <div className="hidden md:block relative">
             <div className="pb-[52.5%]"></div>
             <div className="rounded overflow-hidden absolute left-0 right-0 top-0 bottom-0">
-              {data.JOB_IM !== '' ? (
+              <img
+                src={data.JOB_IM}
+                alt="채용 이미지"
+                className="object-cover w-full h-full"
+              />
+              {/* {data.JOB_IM !== '' ? (
                 <img
                   src={data.JOB_IM}
                   alt="채용 이미지"
@@ -113,7 +118,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                   alt="채용 공공 기본 이미지"
                   className="object-cover w-full h-full"
                 />
-              )}
+              )} */}
             </div>
           </div>
           <div className="list-description">
@@ -153,7 +158,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             </p>
             <p className="list">
               <strong>고용형태상세</strong>
-              <span>{data.EMPLOYTYPE_DET.map((v) => v.CODE_NM)}</span>
+              <span>{data.EMPLOYTYPE_DET.map((v) => v.CODE_NM + ' ')}</span>
             </p>
             <p className="list">
               <strong>임금지급형태</strong>
