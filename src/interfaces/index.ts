@@ -16,7 +16,7 @@ export interface RecruitPost {
 export interface IJob {
   JOBID: number;
   CMPNY_NM: string;
-  CMPNY_IM: string;
+  JOB_IM: string;
   TITLE: string;
   JOB_TYPE_DESC: string;
   WORK_ADDRESS: string;
@@ -98,4 +98,10 @@ export interface JobDetail {
   CONTACT_DEPARTMENT: string;
   CONTACT_PHONE: string;
   CONTACT_EMAIL: string;
+}
+
+export interface ISub {
+  id: number;
+  title: string;
+  link: string;
 }

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faMapMarker } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-const PersonerMyPageMain: FC = () => {
+const PersonalMyPageMain: FC = () => {
   return (
     <div className="container-recruit px-4 pb-12">
       <div className="layout-side">
@@ -144,4 +144,4 @@ const PersonerMyPageMain: FC = () => {
   );
 };
 
-export default PersonerMyPageMain;
+export default PersonalMyPageMain;

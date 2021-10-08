@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import MyPageLeftMenu from '../MyPageLeftMenu';
 
-const RegisterPersonerProfile: FC = () => {
+const RegisterPersonalProfile: FC = () => {
   return (
     <div className="container-recruit px-4 pb-12">
       <div className="layout-side">
@@ -179,4 +179,4 @@ const RegisterPersonerProfile: FC = () => {
   );
 };
 
-export default RegisterPersonerProfile;
+export default RegisterPersonalProfile;
