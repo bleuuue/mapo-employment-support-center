@@ -82,10 +82,10 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
   }, [addr, setAddr, data]);
 
   useEffect(() => {
-    console.log(addr);
-  }, [addr]);
+    console.log(data?.JOB_IM);
+  }, [data]);
 
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <div className="px-4 text-xl">Loading...</div>;
 
   return (
     <div className="container-recruit px-4 pb-12">
@@ -101,11 +101,19 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
           <div className="hidden md:block relative">
             <div className="pb-[52.5%]"></div>
             <div className="rounded overflow-hidden absolute left-0 right-0 top-0 bottom-0">
-              <img
-                src="../../image/dong-gu.jpg"
-                alt="채용 공공 기본 이미지"
-                className="object-cover w-full h-full"
-              />
+              {data.JOB_IM !== '' ? (
+                <img
+                  src={data.JOB_IM}
+                  alt="채용 이미지"
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <img
+                  src="../../image/dong-gu.jpg"
+                  alt="채용 공공 기본 이미지"
+                  className="object-cover w-full h-full"
+                />
+              )}
             </div>
           </div>
           <div className="list-description">
@@ -161,11 +169,19 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             </p>
             <p className="list">
               <strong>전형방법</strong>
-              <span>{data.TEST_METHOD}</span>
+              <span>{data.TEST_METHOD.map((v) => v.CODE_NM + '  ')}</span>
             </p>
             <p className="list">
               <strong>전형방법상세</strong>
               <span>{data.TEST_METHOD_DTC}</span>
+            </p>
+            <p className="list">
+              <strong>접수방법</strong>
+              <span>{data.APPLY_METHOD.map((v) => v.CODE_NM + '  ')}</span>
+            </p>
+            <p className="list">
+              <strong>접수방법상세</strong>
+              <span>{data.APPLY_METHOD_ETC}</span>
             </p>
           </div>
           <div className="list-description">
@@ -184,7 +200,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             </p>
             <p className="list">
               <strong>사회보험</strong>
-              <span>{data.SOCIAL_INSURANCE.map((v) => v.CODE_NM)}</span>
+              <span>{data.SOCIAL_INSURANCE.map((v) => v.CODE_NM + ' ')}</span>
             </p>
           </div>
           <div className="list-description">
@@ -204,7 +220,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             <div
               id="map"
               style={{ width: '100%', height: '300px' }}
-              className="relative overflow-hidden"
+              className="relative overflow-hidden my-4"
               ref={container}
             ></div>
           </div>
@@ -224,7 +240,12 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
           <div className="md:sticky top-24 box-border border-solid border-gray-100">
             <div className="md:block md:border md:rounded p-4 text-center">
               <div>
-                <a href="#">{/* <img src= /> */}</a>
+                <a href="#">
+                  <img
+                    className="rounded w-32 mx-auto mb-4"
+                    src="../../image/dong-gu.jpg"
+                  />
+                </a>
                 <a href="#" className="h5 mb-2">
                   {data.CMPNY_NM}
                 </a>
@@ -261,7 +282,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
           </div>
         </div>
       </div>
-      <div className="my-4">
+      <div className="my-8">
         <button className="btn btn-xs-gray mr-4" onClick={() => history.back()}>
           뒤로가기
         </button>

@@ -84,9 +84,12 @@ const RecruitPostCard: FC<RecruitPostCardProps> = ({ post, mutate }) => {
         {post.JOB_STAT === '등록' ? (
           <div>
             <div className="text-right btn-grouped my-2">
-              <a href="#" className="btn-xs-purple mr-1">
+              <Link
+                to={'/job/enterprise/edit/' + post.JOBID}
+                className="btn-xs-purple mr-1"
+              >
                 수정하기
-              </a>
+              </Link>
             </div>
             <div className="text-right btn-grouped my-2">
               <button

@@ -3,15 +3,37 @@ import imageCompression from 'browser-image-compression';
 import { useInput } from '../../../hooks';
 import RecruitLeftSide from './RecruitLeftSide';
 import axios from 'axios';
-import { EnterpriseProfile, ListMenu } from '../../../interfaces';
+import { EnterpriseProfile, JobDetail, ListMenu } from '../../../interfaces';
 import useSWR from 'swr';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { RouteComponentProps } from 'react-router';
 
-const CreatePost: FC = () => {
+const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
   const token = localStorage.getItem('token');
+  const { jobId } = match.params;
 
-  const [jobId, setJobId] = useState();
+  async function getPostById(url: string) {
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(response.data);
+      console.log(response.data.data);
+
+      return response.data.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const { data } = useSWR<JobDetail>(
+    `${process.env.REACT_APP_BACK_URL}/job/enterprise/list/detail/${jobId}`,
+    getPostById,
+  );
 
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<any>(null);
@@ -33,36 +55,42 @@ const CreatePost: FC = () => {
   const [testmt, setTestmt] = useState([]);
   const [timecd, setTimecd] = useState([]);
 
-  const [recruitTitle, onChangeRecruitTitle] = useInput('');
-  const [recruitOccupation, onChangeRecruitOccupation] = useInput('');
-  const [recruitNumber, onChangeRecruitNumber] = useInput('');
-  const [jobDetail, setJobDetail] = useState<string>('');
-  const [eduBackground, onChangeEduBackground] = useInput('');
-  const [careerCheck, onChangeCareerCheck] = useInput('');
-  const [careerPeriod, onChangeCareerPeriod] = useInput('');
-  const [areaCheck, onChangeAreaCheck] = useInput('');
-  const [areaAddress, onChangeAreaAddress] = useInput('');
-  const [industrialComplex, onChangeIndustrialComplex] = useInput('');
-  const [apytypCheck, onChangeApytypCheck] = useInput('');
-  const [apytypetc, onChangeApytypetc] = useInput('');
-  const [clstypCheck, onChangeClstypCheck] = useInput('');
-  const [doccdCheck, onChangeDoccdCheck] = useInput('');
-  const [empcdCheck, onChangeEmpcdCheck] = useInput('');
-  const [empdetCheck, onChangeEmpdetCheck] = useInput('');
-  const [paycdCheck, onChangePaycdCheck] = useInput('');
-  const [payAmount, onChangePayAmount] = useInput('');
-  const [workHourForWeek, onChangeWorkHourForWeek] = useInput('');
-  const [mealcdCheck, onChangeMealcdCheck] = useInput('');
-  const [sevpayCheck, onChangeSevpayCheck] = useInput('');
-  const [socinsCheck, onChangeSocinsCheck] = useInput('');
-  const [timecdCheck, onChangeTimecdCheck] = useInput('');
-  const [closingTime, onChangeClosingTime] = useInput('');
-  const [testmtCheck, onChangeTestmtCheck] = useInput('');
-  const [testmtetcCheck, onChangeTestmtetcCheck] = useInput('');
-  const [contactName, onChangeContactName] = useInput('');
-  const [contactDepartment, onChangeContactDepartment] = useInput('');
-  const [contactPhone, onChangeContactPhone] = useInput('');
-  const [contactEmail, onChangeContactEmail] = useInput('');
+  const [recruitTitle, onChangeRecruitTitle] = useInput(data?.TITLE);
+  const [recruitOccupation, onChangeRecruitOccupation] = useInput(
+    data?.JOB_TYPE_DESC,
+  );
+  const [recruitNumber, onChangeRecruitNumber] = useInput(data?.REQUIRE_COUNT);
+  const [jobDetail, setJobDetail] = useState<any>(data?.JOB_DESC);
+  const [eduBackground, onChangeEduBackground] = useInput(data?.DEUCATION);
+  const [careerCheck, onChangeCareerCheck] = useInput(data?.CAREER);
+  const [careerPeriod, onChangeCareerPeriod] = useInput(data?.CAREER_PERIOD);
+  const [areaCheck, onChangeAreaCheck] = useInput(data?.WORK_AREA);
+  const [areaAddress, onChangeAreaAddress] = useInput(data?.WORK_ADDRESS);
+  const [industrialComplex, onChangeIndustrialComplex] = useInput(
+    data?.WORK_AREA_DESC,
+  );
+  const [apytypetc, onChangeApytypetc] = useInput(data?.APPLY_METHOD_ETC);
+  const [clstypCheck, onChangeClstypCheck] = useInput(data?.CLOSING_TYPE);
+  const [empcdCheck, onChangeEmpcdCheck] = useInput(data?.EMPLOYTYPE);
+  const [empdetCheck, onChangeEmpdetCheck] = useInput(data?.EMPLOYTYPE_DET);
+  const [paycdCheck, onChangePaycdCheck] = useInput(data?.PAYCD);
+  const [payAmount, onChangePayAmount] = useInput(data?.PAY_AMOUNT);
+  const [workHourForWeek, onChangeWorkHourForWeek] = useInput(
+    data?.WORKINGHOURS,
+  );
+  const [mealcdCheck, onChangeMealcdCheck] = useInput(data?.MEAL_COD);
+  const [sevpayCheck, onChangeSevpayCheck] = useInput(data?.SEVERANCE_PAY_TYPE);
+  const [timecdCheck, onChangeTimecdCheck] = useInput(data?.WORK_TIME_TYPE);
+  const [closingTime, onChangeClosingTime] = useInput(data?.ENDRECEPTION);
+  const [testmtetcCheck, onChangeTestmtetcCheck] = useInput(
+    data?.TEST_METHOD_DTC,
+  );
+  const [contactName, onChangeContactName] = useInput(data?.CONTACT_NAME);
+  const [contactDepartment, onChangeContactDepartment] = useInput(
+    data?.CONTACT_DEPARTMENT,
+  );
+  const [contactPhone, onChangeContactPhone] = useInput(data?.CONTACT_PHONE);
+  const [contactEmail, onChangeContactEmail] = useInput(data?.CONTACT_EMAIL);
 
   const [checkedApplyMethodInputs, setCheckedApplyMethodInputs] = useState<any>(
     [],
@@ -1086,4 +1114,4 @@ const CreatePost: FC = () => {
   );
 };
 
-export default CreatePost;
+export default EditPost;

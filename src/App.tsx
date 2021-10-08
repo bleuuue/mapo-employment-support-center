@@ -23,6 +23,7 @@ import SavedList from './components/myPage/personerMyPage/SavedList';
 import RecruitList from './components/common/recruit/RecruitList';
 import RecruitMain from './components/common/recruit/RecruitMain';
 import GeneralJobList from './components/job/GeneralJobList';
+import EditPost from './components/common/recruit/EditPost';
 
 const App: FC = () => {
   return (
@@ -53,6 +54,7 @@ const App: FC = () => {
           <Route path="/savedList" component={SavedList} />
           <Route exact path="/job/general" component={GeneralJobList} />
           <Route path="/job/detail/:jobId" component={Wanted} />
+          <Route path="/job/enterprise/edit/:jobId" component={EditPost} />
         </Switch>
       </Layout>
     </Router>
