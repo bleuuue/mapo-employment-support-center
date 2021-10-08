@@ -4,6 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 import { RecruitPost } from '../../../interfaces';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 interface RecruitPostCardProps {
   post: RecruitPost;
@@ -61,10 +62,10 @@ const RecruitPostCard: FC<RecruitPostCardProps> = ({ post, mutate }) => {
             : ''}
         </p>
 
-        <div className="flex flex-wrap flex-row -mx-1 text-center my-4">
+        {/* <div className="flex flex-wrap flex-row -mx-1 text-center my-4">
           <div className="flex-1 py-2 px-1 border-2 border-purple-100 rounded mx-1">
             <p className="text-sm">조회수</p>
-            <p className="h4 text-purple-400 font-normal">9</p>
+            <p className="h4 text-purple-400 font-normal">{post.JOBID}</p>
           </div>
           <div className="flex-1 py-2 px-1 border-2 border-purple-100 rounded mx-1">
             <p className="text-sm">지원자 수</p>
@@ -74,11 +75,11 @@ const RecruitPostCard: FC<RecruitPostCardProps> = ({ post, mutate }) => {
             <p className="text-sm">관심 수</p>
             <p className="h4 text-purple-400 font-normal">0</p>
           </div>
-        </div>
+        </div> */}
         <div className="text-right btn-grouped my-2">
-          <a href="#" className="btn-xs-purple mr-1">
+          <Link to={'/job/detail/' + post.JOBID} className="btn-xs-purple mr-1">
             채용공고 보기
-          </a>
+          </Link>
         </div>
         {post.JOB_STAT === '등록' ? (
           <div>
