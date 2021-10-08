@@ -6,14 +6,6 @@ import axios from 'axios';
 import useSWRInfinite from 'swr/infinite';
 import { RecruitPost } from '../../../interfaces';
 
-// interface temp {
-//   count: string;
-//   statusCode: number;
-//   message: string;
-//   ok: boolean;
-//   data: RecruitPost[];
-// }
-
 const getKey = (pageIndex: number, previousPageData: any) => {
   // 마지막 페이지일때
   if (previousPageData && !previousPageData.length) return null;
@@ -52,10 +44,6 @@ const RecruitList: FC = () => {
     getKey,
     fetcher,
   );
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   useEffect(() => {
     if (data && !data[size - 1]) return;

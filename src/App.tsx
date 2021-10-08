@@ -1,5 +1,10 @@
 import { FC } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  match,
+} from 'react-router-dom';
 import CreatePost from './components/common/recruit/CreatePost';
 import Wanted from './components/common/wanted/wanted';
 import Layout from './components/Layout';
@@ -41,13 +46,13 @@ const App: FC = () => {
           <Route exact path="/recruit" component={RecruitMain} />
           <Route path="/recruit/create" component={CreatePost} />
           <Route path="/recruit/management" component={RecruitList} />
-          <Route path="/wanted" component={Wanted} />
           <Route
             path="/personer/ChangePwd"
             component={ChangePersonerPassword}
           />
           <Route path="/savedList" component={SavedList} />
           <Route exact path="/job/general" component={GeneralJobList} />
+          <Route path="/job/detail/:jobId" component={Wanted} />
         </Switch>
       </Layout>
     </Router>

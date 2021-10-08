@@ -1,11 +1,20 @@
 import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
+import imageCompression from 'browser-image-compression';
 import { useInput } from '../../../hooks';
 import RecruitLeftSide from './RecruitLeftSide';
 import axios from 'axios';
-import { ListMenu } from '../../../interfaces';
+import { EnterpriseProfile, ListMenu } from '../../../interfaces';
+import useSWR from 'swr';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CreatePost: FC = () => {
   const token = localStorage.getItem('token');
+
+  const [jobId, setJobId] = useState();
+
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<any>(null);
 
   const [folding, setFolding] = useState(true);
 
@@ -35,6 +44,7 @@ const CreatePost: FC = () => {
   const [areaAddress, onChangeAreaAddress] = useInput('');
   const [industrialComplex, onChangeIndustrialComplex] = useInput('');
   const [apytypCheck, onChangeApytypCheck] = useInput('');
+  const [apytypetc, onChangeApytypetc] = useInput('');
   const [clstypCheck, onChangeClstypCheck] = useInput('');
   const [doccdCheck, onChangeDoccdCheck] = useInput('');
   const [empcdCheck, onChangeEmpcdCheck] = useInput('');
@@ -48,6 +58,62 @@ const CreatePost: FC = () => {
   const [timecdCheck, onChangeTimecdCheck] = useInput('');
   const [closingTime, onChangeClosingTime] = useInput('');
   const [testmtCheck, onChangeTestmtCheck] = useInput('');
+  const [testmtetcCheck, onChangeTestmtetcCheck] = useInput('');
+  const [contactName, onChangeContactName] = useInput('');
+  const [contactDepartment, onChangeContactDepartment] = useInput('');
+  const [contactPhone, onChangeContactPhone] = useInput('');
+  const [contactEmail, onChangeContactEmail] = useInput('');
+
+  const [checkedApplyMethodInputs, setCheckedApplyMethodInputs] = useState<any>(
+    [],
+  );
+  const [checkedTestMethodInputs, setCheckedTestMethodInputs] = useState<any>(
+    [],
+  );
+  const [checkedSocialInsuranceInputs, setCheckedSocialInsuranceInputs] =
+    useState<any>([]);
+  const [checkedApplyDocumentInputs, setCheckedApplyDocumentInputs] =
+    useState<any>([]);
+
+  const changeApplyMethodHandler = (checked: any, id: any) => {
+    if (checked) {
+      setCheckedApplyMethodInputs([...checkedApplyMethodInputs, id]);
+    } else {
+      setCheckedApplyMethodInputs(
+        checkedApplyMethodInputs.filter((el: any) => el !== id),
+      );
+    }
+  };
+
+  const changeTestMethodHandler = (checked: any, id: any) => {
+    if (checked) {
+      setCheckedTestMethodInputs([...checkedTestMethodInputs, id]);
+    } else {
+      setCheckedTestMethodInputs(
+        checkedTestMethodInputs.filter((el: any) => el !== id),
+      );
+    }
+  };
+
+  const changeSocialInsuranceHandler = (checked: any, id: any) => {
+    if (checked) {
+      setCheckedSocialInsuranceInputs([...checkedSocialInsuranceInputs, id]);
+    } else {
+      setCheckedSocialInsuranceInputs(
+        checkedSocialInsuranceInputs.filter((el: any) => el !== id),
+      );
+    }
+  };
+
+  const changeApplyDocumentHandler = (checked: any, id: any) => {
+    if (checked) {
+      setCheckedApplyDocumentInputs([...checkedApplyDocumentInputs, id]);
+    } else {
+      setCheckedApplyDocumentInputs(
+        checkedApplyDocumentInputs.filter((el: any) => el !== id),
+      );
+    }
+  };
 
   useEffect(() => {
     getEnterpriseProfile();
@@ -65,13 +131,20 @@ const CreatePost: FC = () => {
         },
       );
 
-      return response.data;
+      return response.data.data;
     } catch (error) {
       console.error(error);
     }
   };
 
-  const getEnterpriseRegister = async () => {
+  const { data: enterpriseProfileData } = useSWR<EnterpriseProfile>(
+    `${process.env.REACT_APP_BACK_URL}/user/enterprise/profile`,
+    getEnterpriseProfile,
+  );
+
+  if (!enterpriseProfileData) return <div>Loading...</div>;
+
+  async function getEnterpriseRegister() {
     try {
       const response = await axios.get(
         `http://121.162.15.140:3000/job/enterprise/register/all`,
@@ -96,6 +169,19 @@ const CreatePost: FC = () => {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !e.target.files[0]) return;
+
+    const imageFile = e.target.files[0];
+
+    const fileReader = new FileReader();
+
+    setFile(imageFile);
+
+    fileReader.readAsDataURL(imageFile);
+    fileReader.onload = (e) => setPreview(e.target?.result);
   };
 
   const onChangeJobDetail = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -104,44 +190,144 @@ const CreatePost: FC = () => {
     setJobDetail(value);
   };
 
-  const onSubmitRecruitment = async (e: FormEvent<HTMLFormElement>) => {
+  const savePost = async () => {
     try {
-      e.preventDefault();
+      const formData = new FormData();
+
+      if (file !== null) {
+        const compressedImage = await imageCompression(file, {
+          maxSizeMB: 5,
+        });
+
+        console.log(compressedImage);
+
+        formData.append('file', compressedImage);
+      }
+
+      formData.append('TITLE', recruitTitle);
+      formData.append('JOB_TYPE_DESC', recruitOccupation);
+      formData.append('REQUIRE_COUNT', recruitNumber);
+      formData.append('JOB_DESC', jobDetail);
+      formData.append('DEUCATION', eduBackground);
+      formData.append('CAREER', careerCheck);
+      formData.append('CAREER_PERIOD', careerPeriod);
+      formData.append('WORK_AREA', areaCheck);
+      formData.append('WORK_ADDRESS', areaAddress);
+      formData.append('WORK_AREA_DESC', industrialComplex);
+      formData.append('EMPLOYTYPE', empcdCheck);
+      formData.append('EMPLOYTYPE_DET', empdetCheck);
+      formData.append('PAYCD', paycdCheck);
+      formData.append('PAY_AMOUNT', payAmount);
+      formData.append('WORK_TIME_TYPE', paycdCheck);
+      formData.append('MEAL_COD', mealcdCheck);
+      formData.append('WORKINGHOURS', workHourForWeek);
+      formData.append('SEVERANCE_PAY_TYPE', sevpayCheck);
+      formData.append('SOCIAL_INSURANCE', checkedSocialInsuranceInputs.join());
+      formData.append('CLOSING_TYPE', clstypCheck);
+      formData.append('ENDRECEPTION', closingTime);
+      formData.append('APPLY_METHOD', checkedApplyMethodInputs.join());
+      formData.append('APPLY_METHOD_ETC', apytypetc);
+      formData.append('TEST_METHOD', checkedTestMethodInputs.join());
+      formData.append('TEST_METHOD_DTC', testmtetcCheck);
+      formData.append('APPLY_DOCUMENT', checkedApplyDocumentInputs.join());
+      formData.append('CONTACT_NAME', contactName);
+      formData.append('CONTACT_DEPARTMENT', contactDepartment);
+      formData.append('CONTACT_PHONE', contactPhone);
+      formData.append('CONTACT_EMAIL', contactEmail);
+
+      console.log('savePost start');
 
       const response = await axios.post(
         `http://121.162.15.140:3000/job/enterprise/register`,
+        formData,
         {
-          TITLE: recruitTitle,
-          JOB_TYPE_DESC: recruitOccupation,
-          REQUIRE_COUNT: recruitNumber,
-          JOB_DESC: jobDetail,
-          DEUCATION: eduBackground,
-          CAREER: careerCheck,
-          CAREER_PERIOD: careerPeriod,
-          WORK_AREA: areaCheck,
-          WORK_ADDRESS: areaAddress,
-          WORK_AREA_DESC: industrialComplex,
-          EMPLOYTYPE: empcdCheck,
-          EMPLOYTYPE_DET: empdetCheck,
-          PAYCD: paycdCheck,
-          PAY_AMOUNT: payAmount,
-          WORK_TIME_TYPE: paycdCheck,
-          MEAL_COD: mealcdCheck,
-          WORKINGHOURS: workHourForWeek,
-          SEVERANCE_PAY_TYPE: sevpayCheck,
-          SOCIAL_INSURANCE: socinsCheck,
-          CLOSING_TYPE: clstypCheck,
-          ENDRECEPTION: closingTime,
-          APPLY_METHOD: apytypCheck,
-          APPLY_METHOD_ETC: '접수방법 상세',
-          TEST_METHOD: testmtCheck,
-          TEST_METHOD_DTC: '전형방법 상세',
-          APPLY_DOCUMENT: doccdCheck,
-          CONTACT_NAME: '채용담당자 성명',
-          CONTACT_DEPARTMENT: '채용담당자 부서',
-          CONTACT_PHONE: '채용담당자 전화번호',
-          CONTACT_EMAIL: '채용담당자 이메일',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'content-Type': 'multipart/form-data',
+          },
         },
+      );
+
+      if (response.statusText === 'Created') {
+        requestApprove(response.data.jobid);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onClickTemporarySave = async () => {
+    try {
+      const formData = new FormData();
+
+      if (file !== null) {
+        const compressedImage = await imageCompression(file, {
+          maxSizeMB: 5,
+        });
+
+        console.log(compressedImage);
+
+        formData.append('file', compressedImage);
+      }
+
+      formData.append('TITLE', recruitTitle);
+      formData.append('JOB_TYPE_DESC', recruitOccupation);
+      formData.append('REQUIRE_COUNT', recruitNumber);
+      formData.append('JOB_DESC', jobDetail);
+      formData.append('DEUCATION', eduBackground);
+      formData.append('CAREER', careerCheck);
+      formData.append('CAREER_PERIOD', careerPeriod);
+      formData.append('WORK_AREA', areaCheck);
+      formData.append('WORK_ADDRESS', areaAddress);
+      formData.append('WORK_AREA_DESC', industrialComplex);
+      formData.append('EMPLOYTYPE', empcdCheck);
+      formData.append('EMPLOYTYPE_DET', empdetCheck);
+      formData.append('PAYCD', paycdCheck);
+      formData.append('PAY_AMOUNT', payAmount);
+      formData.append('WORK_TIME_TYPE', paycdCheck);
+      formData.append('MEAL_COD', mealcdCheck);
+      formData.append('WORKINGHOURS', workHourForWeek);
+      formData.append('SEVERANCE_PAY_TYPE', sevpayCheck);
+      formData.append('SOCIAL_INSURANCE', checkedSocialInsuranceInputs.join());
+      formData.append('CLOSING_TYPE', clstypCheck);
+      formData.append('ENDRECEPTION', closingTime);
+      formData.append('APPLY_METHOD', checkedApplyMethodInputs.join());
+      formData.append('APPLY_METHOD_ETC', apytypetc);
+      formData.append('TEST_METHOD', checkedTestMethodInputs.join());
+      formData.append('TEST_METHOD_DTC', testmtetcCheck);
+      formData.append('APPLY_DOCUMENT', checkedApplyDocumentInputs.join());
+      formData.append('CONTACT_NAME', contactName);
+      formData.append('CONTACT_DEPARTMENT', contactDepartment);
+      formData.append('CONTACT_PHONE', contactPhone);
+      formData.append('CONTACT_EMAIL', contactEmail);
+
+      console.log('savePost start');
+
+      const response = await axios.post(
+        `http://121.162.15.140:3000/job/enterprise/register`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'content-Type': 'multipart/form-data',
+          },
+        },
+      );
+
+      if (response.statusText === 'Created') console.log('post save!');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const requestApprove = async (j: string) => {
+    try {
+      // console.log('requestApprove start');
+      // console.log('jobId_requestApprove' + jobId);
+
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BACK_URL}/job/enterprise/judge/${j}`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -149,11 +335,25 @@ const CreatePost: FC = () => {
         },
       );
 
-      if (response.statusText === 'Created') {
-        console.log('created recruit');
-        window.location.href = 'http://localhost:3000/recruit/management';
-        // return <Redirect to="/" />
+      // console.log('pass axios');
+      // console.log(response);
+
+      if (response.statusText === 'OK') {
+        console.log(response.data.message);
       }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onSubmitRecruitment = async (e: FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+
+      savePost();
+      // if (jobId) await requestApprove();
+
+      // window.location.href = 'http://localhost:3000/recruit/management';
     } catch (error) {
       console.error(error);
     }
@@ -172,7 +372,7 @@ const CreatePost: FC = () => {
             <form onSubmit={onSubmitRecruitment}>
               <div>
                 <div>
-                  <h5 className="font-bold text-xl">기업정보</h5>
+                  <h5 className="font-bold text-2xl">기업정보</h5>
                 </div>
                 <details className="mb-8">
                   <summary
@@ -187,7 +387,7 @@ const CreatePost: FC = () => {
                       <input
                         className="input-recruit"
                         placeholder="aaaaaaa"
-                        value="mapogu-office"
+                        value={enterpriseProfileData.CMPNY_NM}
                         disabled
                       />
                     </div>
@@ -198,8 +398,7 @@ const CreatePost: FC = () => {
                       <input
                         className="input-recruit"
                         placeholder="aaaaaaa"
-                        value={recruitOccupation}
-                        onChange={onChangeRecruitOccupation}
+                        value={enterpriseProfileData.BIZRNO}
                         disabled
                       />
                     </div>
@@ -209,9 +408,8 @@ const CreatePost: FC = () => {
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="aaaaaaa"
-                        value={recruitOccupation}
-                        onChange={onChangeRecruitOccupation}
+                        placeholder="CEO Name"
+                        value={enterpriseProfileData.CEO}
                         disabled
                       />
                     </div>
@@ -222,8 +420,7 @@ const CreatePost: FC = () => {
                       <input
                         className="input-recruit"
                         placeholder="aaaaaaa"
-                        value={recruitOccupation}
-                        onChange={onChangeRecruitOccupation}
+                        value={enterpriseProfileData.ADRES}
                         disabled
                       />
                     </div>
@@ -234,20 +431,18 @@ const CreatePost: FC = () => {
                       <input
                         className="input-recruit"
                         placeholder="aaaaaaa"
-                        value={recruitOccupation}
-                        onChange={onChangeRecruitOccupation}
+                        value={enterpriseProfileData.INDUTY}
                         disabled
                       />
                     </div>
                   </div>
                   <div className="form-group mt-4">
-                    <label className="label-recruit">사업내용</label>
+                    <label className="label-recruit">홈페이지 주소</label>
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="aaaaaaa"
-                        value={recruitOccupation}
-                        onChange={onChangeRecruitOccupation}
+                        placeholder="www.abcd.com"
+                        value={enterpriseProfileData.WEB_ADRES}
                         disabled
                       />
                     </div>
@@ -258,26 +453,56 @@ const CreatePost: FC = () => {
                       <input
                         className="input-recruit"
                         placeholder="aaaaaaa"
-                        value={recruitOccupation}
-                        onChange={onChangeRecruitOccupation}
+                        value={enterpriseProfileData.NMBR_WRKRS}
                         disabled
                       />
                     </div>
                   </div>
                 </details>
 
-                <div className="mb-8">
-                  <h5 className="font-bold text-xl">구인사항</h5>
+                <div className="mb-8 mt-8">
+                  <h5 className="font-bold text-2xl">구인사항</h5>
                 </div>
                 <div className="form-group">
                   <label className="label-recruit">채용제목</label>
                   <div>
                     <input
                       className="input-recruit"
-                      placeholder="aaaaaaa"
+                      placeholder="마포구청에서 웹 개발자를 모집합니다"
                       value={recruitTitle}
                       onChange={onChangeRecruitTitle}
                     />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="label-recruit">타이틀 이미지</label>
+                  <div className="control">
+                    <div>
+                      <div className="border border-gray-100 p-6 content-center text-center rounded my-2">
+                        <div className="relative cursor-pointer">
+                          {preview ? (
+                            <img
+                              style={{ width: '30%' }}
+                              className="inline-block"
+                              src={preview}
+                            />
+                          ) : (
+                            <FontAwesomeIcon
+                              icon={faUpload}
+                              className="rounded inline-block cursor-pointer text-4xl"
+                            />
+                          )}
+                          <input
+                            type="file"
+                            className="absolute left-0 top-0 w-full h-full opacity-0"
+                            onChange={onChangeImage}
+                          />
+                          <p className="text-black mt-2">
+                            클릭하여 파일 업로드
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="form-group">
@@ -285,7 +510,7 @@ const CreatePost: FC = () => {
                   <div>
                     <input
                       className="input-recruit"
-                      placeholder="aaaaaaa"
+                      placeholder="Front-End Web Developer"
                       value={recruitOccupation}
                       onChange={onChangeRecruitOccupation}
                     />
@@ -296,7 +521,7 @@ const CreatePost: FC = () => {
                   <div>
                     <input
                       className="input-recruit"
-                      placeholder="aaaaaaa"
+                      placeholder="2"
                       value={recruitNumber}
                       onChange={onChangeRecruitNumber}
                     />
@@ -307,7 +532,7 @@ const CreatePost: FC = () => {
                   <div>
                     <textarea
                       className="textarea-recruit"
-                      placeholder="aaaaaaa"
+                      placeholder="React 앱 개발 및 배포"
                       value={jobDetail}
                       onChange={onChangeJobDetail}
                     />
@@ -401,22 +626,24 @@ const CreatePost: FC = () => {
                     })}
                   </div>
                   <div className="form-group">
-                    <label className="label-recruit">주소(근무할 곳)</label>
+                    <label className="my-1 label-recruit">
+                      주소(근무할 곳)
+                    </label>
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="aaaaaaa"
+                        placeholder="서울시 은평구 역촌동 11-1"
                         value={areaAddress}
                         onChange={onChangeAreaAddress}
                       />
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="label-recruit">소속산업단지</label>
+                    <label className="my-1 label-recruit">소속산업단지</label>
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="aaaaaaa"
+                        placeholder="은평구 테크노밸리"
                         value={industrialComplex}
                         onChange={onChangeIndustrialComplex}
                       />
@@ -434,11 +661,20 @@ const CreatePost: FC = () => {
                           className="inline-flex items-center label-form-radio"
                         >
                           <input
-                            type="radio"
+                            type="checkbox"
                             className="form-radio"
                             value={doc.CODE}
-                            checked={doccdCheck === doc.CODE}
-                            onChange={onChangeDoccdCheck}
+                            checked={
+                              checkedApplyDocumentInputs.includes(doc.CODE)
+                                ? true
+                                : false
+                            }
+                            onChange={(e) => {
+                              changeApplyDocumentHandler(
+                                e.currentTarget.checked,
+                                doc.CODE,
+                              );
+                            }}
                           />
                           <span className="mx-1">{doc.CODE_NM}</span>
                         </label>
@@ -520,7 +756,7 @@ const CreatePost: FC = () => {
                   <div>
                     <input
                       className="input-recruit"
-                      placeholder="aaaaaaa"
+                      placeholder="35"
                       value={workHourForWeek}
                       onChange={onChangeWorkHourForWeek}
                     />
@@ -529,8 +765,8 @@ const CreatePost: FC = () => {
               </div>
 
               <div>
-                <div className="mb-8">
-                  <h5 className="font-bold text-xl">근로조건</h5>
+                <div className="mb-8 mt-8">
+                  <h5 className="font-bold text-2xl">근로조건</h5>
                 </div>
 
                 <div className="form-group">
@@ -558,8 +794,8 @@ const CreatePost: FC = () => {
               </div>
 
               <div>
-                <div className="mb-8">
-                  <h5 className="font-bold text-xl">전형사항</h5>
+                <div className="mb-8 mt-8">
+                  <h5 className="font-bold text-2xl">전형사항</h5>
                 </div>
 
                 <div className="form-group">
@@ -629,11 +865,20 @@ const CreatePost: FC = () => {
                           className="inline-flex items-center label-form-radio"
                         >
                           <input
-                            type="radio"
+                            type="checkbox"
                             className="form-radio"
                             value={socin.CODE}
-                            checked={socinsCheck === socin.CODE}
-                            onChange={onChangeSocinsCheck}
+                            checked={
+                              checkedSocialInsuranceInputs.includes(socin.CODE)
+                                ? true
+                                : false
+                            }
+                            onChange={(e) => {
+                              changeSocialInsuranceHandler(
+                                e.currentTarget.checked,
+                                socin.CODE,
+                              );
+                            }}
                           />
                           <span className="mx-1">{socin.CODE_NM}</span>
                         </label>
@@ -652,17 +897,41 @@ const CreatePost: FC = () => {
                           className="inline-flex items-center label-form-radio"
                         >
                           <input
-                            type="radio"
+                            id={test.CODE}
+                            type="checkbox"
                             className="form-radio"
                             value={test.CODE}
-                            checked={testmtCheck === test.CODE}
-                            onChange={onChangeTestmtCheck}
+                            checked={
+                              checkedTestMethodInputs.includes(test.CODE)
+                                ? true
+                                : false
+                            }
+                            onChange={(e) => {
+                              changeTestMethodHandler(
+                                e.currentTarget.checked,
+                                test.CODE,
+                              );
+                            }}
                           />
                           <span className="mx-1">{test.CODE_NM}</span>
                         </label>
                       );
                     })}
                   </div>
+                  {checkedTestMethodInputs.includes('99') ? (
+                    <div className="form-group">
+                      <label className="label-recruit">기타(상세)</label>
+                      <div>
+                        <input
+                          className="input-recruit"
+                          value={testmtetcCheck}
+                          onChange={onChangeTestmtetcCheck}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -675,17 +944,41 @@ const CreatePost: FC = () => {
                           className="inline-flex items-center label-form-radio"
                         >
                           <input
-                            type="radio"
+                            id={apy.CODE}
+                            type="checkbox"
                             className="form-radio"
                             value={apy.CODE}
-                            checked={apytypCheck === apy.CODE}
-                            onChange={onChangeApytypCheck}
+                            checked={
+                              checkedApplyMethodInputs.includes(apy.CODE)
+                                ? true
+                                : false
+                            }
+                            onChange={(e) => {
+                              changeApplyMethodHandler(
+                                e.currentTarget.checked,
+                                apy.CODE,
+                              );
+                            }}
                           />
                           <span className="mx-1">{apy.CODE_NM}</span>
                         </label>
                       );
                     })}
                   </div>
+                  {checkedApplyMethodInputs.includes('90') ? (
+                    <div className="form-group">
+                      <label className="label-recruit">기타(상세)</label>
+                      <div>
+                        <input
+                          className="input-recruit"
+                          value={apytypetc}
+                          onChange={onChangeApytypetc}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </div>
                 <div className="form-group">
                   <label className="label-recruit">접수마감일구분</label>
@@ -714,7 +1007,7 @@ const CreatePost: FC = () => {
                       <div>
                         <input
                           className="input-recruit"
-                          placeholder="aaaaaaa"
+                          placeholder="2021-10-31"
                           value={closingTime}
                           onChange={onChangeClosingTime}
                         />
@@ -724,11 +1017,55 @@ const CreatePost: FC = () => {
                     ''
                   )}
                 </div>
+                <div className="form-group">
+                  <label className="label-recruit">채용담당자 성명</label>
+                  <div>
+                    <input
+                      className="input-recruit"
+                      value={contactName}
+                      onChange={onChangeContactName}
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="label-recruit">채용담당자 부서</label>
+                  <div>
+                    <input
+                      className="input-recruit"
+                      value={contactDepartment}
+                      onChange={onChangeContactDepartment}
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="label-recruit">채용담당자 전화번호</label>
+                  <div>
+                    <input
+                      className="input-recruit"
+                      value={contactPhone}
+                      onChange={onChangeContactPhone}
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="label-recruit">채용담당자 이메일</label>
+                  <div>
+                    <input
+                      className="input-recruit"
+                      value={contactEmail}
+                      onChange={onChangeContactEmail}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="sticky pt-4 pb-20 lg:pt-4 lg:pb-4 my-4 bottom-0 left-0 right-0 z-0">
                 <div className="flex flex-wrap flex-row">
-                  <button className="flex-auto w-auto mr-1 btn btn-lg-three text-white bg-gray-300 shadow-xl hover:filter hover:brightness-90">
+                  <button
+                    type="button"
+                    onClick={onClickTemporarySave}
+                    className="flex-auto w-auto mr-1 btn btn-lg-three text-white bg-gray-300 shadow-xl hover:filter hover:brightness-90"
+                  >
                     임시저장
                   </button>
                   <button
