@@ -251,6 +251,9 @@ const CreatePost: FC = () => {
       );
 
       if (response.statusText === 'Created') {
+        console.log('post save!!');
+        console.log(response.data);
+        console.log(response.data.jobid);
         requestApprove(response.data.jobid);
       }
     } catch (error) {
@@ -303,7 +306,7 @@ const CreatePost: FC = () => {
       formData.append('CONTACT_PHONE', contactPhone);
       formData.append('CONTACT_EMAIL', contactEmail);
 
-      console.log('savePost start');
+      console.log('Temp_savePost start');
 
       const response = await axios.post(
         `http://121.162.15.140:3000/job/enterprise/register`,
@@ -318,7 +321,10 @@ const CreatePost: FC = () => {
 
       console.log(response);
 
-      if (response.statusText === 'Created') console.log('post save!');
+      if (response.statusText === 'Created') {
+        console.log('post save!');
+        // window.location.href = 'http://localhost:3000/recruit/management';
+      }
     } catch (error) {
       console.error(error);
     }
@@ -326,8 +332,7 @@ const CreatePost: FC = () => {
 
   const requestApprove = async (j: string) => {
     try {
-      // console.log('requestApprove start');
-      // console.log('jobId_requestApprove' + jobId);
+      console.log('requestApprove start');
 
       const response = await axios.patch(
         `${process.env.REACT_APP_BACK_URL}/job/enterprise/judge/${j}`,
@@ -340,10 +345,12 @@ const CreatePost: FC = () => {
       );
 
       // console.log('pass axios');
-      // console.log(response);
+      console.log(response);
 
       if (response.statusText === 'OK') {
         console.log(response.data.message);
+
+        // window.location.href = 'http://localhost:3000/recruit/management';
       }
     } catch (error) {
       console.error(error);
@@ -355,9 +362,6 @@ const CreatePost: FC = () => {
       e.preventDefault();
 
       savePost();
-      // if (jobId) await requestApprove();
-
-      window.location.href = 'http://localhost:3000/recruit/management';
     } catch (error) {
       console.error(error);
     }
@@ -412,7 +416,6 @@ const CreatePost: FC = () => {
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="CEO Name"
                         value={enterpriseProfileData.CEO}
                         disabled
                       />
@@ -423,7 +426,6 @@ const CreatePost: FC = () => {
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="aaaaaaa"
                         value={enterpriseProfileData.ADRES}
                         disabled
                       />
@@ -434,7 +436,6 @@ const CreatePost: FC = () => {
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="aaaaaaa"
                         value={enterpriseProfileData.INDUTY}
                         disabled
                       />
@@ -445,7 +446,6 @@ const CreatePost: FC = () => {
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="www.abcd.com"
                         value={enterpriseProfileData.WEB_ADRES}
                         disabled
                       />
@@ -456,7 +456,6 @@ const CreatePost: FC = () => {
                     <div>
                       <input
                         className="input-recruit"
-                        placeholder="aaaaaaa"
                         value={enterpriseProfileData.NMBR_WRKRS}
                         disabled
                       />
@@ -1063,7 +1062,7 @@ const CreatePost: FC = () => {
                 </div>
               </div>
 
-              <div className="sticky pt-4 pb-20 lg:pt-4 lg:pb-4 my-4 bottom-0 left-0 right-0 z-0">
+              <div className="sticky pt-4 pb-20 lg:pt-4 md:pb-2 lg:pb-4 my-4 bottom-0 left-0 right-0 z-0">
                 <div className="flex flex-wrap flex-row">
                   <button
                     type="button"

@@ -20,7 +20,7 @@ const Header: FC = () => {
               <img src="image/mapojob.jpg" />
             </a>
           </div>
-          <HeaderList />
+          <HeaderList token={token} />
         </div>
         <div className="flex flex-row flex-wrap justify-between items-center space-x-3">
           {token ? (

@@ -53,20 +53,39 @@ const headerConfig = [
   { id: 7, title: '마이페이지', link: '/personal' },
 ];
 
-const HeaderList: FC = () => {
+interface HeaderListProps {
+  token: any;
+}
+
+const HeaderList: FC<HeaderListProps> = ({ token }) => {
   return (
-    <nav className="hidden lg:block space-x-8 font-bold">
+    <nav className="hidden md:block space-x-8 font-bold">
       <ul className="menu">
-        {headerConfig.map((header) => {
-          return (
-            <HeaderButton
-              key={header.id}
-              title={header.title}
-              link={header.link}
-              submenu={header.submenu}
-            />
-          );
-        })}
+        {token
+          ? headerConfig.map((header) => {
+              return (
+                <HeaderButton
+                  key={header.id}
+                  title={header.title}
+                  link={header.link}
+                  submenu={header.submenu}
+                />
+              );
+            })
+          : headerConfig
+              .filter((header) => {
+                return header.title !== '채용관리';
+              })
+              .map((header) => {
+                return (
+                  <HeaderButton
+                    key={header.id}
+                    title={header.title}
+                    link={header.link}
+                    submenu={header.submenu}
+                  />
+                );
+              })}
       </ul>
     </nav>
   );
