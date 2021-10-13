@@ -8,8 +8,9 @@ export interface RecruitPost {
   JOBID: number;
   TITLE: string;
   COMENTS: string;
+  JOB_STAT_CODE: string;
+  JOB_STAT_NAME: string;
   CREATE_AT: Date;
-  JOB_STAT: string;
   REQUEST_DATE: Date;
 }
 

@@ -33,36 +33,41 @@ const CreatePost: FC = () => {
   const [testmt, setTestmt] = useState([]);
   const [timecd, setTimecd] = useState([]);
 
-  const [recruitTitle, onChangeRecruitTitle] = useInput('');
-  const [recruitOccupation, onChangeRecruitOccupation] = useInput('');
-  const [recruitNumber, onChangeRecruitNumber] = useInput('');
+  const [recruitTitle, setRecruitTitle, onChangeRecruitTitle] = useInput('');
+  const [recruitOccupation, setRecruitOccupation, onChangeRecruitOccupation] =
+    useInput('');
+  const [recruitNumber, setRecruitNumber, onChangeRecruitNumber] = useInput('');
   const [jobDetail, setJobDetail] = useState<string>('');
-  const [eduBackground, onChangeEduBackground] = useInput('');
-  const [careerCheck, onChangeCareerCheck] = useInput('');
-  const [careerPeriod, onChangeCareerPeriod] = useInput('');
-  const [areaCheck, onChangeAreaCheck] = useInput('');
-  const [areaAddress, onChangeAreaAddress] = useInput('');
-  const [industrialComplex, onChangeIndustrialComplex] = useInput('');
-  const [apytypCheck, onChangeApytypCheck] = useInput('');
-  const [apytypetc, onChangeApytypetc] = useInput('');
-  const [clstypCheck, onChangeClstypCheck] = useInput('');
-  const [doccdCheck, onChangeDoccdCheck] = useInput('');
-  const [empcdCheck, onChangeEmpcdCheck] = useInput('');
-  const [empdetCheck, onChangeEmpdetCheck] = useInput('');
-  const [paycdCheck, onChangePaycdCheck] = useInput('');
-  const [payAmount, onChangePayAmount] = useInput('');
-  const [workHourForWeek, onChangeWorkHourForWeek] = useInput('');
-  const [mealcdCheck, onChangeMealcdCheck] = useInput('');
-  const [sevpayCheck, onChangeSevpayCheck] = useInput('');
-  const [socinsCheck, onChangeSocinsCheck] = useInput('');
-  const [timecdCheck, onChangeTimecdCheck] = useInput('');
-  const [closingTime, onChangeClosingTime] = useInput('');
-  const [testmtCheck, onChangeTestmtCheck] = useInput('');
-  const [testmtetcCheck, onChangeTestmtetcCheck] = useInput('');
-  const [contactName, onChangeContactName] = useInput('');
-  const [contactDepartment, onChangeContactDepartment] = useInput('');
-  const [contactPhone, onChangeContactPhone] = useInput('');
-  const [contactEmail, onChangeContactEmail] = useInput('');
+  const [eduBackground, setEduBackground, onChangeEduBackground] = useInput('');
+  const [careerCheck, setCareerCheck, onChangeCareerCheck] = useInput('');
+  const [careerPeriod, setCareerPeriod, onChangeCareerPeriod] = useInput('');
+  const [areaCheck, setAreaCheck, onChangeAreaCheck] = useInput('');
+  const [areaAddress, setAreaAddress, onChangeAreaAddress] = useInput('');
+  const [industrialComplex, setIndustrialComplex, onChangeIndustrialComplex] =
+    useInput('');
+  const [apytypCheck, setApytypCheck, onChangeApytypCheck] = useInput('');
+  const [apytypetc, setApytypetc, onChangeApytypetc] = useInput('');
+  const [clstypCheck, setClstypCheck, onChangeClstypCheck] = useInput('');
+  const [doccdCheck, setDoccdCheck, onChangeDoccdCheck] = useInput('');
+  const [empcdCheck, setEmpcdCheck, onChangeEmpcdCheck] = useInput('');
+  const [empdetCheck, setEmpdetCheck, onChangeEmpdetCheck] = useInput('');
+  const [paycdCheck, setPaycdCheck, onChangePaycdCheck] = useInput('');
+  const [payAmount, setPayAmount, onChangePayAmount] = useInput('');
+  const [workHourForWeek, setWorkHourForWeek, onChangeWorkHourForWeek] =
+    useInput('');
+  const [mealcdCheck, setMealcdCheck, onChangeMealcdCheck] = useInput('');
+  const [sevpayCheck, setSevpayCheck, onChangeSevpayCheck] = useInput('');
+  const [socinsCheck, setSocinsCheck, onChangeSocinsCheck] = useInput('');
+  const [timecdCheck, setTimecdCheck, onChangeTimecdCheck] = useInput('');
+  const [closingTime, setClosingTime, onChangeClosingTime] = useInput('');
+  const [testmtCheck, setTestmtCheck, onChangeTestmtCheck] = useInput('');
+  const [testmtetcCheck, setTestmtetcCheck, onChangeTestmtetcCheck] =
+    useInput('');
+  const [contactName, setContactName, onChangeContactName] = useInput('');
+  const [contactDepartment, setContactDepartment, onChangeContactDepartment] =
+    useInput('');
+  const [contactPhone, setContactPhone, onChangeContactPhone] = useInput('');
+  const [contactEmail, setContactEmail, onChangeContactEmail] = useInput('');
 
   const [checkedApplyMethodInputs, setCheckedApplyMethodInputs] = useState<any>(
     [],
@@ -203,7 +208,13 @@ const CreatePost: FC = () => {
 
         console.log(compressedImage);
 
-        formData.append('file', compressedImage);
+        const blobToFile = new File([compressedImage], compressedImage.name, {
+          type: compressedImage.type,
+        });
+
+        console.log(blobToFile);
+
+        formData.append('file', blobToFile);
       }
 
       formData.append('TITLE', recruitTitle);
@@ -289,7 +300,7 @@ const CreatePost: FC = () => {
       formData.append('EMPLOYTYPE_DET', empdetCheck);
       formData.append('PAYCD', paycdCheck);
       formData.append('PAY_AMOUNT', payAmount);
-      formData.append('WORK_TIME_TYPE', paycdCheck);
+      formData.append('WORK_TIME_TYPE', timecdCheck);
       formData.append('MEAL_COD', mealcdCheck);
       formData.append('WORKINGHOURS', workHourForWeek);
       formData.append('SEVERANCE_PAY_TYPE', sevpayCheck);
@@ -322,7 +333,7 @@ const CreatePost: FC = () => {
       console.log(response);
 
       if (response.statusText === 'Created') {
-        console.log('post save!');
+        console.log('temp_post save!');
         // window.location.href = 'http://localhost:3000/recruit/management';
       }
     } catch (error) {
@@ -596,7 +607,7 @@ const CreatePost: FC = () => {
                       <div>
                         <input
                           className="input-recruit"
-                          value={careerPeriod}
+                          value={careerPeriod.task}
                           onChange={onChangeCareerPeriod}
                           placeholder="1년"
                         />

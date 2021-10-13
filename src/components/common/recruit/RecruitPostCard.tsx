@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
@@ -57,7 +57,7 @@ const RecruitPostCard: FC<RecruitPostCardProps> = ({ post, mutate }) => {
   return (
     <div className="flex-auto sm:flex-none sm:w-1/2 p-2">
       <div className="border border-gray-100 rounded my-4 p-4 h-full">
-        <div>{renderSwitch(post.JOB_STAT)}</div>
+        <div>{renderSwitch(post.JOB_STAT_NAME)}</div>
         <div className="tag-list">
           <span className="text-sm text-gray-300 mr-1">일반채용</span>
           <span className="text-sm text-gray-300 mr-1">정규직</span>
@@ -94,7 +94,7 @@ const RecruitPostCard: FC<RecruitPostCardProps> = ({ post, mutate }) => {
             채용공고 보기
           </Link>
         </div>
-        {post.JOB_STAT === '등록' ? (
+        {post.JOB_STAT_NAME === '등록' ? (
           <div>
             <div className="text-right btn-grouped my-2">
               <Link

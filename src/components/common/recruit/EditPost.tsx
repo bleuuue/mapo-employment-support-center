@@ -21,9 +21,6 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
         },
       });
 
-      console.log(response.data);
-      console.log(response.data.data);
-
       return response.data.data;
     } catch (error) {
       console.error(error);
@@ -55,42 +52,39 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
   const [testmt, setTestmt] = useState([]);
   const [timecd, setTimecd] = useState([]);
 
-  const [recruitTitle, onChangeRecruitTitle] = useInput(data?.TITLE);
-  const [recruitOccupation, onChangeRecruitOccupation] = useInput(
-    data?.JOB_TYPE_DESC,
+  const [recruitTitle, setRecruitTitle, onChangeRecruitTitle] = useInput('');
+  const [recruitOccupation, setRecruitOccupation, onChangeRecruitOccupation] =
+    useInput('');
+  const [recruitNumber, setRecruitNumber, onChangeRecruitNumber] = useInput('');
+  const [jobDetail, setJobDetail] = useState<any>('');
+  const [eduBackground, setEduBackground, onChangeEduBackground] = useInput('');
+  const [careerCheck, setCareerCheck, onChangeCareerCheck] = useInput('');
+  const [careerPeriod, setCareerPeriod, onChangeCareerPeriod] = useInput('');
+  const [areaCheck, setAreaCheck, onChangeAreaCheck] = useInput('');
+  const [areaAddress, setAreaAddress, onChangeAreaAddress] = useInput('');
+  const [industrialComplex, setIndustrialComplex, onChangeIndustrialComplex] =
+    useInput('');
+  const [apytypetc, setApytypetc, onChangeApytypetc] = useInput('');
+  const [clstypCheck, setClstypCheck, onChangeClstypCheck] = useInput('');
+  const [empcdCheck, setEmpcdCheck, onChangeEmpcdCheck] = useInput('');
+  const [empdetCheck, setEmpdetCheck, onChangeEmpdetCheck] = useInput('');
+  const [paycdCheck, setPaycdCheck, onChangePaycdCheck] = useInput(data?.PAYCD);
+  const [payAmount, setPayAmount, onChangePayAmount] = useInput(
+    data?.PAY_AMOUNT,
   );
-  const [recruitNumber, onChangeRecruitNumber] = useInput(data?.REQUIRE_COUNT);
-  const [jobDetail, setJobDetail] = useState<any>(data?.JOB_DESC);
-  const [eduBackground, onChangeEduBackground] = useInput(data?.DEUCATION);
-  const [careerCheck, onChangeCareerCheck] = useInput(data?.CAREER);
-  const [careerPeriod, onChangeCareerPeriod] = useInput(data?.CAREER_PERIOD);
-  const [areaCheck, onChangeAreaCheck] = useInput(data?.WORK_AREA);
-  const [areaAddress, onChangeAreaAddress] = useInput(data?.WORK_ADDRESS);
-  const [industrialComplex, onChangeIndustrialComplex] = useInput(
-    data?.WORK_AREA_DESC,
-  );
-  const [apytypetc, onChangeApytypetc] = useInput(data?.APPLY_METHOD_ETC);
-  const [clstypCheck, onChangeClstypCheck] = useInput(data?.CLOSING_TYPE);
-  const [empcdCheck, onChangeEmpcdCheck] = useInput(data?.EMPLOYTYPE);
-  const [empdetCheck, onChangeEmpdetCheck] = useInput(data?.EMPLOYTYPE_DET);
-  const [paycdCheck, onChangePaycdCheck] = useInput(data?.PAYCD);
-  const [payAmount, onChangePayAmount] = useInput(data?.PAY_AMOUNT);
-  const [workHourForWeek, onChangeWorkHourForWeek] = useInput(
-    data?.WORKINGHOURS,
-  );
-  const [mealcdCheck, onChangeMealcdCheck] = useInput(data?.MEAL_COD);
-  const [sevpayCheck, onChangeSevpayCheck] = useInput(data?.SEVERANCE_PAY_TYPE);
-  const [timecdCheck, onChangeTimecdCheck] = useInput(data?.WORK_TIME_TYPE);
-  const [closingTime, onChangeClosingTime] = useInput(data?.ENDRECEPTION);
-  const [testmtetcCheck, onChangeTestmtetcCheck] = useInput(
-    data?.TEST_METHOD_DTC,
-  );
-  const [contactName, onChangeContactName] = useInput(data?.CONTACT_NAME);
-  const [contactDepartment, onChangeContactDepartment] = useInput(
-    data?.CONTACT_DEPARTMENT,
-  );
-  const [contactPhone, onChangeContactPhone] = useInput(data?.CONTACT_PHONE);
-  const [contactEmail, onChangeContactEmail] = useInput(data?.CONTACT_EMAIL);
+  const [workHourForWeek, setWorkHourForWeek, onChangeWorkHourForWeek] =
+    useInput(data?.WORKINGHOURS);
+  const [mealcdCheck, setMealcdCheck, onChangeMealcdCheck] = useInput('');
+  const [sevpayCheck, setSevpayCheck, onChangeSevpayCheck] = useInput('');
+  const [timecdCheck, setTimecdCheck, onChangeTimecdCheck] = useInput('');
+  const [closingTime, setClosingTime, onChangeClosingTime] = useInput('');
+  const [testmtetcCheck, setTestmtetcCheck, onChangeTestmtetcCheck] =
+    useInput('');
+  const [contactName, setContactName, onChangeContactName] = useInput('');
+  const [contactDepartment, setContactDepartment, onChangeContactDepartment] =
+    useInput('');
+  const [contactPhone, setContactPhone, onChangeContactPhone] = useInput('');
+  const [contactEmail, setContactEmail, onChangeContactEmail] = useInput('');
 
   const [checkedApplyMethodInputs, setCheckedApplyMethodInputs] = useState<any>(
     [],
@@ -148,6 +142,77 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
     getEnterpriseRegister();
   }, []);
 
+  useEffect(() => {
+    setDatas();
+    setCheckboxData();
+    console.log(data);
+  }, [data]);
+
+  useEffect(() => {
+    console.log(eduBackground.CODE_NM);
+  }, [eduBackground]);
+
+  const setDatas = () => {
+    setPreview(data?.JOB_IM);
+
+    setRecruitTitle(data?.TITLE);
+    setRecruitOccupation(data?.JOB_TYPE_DESC);
+    setRecruitNumber(data?.REQUIRE_COUNT);
+    setJobDetail(data?.JOB_DESC);
+    setEduBackground(data?.DEUCATION);
+    setCareerCheck(data?.CAREER);
+    setCareerPeriod(data?.CAREER_PERIOD);
+    setAreaCheck(data?.WORK_AREA);
+    setAreaAddress(data?.WORK_ADDRESS);
+    setIndustrialComplex(data?.WORK_AREA_DESC);
+    setEmpcdCheck(data?.EMPLOYTYPE);
+    setEmpdetCheck(data?.EMPLOYTYPE_DET.map((v) => v.CODE_NM).join());
+    setPaycdCheck(data?.PAYCD);
+    setPayAmount(data?.PAY_AMOUNT);
+    setTimecdCheck(data?.WORK_TIME_TYPE);
+    setMealcdCheck(data?.MEAL_COD);
+    setWorkHourForWeek(data?.WORKINGHOURS);
+    setSevpayCheck(data?.SEVERANCE_PAY_TYPE);
+    setClstypCheck(data?.CLOSING_TYPE);
+    setClosingTime(data?.ENDRECEPTION);
+    setApytypetc(data?.APPLY_METHOD_ETC);
+    setTestmtetcCheck(data?.TEST_METHOD_DTC);
+    setContactName(data?.CONTACT_NAME);
+    setContactEmail(data?.CONTACT_EMAIL);
+    setContactPhone(data?.CONTACT_PHONE);
+    setContactDepartment(data?.CONTACT_DEPARTMENT);
+  };
+
+  const setCheckboxData = () => {
+    data?.APPLY_DOCUMENT.map((v) => {
+      setCheckedApplyDocumentInputs((checkedApplyDocumentInputs: any) => [
+        ...checkedApplyDocumentInputs,
+        v.CODE_NM,
+      ]);
+    });
+
+    data?.SOCIAL_INSURANCE.map((v) => {
+      setCheckedSocialInsuranceInputs((checkedSocialInsuranceInputs: any) => [
+        ...checkedSocialInsuranceInputs,
+        v.CODE_NM,
+      ]);
+    });
+
+    data?.TEST_METHOD.map((v) => {
+      setCheckedTestMethodInputs((checkedTestMethodInputs: any) => [
+        ...checkedTestMethodInputs,
+        v.CODE_NM,
+      ]);
+    });
+
+    data?.APPLY_METHOD.map((v) => {
+      setCheckedApplyMethodInputs((checkedApplyMethodInputs: any) => [
+        ...checkedApplyMethodInputs,
+        v.CODE_NM,
+      ]);
+    });
+  };
+
   const getEnterpriseProfile = async () => {
     try {
       const response = await axios.get(
@@ -193,8 +258,6 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
       setTestmt(response.data.data.testmt);
       setTimecd(response.data.data.timecd);
 
-      console.log(response.data);
-
       return response.data;
     } catch (error) {
       console.error(error);
@@ -229,9 +292,11 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
           maxSizeMB: 5,
         });
 
-        console.log(compressedImage);
+        const blobToFile = new File([compressedImage], compressedImage.name, {
+          type: compressedImage.type,
+        });
 
-        formData.append('file', compressedImage);
+        formData.append('file', blobToFile);
       }
 
       formData.append('TITLE', recruitTitle);
@@ -266,9 +331,10 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
       formData.append('CONTACT_EMAIL', contactEmail);
 
       console.log('savePost start');
+      console.log(formData);
 
-      const response = await axios.post(
-        `http://121.162.15.140:3000/job/enterprise/register`,
+      const response = await axios.put(
+        `http://121.162.15.140:3000/job/enterprise/edit/${jobId}`,
         formData,
         {
           headers: {
@@ -294,10 +360,10 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
         const compressedImage = await imageCompression(file, {
           maxSizeMB: 5,
         });
-
-        console.log(compressedImage);
-
-        formData.append('file', compressedImage);
+        const blobToFile = new File([compressedImage], compressedImage.name, {
+          type: compressedImage.type,
+        });
+        formData.append('file', blobToFile);
       }
 
       formData.append('TITLE', recruitTitle);
@@ -314,7 +380,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
       formData.append('EMPLOYTYPE_DET', empdetCheck);
       formData.append('PAYCD', paycdCheck);
       formData.append('PAY_AMOUNT', payAmount);
-      formData.append('WORK_TIME_TYPE', paycdCheck);
+      formData.append('WORK_TIME_TYPE', timecdCheck);
       formData.append('MEAL_COD', mealcdCheck);
       formData.append('WORKINGHOURS', workHourForWeek);
       formData.append('SEVERANCE_PAY_TYPE', sevpayCheck);
@@ -331,10 +397,10 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
       formData.append('CONTACT_PHONE', contactPhone);
       formData.append('CONTACT_EMAIL', contactEmail);
 
-      console.log('savePost start');
+      console.log('temp_savePost start');
 
-      const response = await axios.post(
-        `http://121.162.15.140:3000/job/enterprise/register`,
+      const response = await axios.put(
+        `http://121.162.15.140:3000/job/enterprise/edit/${jobId}`,
         formData,
         {
           headers: {
@@ -352,9 +418,6 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
 
   const requestApprove = async (j: string) => {
     try {
-      // console.log('requestApprove start');
-      // console.log('jobId_requestApprove' + jobId);
-
       const response = await axios.patch(
         `${process.env.REACT_APP_BACK_URL}/job/enterprise/judge/${j}`,
         {},
@@ -364,9 +427,6 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
           },
         },
       );
-
-      // console.log('pass axios');
-      // console.log(response);
 
       if (response.statusText === 'OK') {
         console.log(response.data.message);
@@ -584,7 +644,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={edu.CODE}
-                            checked={eduBackground === edu.CODE}
+                            checked={eduBackground.CODE_NM === edu.CODE_NM}
                             onChange={onChangeEduBackground}
                           />
                           <span className="mx-1">{edu.CODE_NM}</span>
@@ -607,8 +667,8 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             <input
                               type="radio"
                               className="form-radio"
-                              value={c.CODE}
-                              checked={careerCheck === c.CODE}
+                              value={c.CODE_NM}
+                              checked={careerCheck === c.CODE_NM}
                               onChange={onChangeCareerCheck}
                             />
                             <span className="mx-1">{c.CODE_NM}</span>
@@ -647,7 +707,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={area.CODE}
-                            checked={areaCheck === area.CODE}
+                            checked={areaCheck === area.CODE_NM}
                             onChange={onChangeAreaCheck}
                           />
                           <span className="mx-1">{area.CODE_NM}</span>
@@ -695,7 +755,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             className="form-radio"
                             value={doc.CODE}
                             checked={
-                              checkedApplyDocumentInputs.includes(doc.CODE)
+                              checkedApplyDocumentInputs.includes(doc.CODE_NM)
                                 ? true
                                 : false
                             }
@@ -725,7 +785,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={emp.CODE}
-                            checked={empcdCheck === emp.CODE}
+                            checked={empcdCheck === emp.CODE_NM}
                             onChange={onChangeEmpcdCheck}
                           />
                           <span className="mx-1">{emp.CODE_NM}</span>
@@ -748,7 +808,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={empd.CODE}
-                            checked={empdetCheck === empd.CODE}
+                            checked={empdetCheck === empd.CODE_NM}
                             onChange={onChangeEmpdetCheck}
                           />
                           <span className="mx-1">{empd.CODE_NM}</span>
@@ -771,7 +831,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={time.CODE}
-                            checked={timecdCheck === time.CODE}
+                            checked={timecdCheck === time.CODE_NM}
                             onChange={onChangeTimecdCheck}
                           />
                           <span className="mx-1">{time.CODE_NM}</span>
@@ -812,7 +872,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={meal.CODE}
-                            checked={mealcdCheck === meal.CODE}
+                            checked={mealcdCheck === meal.CODE_NM}
                             onChange={onChangeMealcdCheck}
                           />
                           <span className="mx-1">{meal.CODE_NM}</span>
@@ -841,7 +901,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={pay.CODE}
-                            checked={paycdCheck === pay.CODE}
+                            checked={paycdCheck === pay.CODE_NM}
                             onChange={onChangePaycdCheck}
                           />
                           <span className="mx-1">{pay.CODE_NM}</span>
@@ -875,7 +935,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={sev.CODE}
-                            checked={sevpayCheck === sev.CODE}
+                            checked={sevpayCheck === sev.CODE_NM}
                             onChange={onChangeSevpayCheck}
                           />
                           <span className="mx-1">{sev.CODE_NM}</span>
@@ -899,7 +959,9 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             className="form-radio"
                             value={socin.CODE}
                             checked={
-                              checkedSocialInsuranceInputs.includes(socin.CODE)
+                              checkedSocialInsuranceInputs.includes(
+                                socin.CODE_NM,
+                              )
                                 ? true
                                 : false
                             }
@@ -932,7 +994,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             className="form-radio"
                             value={test.CODE}
                             checked={
-                              checkedTestMethodInputs.includes(test.CODE)
+                              checkedTestMethodInputs.includes(test.CODE_NM)
                                 ? true
                                 : false
                             }
@@ -979,7 +1041,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             className="form-radio"
                             value={apy.CODE}
                             checked={
-                              checkedApplyMethodInputs.includes(apy.CODE)
+                              checkedApplyMethodInputs.includes(apy.CODE_NM)
                                 ? true
                                 : false
                             }
@@ -1023,7 +1085,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={cls.CODE}
-                            checked={clstypCheck === cls.CODE}
+                            checked={clstypCheck === cls.CODE_NM}
                             onChange={onChangeClstypCheck}
                           />
                           <span className="mx-1">{cls.CODE_NM}</span>
