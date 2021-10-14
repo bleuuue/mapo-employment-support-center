@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faMapMarker } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -17,11 +17,16 @@ interface GeneralJobProps {
 }
 
 const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
+  useEffect(() => {
+    console.log(job.ENDRECEPTION);
+    console.log(dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day'));
+  }, [job]);
+
   return (
     <div className="w-full sm:w-1/2 md:w-1/3 px-2">
       <div className="rounded relative my-2 sm:my-6">
         <div className="relative">
-          <Link to="/">
+          <Link to={'/job/detail/' + job.JOBID}>
             <div>
               <div className="pb-[52.5%]"></div>
               <div className="rounded overflow-hidden absolute left-0 right-0 top-0 bottom-0">
@@ -49,7 +54,7 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
               {job.WORK_ADDRESS}
             </span>
           </div>
-          {dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day') > 0 ? (
+          {dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day') <= 0 ? (
             <div className="rounded text-center flex items-center bg">
               <p className="m-auto inline-block text-white font-sans font-bold tracking-wide text-lg">
                 CLOSED
@@ -66,7 +71,7 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
             </span>
           </div>
           <div className="h4 mb-1 cursor-pointer truncate block">
-            {job.TITLE}
+            <Link to={'/job/detail/' + job.JOBID}>{job.TITLE}</Link>
           </div>
           {/* <link className="h4 mb-1 cursor-pointer truncate block">
                         동구밭
@@ -74,7 +79,7 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
           <p className="mb-2 truncate-2">{job.CMPNY_NM}</p>
           <div className="my-2">
             <span className="rounded gray-bg-color uppercase px-2 lg:px-3 py-1 text-sm">
-              {dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day') > 0 ? (
+              {dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day') < 0 ? (
                 <strong className="ml-1 lg-ml-2 text-gray-400">CLOSED</strong>
               ) : (
                 <>
@@ -83,7 +88,8 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
                     23시 59분 채용 마감
                   </span>
                   <span className="text-primary-color ml-2 font-bold">
-                    D{dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day')}
+                    D-
+                    {dayjs(job.ENDRECEPTION).locale('ko').diff(dayjs(), 'day')}
                   </span>
                 </>
               )}

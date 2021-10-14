@@ -8,7 +8,7 @@ const Header: FC = () => {
 
   const logout = () => {
     localStorage.removeItem('token');
-    window.location.reload();
+    window.location.href = 'http://localhost:3000/';
   };
 
   return (
@@ -17,7 +17,7 @@ const Header: FC = () => {
         <div className="flex flex-row flex-wrap justify-between items-center space-x-12">
           <div className="text-bold text-2xl">
             <a href="/">
-              <img src="image/mapojob.jpg" />
+              <img src="../../image/mapojob.jpg" />
             </a>
           </div>
           <HeaderList token={token} />

@@ -7,9 +7,9 @@ import Swal from 'sweetalert2';
 import crypto from 'crypto';
 
 const Login: FC = () => {
-  const [id, onChangeId] = useInput('');
+  const [id, setId, onChangeId] = useInput('');
   const [idError, setIdError] = useState<string>('');
-  const [password, onChangePassword] = useInput('');
+  const [password, setPassword, onChangePassword] = useInput('');
   const [passwordError, setPasswordError] = useState<string>('');
   const [passwordType, setPasswordType] = useState({
     type: 'password',

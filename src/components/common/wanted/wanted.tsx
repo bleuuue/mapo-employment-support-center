@@ -9,6 +9,8 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import axios from 'axios';
 import useSWR from 'swr';
 import { JobDetail } from '../../../interfaces';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 
 declare global {
   interface Window {
@@ -82,7 +84,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
   }, [addr, setAddr, data]);
 
   useEffect(() => {
-    console.log(data?.JOB_IM);
+    console.log(data);
   }, [data]);
 
   if (!data) return <div className="px-4 text-xl">Loading...</div>;
@@ -129,17 +131,19 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             <h5>자격 요건</h5>
             <p className="list">
               <strong>학력</strong>
-              <span>{data.DEUCATION}</span>
+              <span>{data.DEUCATION.CODE_NM}</span>
             </p>
             <p className="list">
               <strong>경력</strong>
               <span>
-                {data.CAREER} {data.CAREER === '경력' && data.CAREER_PERIOD}
+                {data.CAREER.CODE_NM === '경력'
+                  ? data.CAREER_PERIOD
+                  : data.CAREER.CODE_NM}
               </span>
             </p>
             <p className="list">
               <strong>제출서류</strong>
-              <span>{data.APPLY_DOCUMENT.map((v) => v.CODE_NM)}</span>
+              <span>{data.APPLY_DOCUMENT.map((v) => v.CODE_NM + ' ')}</span>
             </p>
           </div>
           <div className="list-description">
@@ -154,7 +158,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             </p>
             <p className="list">
               <strong>고용형태</strong>
-              <span>{data.EMPLOYTYPE}</span>
+              <span>{data.EMPLOYTYPE.CODE_NM}</span>
             </p>
             <p className="list">
               <strong>고용형태상세</strong>
@@ -162,7 +166,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             </p>
             <p className="list">
               <strong>임금지급형태</strong>
-              <span>{data.PAYCD}</span>
+              <span>{data.PAYCD.CODE_NM}</span>
             </p>
             <p className="list">
               <strong>임금금액</strong>
@@ -170,7 +174,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             </p>
             <p className="list">
               <strong>근무시간유형</strong>
-              <span>{data.WORK_TIME_TYPE}</span>
+              <span>{data.WORK_TIME_TYPE.CODE_NM}</span>
             </p>
             <p className="list">
               <strong>전형방법</strong>
@@ -193,7 +197,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             <h5>근무 조건</h5>
             <p className="list">
               <strong>식사제공</strong>
-              <span>{data.MEAL_COD}</span>
+              <span>{data.MEAL_COD.CODE_NM}</span>
             </p>
             <p className="list">
               <strong>주당근로시간</strong>
@@ -201,7 +205,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             </p>
             <p className="list">
               <strong>퇴직금형태</strong>
-              <span>{data.SEVERANCE_PAY_TYPE}</span>
+              <span>{data.SEVERANCE_PAY_TYPE.CODE_NM}</span>
             </p>
             <p className="list">
               <strong>사회보험</strong>
@@ -212,7 +216,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             <h5>근무위치</h5>
             <p className="list">
               <strong>근무예정지</strong>
-              <span>{data.WORK_AREA}</span>
+              <span>{data.WORK_AREA.CODE_NM}</span>
             </p>
             <p className="list">
               <strong>소속산업단지</strong>
@@ -234,9 +238,11 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
             <p className="list">
               <strong>지원 마감일</strong>
               <span>
-                {data.CLOSING_TYPE === '채용시까지'
-                  ? data.CLOSING_TYPE
-                  : data.ENDRECEPTION}
+                {data.CLOSING_TYPE.CODE_NM === '채용시까지'
+                  ? data.CLOSING_TYPE.CODE_NM
+                  : dayjs(data.ENDRECEPTION)
+                      .locale('ko')
+                      .format('YYYY년 MM월 DD일')}
               </span>
             </p>
           </div>

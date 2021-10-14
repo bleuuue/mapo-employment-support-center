@@ -148,32 +148,27 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
     console.log(data);
   }, [data]);
 
-  useEffect(() => {
-    console.log(eduBackground.CODE_NM);
-  }, [eduBackground]);
-
   const setDatas = () => {
     setPreview(data?.JOB_IM);
-
     setRecruitTitle(data?.TITLE);
     setRecruitOccupation(data?.JOB_TYPE_DESC);
     setRecruitNumber(data?.REQUIRE_COUNT);
     setJobDetail(data?.JOB_DESC);
     setEduBackground(data?.DEUCATION);
-    setCareerCheck(data?.CAREER);
+    setCareerCheck(data?.CAREER.CODE);
     setCareerPeriod(data?.CAREER_PERIOD);
-    setAreaCheck(data?.WORK_AREA);
+    setAreaCheck(data?.WORK_AREA.CODE);
     setAreaAddress(data?.WORK_ADDRESS);
     setIndustrialComplex(data?.WORK_AREA_DESC);
-    setEmpcdCheck(data?.EMPLOYTYPE);
+    setEmpcdCheck(data?.EMPLOYTYPE.CODE);
     setEmpdetCheck(data?.EMPLOYTYPE_DET.map((v) => v.CODE_NM).join());
-    setPaycdCheck(data?.PAYCD);
+    setPaycdCheck(data?.PAYCD.CODE);
     setPayAmount(data?.PAY_AMOUNT);
-    setTimecdCheck(data?.WORK_TIME_TYPE);
-    setMealcdCheck(data?.MEAL_COD);
+    setTimecdCheck(data?.WORK_TIME_TYPE.CODE);
+    setMealcdCheck(data?.MEAL_COD.CODE);
     setWorkHourForWeek(data?.WORKINGHOURS);
-    setSevpayCheck(data?.SEVERANCE_PAY_TYPE);
-    setClstypCheck(data?.CLOSING_TYPE);
+    setSevpayCheck(data?.SEVERANCE_PAY_TYPE.CODE);
+    setClstypCheck(data?.CLOSING_TYPE.CODE);
     setClosingTime(data?.ENDRECEPTION);
     setApytypetc(data?.APPLY_METHOD_ETC);
     setTestmtetcCheck(data?.TEST_METHOD_DTC);
@@ -667,8 +662,8 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             <input
                               type="radio"
                               className="form-radio"
-                              value={c.CODE_NM}
-                              checked={careerCheck === c.CODE_NM}
+                              value={c.CODE}
+                              checked={careerCheck === c.CODE}
                               onChange={onChangeCareerCheck}
                             />
                             <span className="mx-1">{c.CODE_NM}</span>
@@ -707,7 +702,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={area.CODE}
-                            checked={areaCheck === area.CODE_NM}
+                            checked={areaCheck === area.CODE}
                             onChange={onChangeAreaCheck}
                           />
                           <span className="mx-1">{area.CODE_NM}</span>
@@ -785,7 +780,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={emp.CODE}
-                            checked={empcdCheck === emp.CODE_NM}
+                            checked={empcdCheck === emp.CODE}
                             onChange={onChangeEmpcdCheck}
                           />
                           <span className="mx-1">{emp.CODE_NM}</span>
@@ -831,7 +826,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={time.CODE}
-                            checked={timecdCheck === time.CODE_NM}
+                            checked={timecdCheck === time.CODE}
                             onChange={onChangeTimecdCheck}
                           />
                           <span className="mx-1">{time.CODE_NM}</span>
@@ -872,7 +867,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={meal.CODE}
-                            checked={mealcdCheck === meal.CODE_NM}
+                            checked={mealcdCheck === meal.CODE}
                             onChange={onChangeMealcdCheck}
                           />
                           <span className="mx-1">{meal.CODE_NM}</span>
@@ -901,7 +896,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={pay.CODE}
-                            checked={paycdCheck === pay.CODE_NM}
+                            checked={paycdCheck === pay.CODE}
                             onChange={onChangePaycdCheck}
                           />
                           <span className="mx-1">{pay.CODE_NM}</span>
@@ -935,7 +930,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={sev.CODE}
-                            checked={sevpayCheck === sev.CODE_NM}
+                            checked={sevpayCheck === sev.CODE}
                             onChange={onChangeSevpayCheck}
                           />
                           <span className="mx-1">{sev.CODE_NM}</span>
@@ -1085,7 +1080,7 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
                             type="radio"
                             className="form-radio"
                             value={cls.CODE}
-                            checked={clstypCheck === cls.CODE_NM}
+                            checked={clstypCheck === cls.CODE}
                             onChange={onChangeClstypCheck}
                           />
                           <span className="mx-1">{cls.CODE_NM}</span>

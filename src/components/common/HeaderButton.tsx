@@ -10,7 +10,7 @@ interface HeaderButtonProps {
 
 const HeaderButton: FC<HeaderButtonProps> = ({ title, link, submenu }) => {
   return (
-    <li>
+    <li className="text-center justify-center align-middle ">
       <NavLink to={link} activeClassName="is-active">
         {title}
       </NavLink>
