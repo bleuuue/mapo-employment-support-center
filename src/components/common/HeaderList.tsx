@@ -28,8 +28,8 @@ const headerConfig = [
     title: '일자리',
     link: '/job/general',
     submenu: [
-      { id: 31, title: '일반 채용', link: '/' },
-      { id: 32, title: '공공 채용', link: '/' },
+      { id: 31, title: '일반 채용', link: '/job/general' },
+      { id: 32, title: '공공 채용', link: '/job/public' },
       { id: 33, title: '인턴십', link: '/' },
       { id: 34, title: '일자리매칭', link: '/' },
     ],
@@ -50,22 +50,37 @@ const headerConfig = [
     submenu: [{ id: 51, title: '취업상담실', link: '/' }],
   },
   { id: 6, title: '채용관리', link: '/recruit' },
-  { id: 7, title: '마이페이지', link: '/personal' },
+  { id: 7, title: '마이페이지', link: '/user/enterprise' },
 ];
 
 const HeaderList: FC = () => {
+  const token = localStorage.getItem('token');
+
   return (
     <nav className="hidden lg:block space-x-8 font-bold">
       <ul className="menu">
         {headerConfig.map((header) => {
-          return (
-            <HeaderButton
-              key={header.id}
-              title={header.title}
-              link={header.link}
-              submenu={header.submenu}
-            />
-          );
+          if (token) {
+            return (
+              <HeaderButton
+                key={header.id}
+                title={header.title}
+                link={header.link}
+                submenu={header.submenu}
+              />
+            );
+          } else {
+            if (header.id < 6) {
+              return (
+                <HeaderButton
+                  key={header.id}
+                  title={header.title}
+                  link={header.link}
+                  submenu={header.submenu}
+                />
+              );
+            }
+          }
         })}
       </ul>
     </nav>

@@ -15,7 +15,7 @@ const PersonalProfileInfo: FC = () => {
                 <div className="text-sm text-[#B1B1B1] font-bold mb-6">
                   프로필 등록 후 사용해주세요
                 </div>
-                <NavLink to="/personal/registerProfile">
+                <NavLink to="/user/personal/upload/profile">
                   <button className="input-btn bg-primary-color">
                     <span className="mx-[85px] text-sm text-white">
                       등록하기

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import axios from 'axios';
 import GeneralJobs from './GeneralJobs';
@@ -52,6 +52,8 @@ const GeneralJobList: FC = () => {
   const [searchKeyword, onChangeSearchKeyword] = useInput('');
   const [activePage, setActivePage] = useState<number>(1);
 
+  const jobPath = window.location.pathname.split('/');
+
   const fetcher = async (url: string) => {
     try {
       const response = await axios.post(url, {
@@ -68,12 +70,34 @@ const GeneralJobList: FC = () => {
   };
 
   const { data, error, mutate } = useSWR<IJob[]>(
-    `${process.env.REACT_APP_BACK_URL}/job/general?page=${pageIndex}`,
+    `${process.env.REACT_APP_BACK_URL}/job/${jobPath[2]}?page=${pageIndex}`,
     fetcher,
   );
 
+  // const getJobList = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       '${process.env.REACT_APP_BACK_URL}/job/general?page=${pageIndex}',
+  //       {
+  //         SEARCH_NAME: searchKeyword,
+  //       },
+  //     );
+
+  //     if (response.statusText === 'Created') {
+  //       setPageCount(Number(response.data.count) / 12);
+  //       return response.data.data;
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   if (!data) return <div>loading...</div>;
   if (error) return <div>error</div>;
+
+  // useEffect(() => {
+  //   getJobList();
+  // }, []);
 
   const paging = () => {
     const pageArray = [];
@@ -96,6 +120,7 @@ const GeneralJobList: FC = () => {
 
   const search = async (e: any) => {
     e.preventDefault();
+    console.log(window.location.pathname);
   };
 
   return (

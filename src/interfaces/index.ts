@@ -43,7 +43,8 @@ export interface EnterpriseProfile {
   CEO_EMAIL_ADRES: string;
   CMPNY_IM: string;
   PROFILE_STTUS: boolean;
-  BSNNM_APRVL: string;
+  BSNNM_APRVL_CODE: string;
+  BSNNM_APRVL_NAME: string;
 }
 
 export interface JobDetail {
@@ -104,4 +105,9 @@ export interface ISub {
   id: number;
   title: string;
   link: string;
+}
+
+export interface IDivision {
+  CODE: string;
+  CODE_NM: string;
 }

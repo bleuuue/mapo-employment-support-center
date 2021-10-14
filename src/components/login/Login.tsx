@@ -5,6 +5,7 @@ import React, { FC, FormEvent, useEffect, useState } from 'react';
 import { useInput } from '../../hooks';
 import Swal from 'sweetalert2';
 import crypto from 'crypto';
+import { Link } from 'react-router-dom';
 
 const Login: FC = () => {
   const [id, onChangeId] = useInput('');
@@ -151,29 +152,29 @@ const Login: FC = () => {
                 <div className="flex"> 자동 로그인</div>
               </div>
               <div className="flex">
-                <a href="/personalId" className="whitespace-nowrap">
+                <Link to="/personalId" className="whitespace-nowrap">
                   <div className="gray-text-color">개인 아이디 찾기</div>
-                </a>
+                </Link>
                 <div className="mx-2 gray-text-color"> / </div>
-                <a href="/businessId" className="whitespace-nowrap">
+                <Link to="/businessId" className="whitespace-nowrap">
                   <div className="gray-text-color"> 기업 아이디 찾기</div>
-                </a>
+                </Link>
               </div>
             </div>
-            <a href="/password" className="whitespace-nowrap">
+            <Link to="/password" className="whitespace-nowrap">
               <div className="flex justify-end gray-text-color">
                 비밀번호 찾기
               </div>
-            </a>
+            </Link>
           </div>
-          <a href="/user/personal" className="whitespace-nowrap">
+          <Link to="/user/personal/signup" className="whitespace-nowrap">
             <button
               type="button"
               className="input-btn my-3 font-bold input-size bg-opacity"
             >
               이메일로 개인회원 가입하기
             </button>
-          </a>
+          </Link>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-100"></div>
@@ -184,14 +185,14 @@ const Login: FC = () => {
               </span>
             </div>
           </div>
-          <a href="/user/enterprise" className="whitespace-nowrap">
+          <Link to="/user/enterprise/signup" className="whitespace-nowrap">
             <button
               type="button"
               className="input-btn my-3 font-bold input-size border-1"
             >
               이메일로 기업회원 가입하기
             </button>
-          </a>
+          </Link>
         </form>
       </div>
     </div>
