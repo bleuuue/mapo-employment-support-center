@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
-import { useInput } from '../../hooks';
+import { useInput2 } from '../../hooks/useInput2';
 
 const FindBusinessId: FC = () => {
-  const [businessName, onChangeBusinessName] = useInput('');
+  const [businessName, onChangeBusinessName] = useInput2('');
   const [businessNameError, setBusinessNameError] = useState<string>('');
-  const [businessNumber, onChangeBusinessNumber] = useInput('');
+  const [businessNumber, onChangeBusinessNumber] = useInput2('');
   const [businessNumberError, setBusinessNumberError] = useState<string>('');
 
   const onSubmitFindId = () => {

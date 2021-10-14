@@ -1,15 +1,15 @@
 import axios from 'axios';
 import React, { FC, FormEvent, useState } from 'react';
-import { useInput } from '../../../hooks';
+import { useInput2 } from '../../../hooks/useInput2';
 import Swal from 'sweetalert2';
 
 const PersonalSignUp: FC = () => {
-  const [name, onChangeName] = useInput('');
-  const [email, onChangeEmail] = useInput('');
-  const [userId, onChangeUserId] = useInput('');
-  const [emailCheck, onChangeEmailCheck] = useInput('');
-  const [password, onChangePassword] = useInput('');
-  const [passwordCheck, onChangePasswordCheck] = useInput('');
+  const [name, onChangeName] = useInput2('');
+  const [email, onChangeEmail] = useInput2('');
+  const [userId, onChangeUserId] = useInput2('');
+  const [emailCheck, onChangeEmailCheck] = useInput2('');
+  const [password, onChangePassword] = useInput2('');
+  const [passwordCheck, onChangePasswordCheck] = useInput2('');
   const [idDuplicateCheck, setIdDuplicateCheck] = useState<boolean>(true);
   const [emailDuplicateCheck, setEmailDuplicateCheck] = useState<boolean>(true);
 

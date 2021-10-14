@@ -2,21 +2,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
 import useSWR from 'swr';
-import { useInput } from '../../../hooks';
+import { useInput2 } from '../../../hooks/useInput2';
 import { EnterpriseProfile, IDivision } from '../../../interfaces';
 import MyPageLeftMenu from '../MyPageLeftMenu';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import imageCompression from 'browser-image-compression';
 
 const RegisterBusinessProfile: FC = () => {
-  const [leaderName, onChangeLeaderName] = useInput('');
-  const [address, onChangeAddress] = useInput('');
-  const [detailAddress, onChangeDetailAddress] = useInput('');
-  const [businessType, onChangeBusinessType] = useInput('');
-  const [memberNum, onChangeMemberNum] = useInput('');
-  const [webAddress, onChangeWebAddress] = useInput('');
-  const [businessEmail, onChangeBusinessEmail] = useInput('');
-  const [sectorCheck, onChangeSectorCheck] = useInput('');
+  const [leaderName, onChangeLeaderName] = useInput2('');
+  const [address, onChangeAddress] = useInput2('');
+  const [detailAddress, onChangeDetailAddress] = useInput2('');
+  const [businessType, onChangeBusinessType] = useInput2('');
+  const [memberNum, onChangeMemberNum] = useInput2('');
+  const [webAddress, onChangeWebAddress] = useInput2('');
+  const [businessEmail, onChangeBusinessEmail] = useInput2('');
+  const [sectorCheck, onChangeSectorCheck] = useInput2('');
   const sectorConfig = [
     {
       CODE: '10',

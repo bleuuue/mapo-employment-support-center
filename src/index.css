@@ -236,7 +236,7 @@ h5 {
 .form-radio {
   @apply inline-block align-middle bg-origin-border flex-shrink-0 rounded-full h-5 w-5 border bg-white;
 
-  color: #6f2b90;
+  color: #63b3ed;
 }
 
 .label-form-radio {
@@ -291,8 +291,8 @@ h5 {
   font-weight: 700;
   width: 100%;
   min-height: 3.125rem;
-  background-color: rgba(241, 234, 245);
-  color: #6f2b90;
+  background-color: #f0f4fe;
+  color: #7c9ff2;
 }
 
 .btn-xs-gray {
@@ -304,8 +304,8 @@ h5 {
 }
 
 .btn-xs-purple {
-  background-color: #f1eaf5;
-  color: #6f2b90;
+  background-color: #f0f4fe;
+  color: #7c9ff2;
   display: inline-block;
   padding: 0.25rem 1rem;
   font-size: 0.875rem;

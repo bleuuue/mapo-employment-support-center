@@ -47,7 +47,6 @@ const Login: FC = () => {
 
       if (response.data.statusCode === 201) {
         localStorage.setItem('token', response.data.accessToken);
-        console.log('sdf');
         window.location.href = 'http://localhost:3000/';
       } else {
         Swal.fire({
@@ -84,7 +83,7 @@ const Login: FC = () => {
     const salt = 'rHQOMrYQAJp8+XICMU2SP+YTC8YkRnWEj825pffj0GE';
     // const salt = crypto.randomBytes(32).toString('base64');
 
-    crypto.pbkdf2(password, salt, 100000, 64, 'sha256', (err, hash) => {
+    crypto.pbkdf2(password, salt, 10000, 64, 'sha256', (err, hash) => {
       if (err) {
         console.log(err);
       } else {

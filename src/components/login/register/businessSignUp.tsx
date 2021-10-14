@@ -1,26 +1,26 @@
 import axios from 'axios';
 import React, { FC, FormEvent, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import { useInput } from '../../../hooks';
+import { useInput2 } from '../../../hooks/useInput2';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import crypto from 'crypto';
 
 const BusinessSignUp: FC = () => {
-  const [name, onChangeName] = useInput('');
-  const [email, onChangeEmail] = useInput('');
-  const [userId, onChangeUserId] = useInput('');
-  const [password, onChangePassword] = useInput('');
-  const [passwordCheck, onChangePasswordCheck] = useInput('');
+  const [name, onChangeName] = useInput2('');
+  const [email, onChangeEmail] = useInput2('');
+  const [userId, onChangeUserId] = useInput2('');
+  const [password, onChangePassword] = useInput2('');
+  const [passwordCheck, onChangePasswordCheck] = useInput2('');
   const [hashKey, setHashKey] = useState<any>('');
-  const [businessName, onChangeBusinessName] = useInput('');
-  const [businessNumber, onChangeBusinessNumber] = useInput('');
+  const [businessName, onChangeBusinessName] = useInput2('');
+  const [businessNumber, onChangeBusinessNumber] = useInput2('');
   const [idDuplicateCheck, setIdDuplicateCheck] = useState<boolean>(true);
   const [emailDuplicateCheck, setEmailDuplicateCheck] = useState<boolean>(true);
   const [sendEmailCode, setSendEmailCode] = useState<boolean>();
   const [verifyEmailCheck, setVerifyEmailCheck] = useState<boolean>(false);
   const [verifyCode, setVerifyCode] = useState<number>(0);
-  const [userVerifyCode, onChangeUserVerifyCode] = useInput('');
+  const [userVerifyCode, onChangeUserVerifyCode] = useInput2('');
   const [businessNumberDuplicateCheck, setBusinessNumberDuplicateCheck] =
     useState<boolean>(true);
   const [isAgreeTerms, setIsAgreeTerms] = useState<boolean>(false);
@@ -252,7 +252,7 @@ const BusinessSignUp: FC = () => {
       );
 
       if (response.data.statusCode === 201) {
-        window.location.href = 'http://localhost:3000/login';
+        window.location.href = 'http://localhost:3000/user/signin';
       } else {
         Swal.fire({
           html: `<p style={padding-top: 20px}>${response.data.message}</p>`,

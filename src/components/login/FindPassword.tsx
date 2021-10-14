@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
-import { useInput } from '../../hooks';
+import { useInput2 } from '../../hooks/useInput2';
 
 const FindPassword: FC = () => {
-  const [id, onChangeId] = useInput('');
+  const [id, onChangeId] = useInput2('');
   const [idError, setIdError] = useState<string>('');
-  const [email, onChangeEmail] = useInput('');
+  const [email, onChangeEmail] = useInput2('');
   const [emailError, setEmailError] = useState<string>('');
 
   const onSubmitFindPassword = () => {

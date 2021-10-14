@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
-import { useInput } from '../../hooks';
+import { useInput2 } from '../../hooks/useInput2';
 
 const FindPersonalId: FC = () => {
-  const [personalName, onChangePersonalName] = useInput('');
+  const [personalName, onChangePersonalName] = useInput2('');
   const [personalNameError, setPersonalNameError] = useState<string>('');
-  const [personalEmail, onChangePersonalEmail] = useInput('');
+  const [personalEmail, onChangePersonalEmail] = useInput2('');
   const [personalEmailError, setPersonalEmailError] = useState<string>('');
 
   const onSubmitFindId = () => {

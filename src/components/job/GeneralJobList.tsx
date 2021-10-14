@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { IJob } from '../../interfaces';
-import { useInput } from '../../hooks';
+import { useInput2 } from '../../hooks/useInput2';
 
 const mapoguConfig = [
   { id: 1, title: '공덕동' },
@@ -49,7 +49,7 @@ const jobConfig = [
 const GeneralJobList: FC = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
   const [pageCount, setPageCount] = useState<number>(1);
-  const [searchKeyword, onChangeSearchKeyword] = useInput('');
+  const [searchKeyword, onChangeSearchKeyword] = useInput2('');
   const [activePage, setActivePage] = useState<number>(1);
 
   const jobPath = window.location.pathname.split('/');
