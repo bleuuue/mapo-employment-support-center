@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import HeaderList from './HeaderList';
 
 const Header: FC = () => {
-  const [loginButton, setLoginButton] = useState('회원가입/로그인');
   const token = localStorage.getItem('token');
 
   const logout = () => {
@@ -26,7 +25,7 @@ const Header: FC = () => {
           {token ? (
             <button onClick={logout}>로그아웃</button>
           ) : (
-            <NavLink to="/login" className="whitespace-nowrap">
+            <NavLink to="/user/signin" className="whitespace-nowrap">
               회원가입/로그인
             </NavLink>
           )}
