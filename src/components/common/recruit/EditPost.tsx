@@ -436,9 +436,8 @@ const EditPost: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
       e.preventDefault();
 
       savePost();
-      // if (jobId) await requestApprove();
 
-      // window.location.href = 'http://localhost:3000/recruit/management';
+      // window.location.href = `${process.env.REACT_APP_BACK_URL}/recruit/management`;
     } catch (error) {
       console.error(error);
     }
