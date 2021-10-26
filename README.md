@@ -32,7 +32,7 @@
 *   Back-end Development
     *   NestJS, PostgresSQL
 *   Tools
-    *   GitHub, HeidiSQL, Postman, Slack, Notion, Figma
+    *   GitHub, HeidiSQL, Postman, Swagger, Slack, Notion, Figma
 
 ---
 
@@ -44,3 +44,12 @@
 ---
 
 ## **[ Feature Implementation ]**
+로그인 / 회원가입
+회원 구분(일반, 기업), 중복 확인, 이메일 인증, 비밀번호 암호화, 이메일 조건 확인, 비밀번호 조건 확인, 토큰 관리, 로그아웃
+
+일자리정보
+일자리 제목 검색, 마감 기한 D-day, 페이징 처리
+
+
+기업 마이페이지
+프로필 여부 확인, 프로필 등록 or 정보 조회, 기업 승인 요청, 이미지 파일 업로드
