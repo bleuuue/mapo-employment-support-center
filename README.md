@@ -1,13 +1,46 @@
-# Mapo Employment Support Center(WEB)
+# Mapo Employment Support Center (WEB)
 
-1. login page
-2. signup page
-3. main page
-4. recruit page
-5. header
+![preview](https://user-images.githubusercontent.com/79898245/138792780-add043c8-9dd7-4baf-83d9-aab5e005ff44.png)
 
-## recruit page
+---
 
-1. basic css
-2. nav buttons
-3. job posting
+## **[ About ]**
+**마포구 일자리 정보들을 모아 제공하는 취업 지원 서비스**
+
+서울시 마포고용복지지원센터가 클라이언트로 참여하여 제작하였습니다.
+
+### 기획 의도
+1. 오프라인으로 진행 중인 구인, 구직 서비스의 온라인화
+
+2. 정보 공유가 될 수 있는 통합 웹사이트의 필요성 대두
+
+### 기대 효과
+* 통합 관리
+
+* 일자리 매칭
+
+* 검증된 정보 관리
+
+---
+
+## **[ Technical Skills ]**
+
+*   Programming Language
+    *   JavaScript, TypeScript
+*   Front-end Development
+    *   React, Axios, Tailwind CSS, Font Awesome, crypto-js, Sweetalert, Day.js
+*   Back-end Development
+    *   NestJS, PostgresSQL
+*   Tools
+    *   GitHub, HeidiSQL, Postman, Slack, Notion, Figma
+
+---
+
+## **[ Role ]**
+* Signin / Signup
+* Job Information List
+* MyPage
+
+---
+
+## **[ Feature Implementation ]**
