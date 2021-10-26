@@ -120,14 +120,15 @@ const GeneralJobList: FC = () => {
 
   const search = async (e: any) => {
     e.preventDefault();
-    console.log(window.location.pathname);
   };
 
   return (
     <>
       <div className="container-recruit px-4 pb-12">
         <div className="content-header">
-          <h2 className="flex justify-between text-3xl font-bold">채용</h2>
+          <h2 className="flex justify-between text-3xl font-bold">
+            {jobPath[2] === 'general' ? '일반 채용' : '공공 채용'}
+          </h2>
         </div>
         <div className="flex flex-wrap -mx-2">
           <div className="w-full px-2 py-2 md:w-2/3">

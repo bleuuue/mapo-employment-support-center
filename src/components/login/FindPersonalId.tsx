@@ -29,7 +29,7 @@ const FindPersonalId: FC = () => {
     <div className="flex">
       <div className="mx-auto">
         <div className="pt-8 pb-8">
-          <h2 className="font-bold md:text-3xl">개인회원 아이디 찾기</h2>
+          <h2 className="font-bold md:text-3xl">아이디 찾기</h2>
         </div>
         <div className="form-group">
           <div className="mb-1">

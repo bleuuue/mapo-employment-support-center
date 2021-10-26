@@ -252,7 +252,8 @@ const BusinessSignUp: FC = () => {
       );
 
       if (response.data.statusCode === 201) {
-        window.location.href = `${process.env.REACT_APP_BACK_URL}/user/signin`;
+        //window.location.href = `${process.env.REACT_APP_BACK_URL}/user/signin`;
+        window.location.href = 'http://localhost:3000/user/signin';
       } else {
         Swal.fire({
           html: `<p style={padding-top: 20px}>${response.data.message}</p>`,

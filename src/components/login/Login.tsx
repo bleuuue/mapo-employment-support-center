@@ -47,7 +47,8 @@ const Login: FC = () => {
 
       if (response.data.statusCode === 201) {
         localStorage.setItem('token', response.data.accessToken);
-        window.location.href = `${process.env.REACT_APP_BACK_URL}`;
+        //window.location.href = `${process.env.REACT_APP_BACK_URL}`;
+        window.location.href = 'http://localhost:3000/';
       } else {
         Swal.fire({
           html: `<p style={padding-top: 20px}>아이디, 비밀번호를 확인해주세요</p>`,
@@ -152,19 +153,14 @@ const Login: FC = () => {
               </div>
               <div className="flex">
                 <Link to="/personalId" className="whitespace-nowrap">
-                  <div className="gray-text-color">개인 아이디 찾기</div>
+                  <div className="gray-text-color">아이디 찾기</div>
                 </Link>
                 <div className="mx-2 gray-text-color"> / </div>
-                <Link to="/businessId" className="whitespace-nowrap">
-                  <div className="gray-text-color"> 기업 아이디 찾기</div>
+                <Link to="/password" className="whitespace-nowrap">
+                  <div className="gray-text-color">비밀번호 찾기</div>
                 </Link>
               </div>
             </div>
-            <Link to="/password" className="whitespace-nowrap">
-              <div className="flex justify-end gray-text-color">
-                비밀번호 찾기
-              </div>
-            </Link>
           </div>
           <Link to="/user/personal/signup" className="whitespace-nowrap">
             <button
