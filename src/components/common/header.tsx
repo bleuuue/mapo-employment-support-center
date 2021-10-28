@@ -7,7 +7,7 @@ const Header: FC = () => {
 
   const logout = () => {
     localStorage.removeItem('token');
-    window.location.href = `${process.env.REACT_APP_BACK_URL}`;
+    window.location.href = `${process.env.REACT_APP_FRONT_URL}`;
     //window.location.href = 'http://localhost:3000/';
   };
 

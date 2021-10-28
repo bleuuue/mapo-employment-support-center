@@ -47,7 +47,7 @@ const Login: FC = () => {
 
       if (response.data.statusCode === 201) {
         localStorage.setItem('token', response.data.accessToken);
-        window.location.href = `${process.env.REACT_APP_BACK_URL}`;
+        window.location.href = `${process.env.REACT_APP_FRONT_URL}`;
         //window.location.href = 'http://localhost:3000/';
       } else {
         Swal.fire({

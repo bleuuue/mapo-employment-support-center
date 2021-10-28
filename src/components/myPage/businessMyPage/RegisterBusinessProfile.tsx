@@ -98,7 +98,7 @@ const RegisterBusinessProfile: FC = () => {
       );
 
       if (response.statusText === 'OK') {
-        window.location.href = `${process.env.REACT_APP_BACK_URL}/user/enterprise`;
+        window.location.href = `${process.env.REACT_APP_FRONT_URL}/user/enterprise`;
         //window.location.href = 'http://localhost:3000/user/enterprise';
       }
     } catch (error) {
