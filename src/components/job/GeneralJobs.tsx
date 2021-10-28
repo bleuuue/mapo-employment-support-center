@@ -73,9 +73,6 @@ const GeneralJobs: FC<GeneralJobProps> = ({ job, mutate }) => {
           <div className="h4 mb-1 cursor-pointer truncate block">
             <Link to={'/job/detail/' + job.JOBID}>{job.TITLE}</Link>
           </div>
-          {/* <link className="h4 mb-1 cursor-pointer truncate block">
-                        동구밭
-                      </link> */}
           <p className="mb-2 truncate-2">{job.CMPNY_NM}</p>
           <div className="my-2">
             <span className="rounded gray-bg-color uppercase px-2 lg:px-3 py-1 text-sm">
