@@ -334,8 +334,8 @@ const CreatePost: FC = () => {
 
       if (response.statusText === 'Created') {
         console.log('temp_post save!');
-        //window.location.href = `${process.env.REACT_APP_BACK_URL}/recruit/management`;
-        window.location.href = 'http://localhost:3000/recruit/management';
+        window.location.href = `${process.env.REACT_APP_BACK_URL}/recruit/management`;
+        //window.location.href = 'http://localhost:3000/recruit/management';
       }
     } catch (error) {
       console.error(error);
@@ -362,8 +362,8 @@ const CreatePost: FC = () => {
       if (response.statusText === 'OK') {
         console.log(response.data.message);
 
-        //window.location.href = `${process.env.REACT_APP_BACK_URL}/recruit/management`;
-        window.location.href = 'http://localhost:3000/recruit/management';
+        window.location.href = `${process.env.REACT_APP_BACK_URL}/recruit/management`;
+        //window.location.href = 'http://localhost:3000/recruit/management';
       }
     } catch (error) {
       console.error(error);
