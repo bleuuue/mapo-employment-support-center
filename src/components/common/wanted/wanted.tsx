@@ -55,7 +55,7 @@ const Wanted: FC<RouteComponentProps<{ jobId: string }>> = ({ match }) => {
   }
 
   const { data } = useSWR<JobDetail>(
-    `${process.env.REACT_APP_BACK_URL}/job/enterprise/list/detail/${jobId}`,
+    `${process.env.REACT_APP_BACK_URL}/job/detail/${jobId}`,
     getPostById,
   );
 
