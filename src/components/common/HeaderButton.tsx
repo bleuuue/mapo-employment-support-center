@@ -10,20 +10,19 @@ interface HeaderButtonProps {
 
 const HeaderButton: FC<HeaderButtonProps> = ({ title, link, submenu }) => {
   return (
-    <li className="text-center justify-center align-middle ">
-      <NavLink to={link} activeClassName="is-active">
+    <li>
+      <NavLink
+        to={link}
+        activeClassName="is-active"
+        className="hover:text-[#7c9ff2]"
+      >
         {title}
       </NavLink>
       <ul className="sub">
         {submenu?.map((sub) => {
           return (
             <li>
-              <NavLink
-                key={sub.id}
-                to={sub.link}
-                className="whitespace-nowrap block w-full h-full"
-                activeClassName="is-active"
-              >
+              <NavLink key={sub.id} to={sub.link}>
                 {sub.title}
               </NavLink>
             </li>

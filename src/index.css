@@ -364,6 +364,19 @@ h5 {
   color: #7c9ff2;
 }
 
+.menu-box-start {
+  position: absolute;
+}
+
+.menu-box {
+  max-width: 700px;
+  width: 100%;
+  justify-items: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  margin-left: 220px;
+}
+
 .menu {
   display: flex;
   flex-direction: row;
@@ -374,7 +387,6 @@ h5 {
   flex-basis: 20%;
   line-height: 50px;
   text-align: center;
-  margin-right: 40px;
 }
 
 .menu li a {
@@ -384,9 +396,6 @@ h5 {
   white-space: nowrap;
 }
 
-.menu > li:hover a {
-  color: #7c9ff2;
-}
 .menu > li:hover .sub {
   display: block;
 }
@@ -401,8 +410,8 @@ h5 {
 }
 
 .sub li {
-  width: 100%;
   line-height: 50px;
+  @apply whitespace-nowrap block w-full h-full justify-center align-middle text-center bg-[#7c9ff2] text-white py-2 hover:filter hover:brightness-90;
 }
 
 @media (min-width: 640px) {
