@@ -59,7 +59,7 @@ interface HeaderListProps {
 
 const HeaderList: FC<HeaderListProps> = ({ token }) => {
   return (
-    <nav className="hidden md:block space-x-8 font-bold">
+    <nav className="hidden md:block space-x-8 font-bold menu-box">
       <ul className="menu">
         {token
           ? headerConfig.map((header) => {

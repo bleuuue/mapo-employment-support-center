@@ -47,8 +47,8 @@ const Login: FC = () => {
 
       if (response.data.statusCode === 201) {
         localStorage.setItem('token', response.data.accessToken);
-        //window.location.href = `${process.env.REACT_APP_BACK_URL}`;
-        window.location.href = 'http://localhost:3000/';
+        window.location.href = `${process.env.REACT_APP_FRONT_URL}`;
+        //window.location.href = 'http://localhost:3000/';
       } else {
         Swal.fire({
           html: `<p style={padding-top: 20px}>아이디, 비밀번호를 확인해주세요</p>`,

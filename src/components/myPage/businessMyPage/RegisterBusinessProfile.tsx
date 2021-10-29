@@ -98,8 +98,8 @@ const RegisterBusinessProfile: FC = () => {
       );
 
       if (response.statusText === 'OK') {
-        //window.location.href = `${process.env.REACT_APP_BACK_URL}/user/enterprise`;
-        window.location.href = 'http://localhost:3000/user/enterprise';
+        window.location.href = `${process.env.REACT_APP_FRONT_URL}/user/enterprise`;
+        //window.location.href = 'http://localhost:3000/user/enterprise';
       }
     } catch (error) {
       console.error(error);
@@ -167,9 +167,9 @@ const RegisterBusinessProfile: FC = () => {
                         <span className="red-star">*</span>
                       </div>
                       <input
-                        className="block w-full input gray-bg-color"
+                        className="block w-full input gray-bg-color text-gray-400"
                         placeholder="mapo"
-                        type="text"
+                        value={enterpriseProfileData.CMPNY_NM}
                         disabled
                       ></input>
                     </div>
@@ -181,8 +181,9 @@ const RegisterBusinessProfile: FC = () => {
                       <div className="mt-1 relative flex flex-wrap flex-col md:flex-row">
                         <div className="relative flex items-stretch flex-grow focus-within:z-10">
                           <input
-                            className="block w-full input gray-bg-color"
+                            className="block w-full input gray-bg-color text-gray-400"
                             placeholder="mapo"
+                            value={enterpriseProfileData.BIZRNO}
                             disabled
                           ></input>
                         </div>
