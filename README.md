@@ -21,6 +21,9 @@
 
 * 검증된 정보 관리
 
+### Development period
+21.09.13 ~ 21.10.27
+
 ---
 
 ## **[ Technical Skills ]**
