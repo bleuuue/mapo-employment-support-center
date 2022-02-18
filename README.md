@@ -1,6 +1,6 @@
 # Mapo Employment Support Center (WEB)
 
-![preview](https://user-images.githubusercontent.com/79898245/138797354-418d7b57-8855-466d-886e-f932bde435ab.png)
+<img src="https://user-images.githubusercontent.com/79898245/138797354-418d7b57-8855-466d-886e-f932bde435ab.png">
 
 ---
 
