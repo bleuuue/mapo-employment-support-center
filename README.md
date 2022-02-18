@@ -5,7 +5,7 @@
 ---
 
 ## **[ About ]**
-**마포구 일자리 정보들을 모아 제공하는 취업 지원 서비스**
+> ### **마포구 일자리 정보들을 모아 제공하는 취업 지원 서비스**
 
 서울시 마포고용복지지원센터가 클라이언트로 참여하여 제작하였습니다.
 
@@ -28,10 +28,10 @@
 
 ## **[ Technical Skills ]**
 
-*   Programming Language
-    *   JavaScript, TypeScript
-*   Front-end Development
-    *   React, Axios, Tailwind CSS, Font Awesome, crypto-js, Sweetalert, Day.js
+*   **Programming Language**
+    *   **JavaScript, TypeScript**
+*   **Front-end Development**
+    *   **React, Axios, Tailwind CSS, Font Awesome, crypto-js, Sweetalert, Day.js**
 *   Back-end Development
     *   NestJS, PostgresSQL
 *   Tools
@@ -40,6 +40,7 @@
 ---
 
 ## **[ Role ]**
+### **Front-end Developer**
 * Main Page
 * Signin / Signup
 * Job Information List
@@ -72,3 +73,5 @@
       — 기업 승인 요청
       
       — 이미지 파일 업로드
+
+---
