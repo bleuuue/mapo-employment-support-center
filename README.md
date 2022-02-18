@@ -31,7 +31,7 @@
 *   **Programming Language**
     *   **JavaScript, TypeScript**
 *   **Front-end Development**
-    *   **React, Axios, Tailwind CSS, Font Awesome, crypto-js, Sweetalert, Day.js**
+    *   **React, Axios, react-router-dom, Tailwind CSS, Font Awesome, crypto-js, Sweetalert, Day.js**
 *   Back-end Development
     *   NestJS, PostgresSQL
 *   Tools
